@@ -1,6 +1,14 @@
 import React from "react";
 
-const Button = (props) => {
+type ButtonProps = {
+  name: string;
+  handleClick: () => void;
+  color: string;
+  background: string;
+  borderColor: string;
+};
+
+const Button = (props: ButtonProps) => {
   const { name, handleClick, color, background, borderColor } = props;
 
   return (
