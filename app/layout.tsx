@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
-
-import Provider from "./provider/Provider"
+import Provider from "./provider/Provider";
+import Nav from "./_components/Nav";
+import Footer from "./_components/Footer";
+  
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
@@ -20,7 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider>
-          <main >{children}</main>
+          <main>
+            <Nav />
+            {children}
+            <Footer />
+          </main>
         </Provider>
       </body>
     </html>
