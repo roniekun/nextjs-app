@@ -15,7 +15,11 @@ export default function Links() {
   ];
 
   const links = linkLists.map((item, idx) => (
-    <Link key={idx} href={item.to} className="m-1 w-fit capitalize">
+    <Link
+      key={idx}
+      href={item.to}
+      className="m-1 w-fit capitalize hover:text-neutral-200"
+    >
       {item.name}
     </Link>
   ));
