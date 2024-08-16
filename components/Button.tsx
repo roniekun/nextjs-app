@@ -1,11 +1,11 @@
 import React from "react";
 
 type ButtonProps = {
-  name: string;
-  handleClick: () => void;
-  color: string;
-  background: string;
-  borderColor: string;
+  name?: string;
+  handleClick?: () => void;
+  color?: string;
+  background?: string;
+  borderColor?: string;
 };
 
 const Button = (props: ButtonProps) => {

@@ -2,12 +2,14 @@
 
 import Button from "./Button";
 import Logo from "./Logo";
+import Search from "./Search";
 import Links from "./Links";
 
 const Nav = () => {
   return (
-    <nav className="top-0 w-full flex fixed h-fit py-2 px-[5vw] items-center justify-between bg-neutral-950 text-neutral-100 backdrop-blur-sm">
+    <nav className="z-10 top-0 w-full flex sticky h-fit px-[5vw] items-center justify-between bg-neutral-950 text-neutral-100">
       <Logo />
+      <Search />
       <div className="flex gap-1">
         <Links />
       </div>

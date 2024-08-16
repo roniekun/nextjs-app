@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Links() {
   const linkLists = [
     {
-      name: "my profile",
+      name: "profile",
       to: "/profile",
     },
     {
