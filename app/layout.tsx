@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Provider from "./provider/Provider";
+import LocalProvider from "@/provider/LocalProvider";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
@@ -17,13 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Provider>
+        <LocalProvider>
           <main style={{ fontFamily: "Neue" }}>
             <Nav />
             {children}
             <Footer />
           </main>
-        </Provider>
+        </LocalProvider>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Container from "@/components/Container";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -7,8 +8,10 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <div className="min-h-screen flex">
-      <h1>Contact page</h1>
-    </div>
+    <Container>
+      <div className="min-h-screen flex">
+        <h1>Contact page</h1>
+      </div>
+    </Container>
   );
 }
