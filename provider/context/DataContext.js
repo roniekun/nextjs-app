@@ -6,7 +6,6 @@ const DataProvider = ({ children }) => {
   const defaultColor = "black";
   const defaultBgColor = "transparent";
 
-  const [title, setTitle] = useState(document.title);
   const [isLoading, setLoading] = useState(true);
   const [isTransition, setIsTransition] = useState(false);
   const [color, setColor] = useState(defaultColor);
@@ -28,9 +27,9 @@ const DataProvider = ({ children }) => {
   };
 
   //dynamic document title
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
+  // useEffect(() => {
+  //   document.title = title;
+  // }, [title]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,8 +76,8 @@ const DataProvider = ({ children }) => {
         bgColor,
         setColor,
         setBgColor,
-        title,
-        setTitle,
+        // title,
+        // setTitle,
         isLoading,
         setLoading,
         isTransition,
