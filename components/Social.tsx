@@ -13,7 +13,7 @@ export default function Social({ className }: SocialProps) {
   ];
   const linksItem = links.map((item, idx) => (
     <a
-      className={twMerge("m-1 inline-flex transition duration-300", className)}
+      className={twMerge("inline-flex transition duration-300", className)}
       target="_blank"
       key={idx}
       href={item.to}
@@ -21,5 +21,5 @@ export default function Social({ className }: SocialProps) {
       {item.name}
     </a>
   ));
-  return <div className="flex">{linksItem}</div>;
+  return <div className="flex gap-1">{linksItem}</div>;
 }

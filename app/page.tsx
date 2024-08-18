@@ -1,6 +1,5 @@
 import SignIn from "@/components/SignIn";
 import Container from "@/components/Container";
-
 export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col w-full items-center">
