@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LocalProvider from "@/provider/LocalProvider";
-import Nav from "@/components/Nav";
+
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -18,8 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LocalProvider>
-          <main style={{ fontFamily: "Neue" }}>
-            <Nav />
+          <main
+            className="flex flex-col p-0 items-center justify-center bg-neutral-50"
+            style={{ fontFamily: "Neue" }}
+          >
+            <Header />
             {children}
             <Footer />
           </main>

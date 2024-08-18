@@ -13,7 +13,7 @@ export default function Social({ className }: SocialProps) {
   ];
   const linksItem = links.map((item, idx) => (
     <a
-      className={twMerge("m-1 inline-flex", className)}
+      className={twMerge("m-1 inline-flex transition duration-300", className)}
       target="_blank"
       key={idx}
       href={item.to}

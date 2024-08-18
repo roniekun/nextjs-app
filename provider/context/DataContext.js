@@ -26,11 +26,6 @@ const DataProvider = ({ children }) => {
     subject: "New Project",
   };
 
-  //dynamic document title
-  // useEffect(() => {
-  //   document.title = title;
-  // }, [title]);
-
   useEffect(() => {
     const handleResize = () => {
       setMobile(window.innerWidth < 1024);
@@ -76,8 +71,6 @@ const DataProvider = ({ children }) => {
         bgColor,
         setColor,
         setBgColor,
-        // title,
-        // setTitle,
         isLoading,
         setLoading,
         isTransition,
