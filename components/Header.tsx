@@ -1,7 +1,7 @@
 "use client";
-import Container from "./Container";
-import Logo from "./Logo";
-import Links from "./Links";
+import Container from "./util/container";
+import Logo from "./util/logo";
+import Links from "./util/links";
 import { useContext } from "react";
 import { DataContext } from "@/provider/context/DataContext";
 

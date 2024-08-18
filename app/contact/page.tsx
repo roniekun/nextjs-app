@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import Container from "@/components/Container";
+import Container from "@/components/util/container";
 
 export const metadata: Metadata = {
   title: "Contact",
