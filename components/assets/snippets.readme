@@ -1,0 +1,25 @@
+*scrolltrigger in gsap.timeline()
+
+const MyComponent = () => {
+  useEffect(() => {
+    // Create a GSAP timeline
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".scrollable-section",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true, // Smoothly animate based on scroll position
+      }
+    });
+
+    // Add animations to the timeline
+    timeline
+      .from(".box1", { x: -200, opacity: 0, duration: 1 })
+      .to(".box2", { scale: 1.5, opacity: 1, duration: 1 }, "-=0.5")
+      .from(".box3", { rotation: 360, duration: 1 });
+
+    // Clean up ScrollTrigger instances on component unmount
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
