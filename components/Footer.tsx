@@ -4,7 +4,6 @@ import Container from "./util/container";
 import Social from "./util/social";
 import Button from "./util/button";
 import EmailTo from "./util/emailTo";
-import TextSlider from "./util/marquee";
 
 export default function Footer() {
   const date = new Date();
@@ -27,11 +26,6 @@ export default function Footer() {
             <Social className="text-base hover:text-blue-500 text-neutral-300" />
             <Button handleClick={EmailTo} name="Say Hello" size="lg" />
           </div>
-          <TextSlider
-            title="Building interactive website with NextJS. Building interactive website with NextJS."
-            className="text-2xl font-medium overflow-hidden"
-            speed={0.07}
-          />
         </section>
         <section className="flex flex-col md:justify-end font-medium md:items-end py-5">
           <h3 className="capitalize">all rights reserved</h3>

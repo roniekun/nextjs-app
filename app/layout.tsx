@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LocalProvider from "@/provider/LocalProvider";
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieModal from "@/components/modal/cookie";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
@@ -21,10 +22,12 @@ export default function RootLayout({
         <LocalProvider>
           <main
             className="flex flex-col p-0 items-center justify-center bg-neutral-50"
-            style={{ fontFamily: "Neue" }}
+            style={{ fontFamily: "Neue, sans-serif" }}
           >
             <Header />
+            <Navbar />
             {children}
+            <CookieModal />
             <Footer />
           </main>
         </LocalProvider>

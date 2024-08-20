@@ -10,7 +10,7 @@ const DataProvider = ({ children }) => {
   const [isTransition, setIsTransition] = useState(false);
   const [color, setColor] = useState(defaultColor);
   const [bgColor, setBgColor] = useState(defaultBgColor);
-  const [isToggleMenu, setToggleMenu] = useState(false);
+  const [isToggleMenu, setToggleMenu] = useState(false); //false
   const [isScrolled, setScrolled] = useState(false);
   const [pathData, setPathData] = useState({ path: null, color: null });
   const [isMobile, setMobile] = useState(false);

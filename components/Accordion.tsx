@@ -17,8 +17,8 @@ const Accordion = () => {
 
   return (
     <section className={` relative h-auto w-full flex flex-col`}>
-      <h1 className="mt-5 font-semibold md:text-2xl text-xl relative self-center my-10">
-        <span className="text-lime-500">Questions? </span>
+      <h1 className="mt-5 font-semibold md:text-2xl text-xl relative self-center my-10 text-neutral-600">
+        <span className="text-neutral-900">Questions? </span>
         Answer.
       </h1>
       {questions.map((data, idx) => (
@@ -36,7 +36,7 @@ const Accordion = () => {
           >
             <h2
               className={` w-full cursor-pointer text-lg font-medium text-left leading-relaxed transition duration-300  ${
-                isActive[idx] && "text-lime-500"
+                isActive[idx] && "text-neutral-900s"
               }`}
             >
               {data.question}
