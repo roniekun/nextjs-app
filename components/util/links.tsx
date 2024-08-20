@@ -27,9 +27,8 @@ export default function Links({ className }: Props) {
   };
 
   const links = linkLists.map((item, idx) => (
-    <div className="flex gap-1 flex-col">
+    <div key={idx} className="flex gap-1 flex-col">
       <Link
-        key={idx}
         onClick={handleClick}
         href={item.to}
         className={twMerge(
