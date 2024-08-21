@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
+    "@svgr/webpack": "^8.1.0",
     "framer-motion": "^11.3.28",
     "gsap": "^3.12.5",
     "mongodb": "^6.8.0",

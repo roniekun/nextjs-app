@@ -34,8 +34,8 @@ const CookieModal: React.FC = () => {
           decline cookies.
         </p>
         <div className="flex mt-2">
-          <Button handleClick={handleAccept} name="accept" size="sm" />
-          <Button handleClick={handleDecline} name="decline" size="sm" />
+          <Button handleClick={handleAccept} name="Accept" size="sm" />
+          <Button handleClick={handleDecline} name="Decline" size="sm" />
         </div>
       </Container>
     </div>

@@ -1,16 +1,17 @@
-"useClient";
+"use client";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
 type ButtonProps = {
+  children?: React.ReactNode;
   name?: string;
   handleClick?: () => void;
   className?: string;
   size?: "sm" | "md" | "lg";
 };
 
-const Button = (props: ButtonProps) => {
-  const { name, handleClick, className, size = "md" } = props;
+const Button: React.FC<ButtonProps> = (props) => {
+  const { name, handleClick, className, size = "md", children } = props;
 
   const sizeClasses = {
     sm: "px-2 py-1 text-xs",
@@ -29,6 +30,7 @@ const Button = (props: ButtonProps) => {
       onClick={handleClick}
     >
       {name}
+      {children}
     </button>
   );
 };

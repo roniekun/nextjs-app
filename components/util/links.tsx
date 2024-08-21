@@ -20,6 +20,10 @@ export default function Links({ className }: Props) {
       name: "projects",
       to: "/projects",
     },
+    {
+      name: "contact",
+      to: "/contact",
+    },
   ];
 
   const handleClick = () => {

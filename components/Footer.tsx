@@ -3,7 +3,7 @@ import React from "react";
 import Container from "./util/container";
 import Social from "./util/social";
 import Button from "./util/button";
-import EmailTo from "./util/emailTo";
+import EmailTo from "./util/email";
 
 export default function Footer() {
   const date = new Date();
