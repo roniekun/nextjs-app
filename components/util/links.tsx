@@ -42,7 +42,7 @@ export default function Links({ className }: Props) {
       >
         {item.name}
       </Link>
-      <div className="w-full relative h-[1px] bg-slate-50" />
+      {/* <div className="w-full relative h-[1px] bg-slate-50" /> */}
     </div>
   ));
 

@@ -12,32 +12,43 @@ export default function Navbar() {
   useLayoutEffect(() => {
     if (isToggleMenu) {
       gsap.to(".target", {
-        height: () => `${window.innerHeight - 44}px`,
-        ease: "power2.in",
-        onComplete: () => {
-          gsap.to(".container", { opacity: 1, delay: 0.3 });
-        },
+        display: "flex",
+      });
+      gsap.to(".container", {
+        opacity: 1,
+        duration: 0.1,
+        scale: 1,
       });
     } else {
       gsap.to(".target", {
-        height: 0,
-        ease: "power2.out",
-        onComplete: () => {
-          gsap.to(".container", { opacity: 0 });
-        },
+        display: "none",
+        duration: 0.1,
       });
+      gsap.to(".container", { opacity: 0, duration: 0.1, scale: 0.7 });
     }
   }, [isToggleMenu]);
 
   return (
     <>
-      <nav className="flex rounded-b-sm justify-center bg-opacity-80 backdrop-blur-3xl target w-screen fixed left-0 top-[--header-height] z-30 h-0 bg-black overflow-clip">
-        <Container className="container flex flex-col max-w-[1200px] h-[--hero-height] overflow-hidden opacity-0">
+      <nav
+        className="hidden text-neutral-950 h-screen rounded-b-sm justify-center 
+      backdrop-blur-3xl target w-screen fixed left-0 top-[--header-height] z-30  bg-black overflow-clip"
+      >
+        <Container className="rounded-lg md:p-[2vw] container scale-75 absolute top-[--header-height] lg:right-[10vw] right-[5vw] flex flex-col lg:w-[30vw] sm:w-[50vw] w-[70%] h-[70%] overflow-hidden gap-y-5 opacity-0 bg-neutral-200">
           <div>
-            <Links className="text-neutral-50 hover:text-neutral-200 transition-all duration-300 text-3xl font-medium" />
+            <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
+              <h1 className=" font-medium my-1">Navigations</h1>
+            </Container>
+
+            <Links className=" hover:text-black transition-all duration-300 text-base " />
           </div>
-          <div className="flex flex-col justify-end flex-1 mb-10">
-            <Social className=" text-neutral-50 text-base font-thin" />
+          <div className="flex flex-col flex-1 ">
+            <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
+              <h1 className="w-full relative bg-neutral-300 font-medium my-1">
+                Socials
+              </h1>
+            </Container>
+            <Social className="text-base hover:text-black" />
           </div>
         </Container>
       </nav>
