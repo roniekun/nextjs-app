@@ -21,11 +21,11 @@ export default function Footer() {
           <br />
         </section>
 
-        <section className="flex flex-col">
-          <div className="flex flex-col gap-1">
+        <section className="flex flex-col gap-y-1">
+          <div className="flex flex-row gap-1">
             <Social className="text-base hover:text-blue-500 text-neutral-300" />
-            <Button handleClick={EmailTo} name="Say Hello" size="lg" />
           </div>
+          <Button handleClick={EmailTo} name="Say Hello" size="lg" />
         </section>
         <section className="flex flex-col md:justify-end font-medium md:items-end py-5">
           <h3 className="capitalize">all rights reserved</h3>

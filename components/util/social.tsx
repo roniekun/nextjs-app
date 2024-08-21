@@ -18,7 +18,7 @@ export default function Social({ className }: SocialProps) {
       key={idx}
       href={item.to}
     >
-      /{item.name}
+      {item.name}
     </a>
   ));
   return linksItem;
