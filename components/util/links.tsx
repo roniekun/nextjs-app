@@ -31,17 +31,18 @@ export default function Links({ className }: Props) {
   };
 
   const links = linkLists.map((item, idx) => (
-    <div key={idx} className="flex gap-1 flex-col">
+    <div key={idx} className="flex flex-col">
       <Link
         onClick={handleClick}
         href={item.to}
         className={twMerge(
-          "m-1 w-fit capitalize hover:text-neutral-200",
+          "w-fit capitalize hover:text-neutral-200",
           className
         )}
       >
         {item.name}
       </Link>
+      <div className="w-full relative h-[1px] bg-slate-50" />
     </div>
   ));
 
