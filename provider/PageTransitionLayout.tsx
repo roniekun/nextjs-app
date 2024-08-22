@@ -14,7 +14,6 @@ const PageTransitionLayout: React.FC<Props> = ({ children }) => {
     <AnimatePresence mode={"wait"}>
       <motion.div
         key={pathname}
-        className="relative top-0 left-0 w-screen z-10 h-screen "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
