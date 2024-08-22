@@ -34,7 +34,11 @@ export default function Navbar() {
         className="hidden text-neutral-950 h-screen rounded-b-sm justify-center 
       backdrop-blur-3xl target w-screen fixed left-0 top-[--header-height] z-30  bg-black overflow-clip"
       >
-        <Container className="rounded-lg md:p-[2vw] container scale-75 absolute top-[--header-height] lg:right-[10vw] right-[5vw] flex flex-col lg:w-[30vw] sm:w-[50vw] w-[70%] h-[70%] overflow-hidden gap-y-5 opacity-0 bg-neutral-200">
+        <Container
+          className="rounded-lg md:p-[2vw] container scale-75 absolute top-[--header-height] 
+        lg:right-[10vw] right-[5vw] flex flex-col lg:w-[30vw] sm:w-[50vw] w-[70%] h-[70%] overflow-hidden
+         gap-y-5 opacity-0 bg-neutral-200 shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow"
+        >
           <div>
             <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
               <h1 className=" font-medium my-1">Navigations</h1>

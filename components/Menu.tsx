@@ -15,7 +15,8 @@ export default function Menu() {
     <div>
       <Button
         size="sm"
-        className="bg-neutral-950 bg-opacity-10  hover:border border-none border-neutral-500 rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300"
+        className="bg-neutral-950 bg-opacity-10  hover:border border-none border-neutral-500
+         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300"
         handleClick={handleClick}
       >
         {isToggleMenu ? <RiCloseLargeFill /> : <GrMenu />}

@@ -1,5 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
+import PageTransitionLayout from "@/provider/PageTransitionLayout";
+
 import Container from "@/components/util/container";
 
 export const metadata: Metadata = {
@@ -8,10 +10,14 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <Container>
-      <div className="min-h-screen flex">
-        <h1>Contact page</h1>
+    <PageTransitionLayout>
+      <div>
+        <Container>
+          <div className="min-h-screen flex">
+            <h1>Contact page</h1>
+          </div>
+        </Container>
       </div>
-    </Container>
+    </PageTransitionLayout>
   );
 }

@@ -2,7 +2,11 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { DataProvider } from "./context/DataContext";
 import SmoothScrolling from "./SmoothScrolling";
 
-const LocalProvider = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const LocalProvider = ({ children }: Props) => {
   return (
     <DataProvider>
       <ThemeProvider>

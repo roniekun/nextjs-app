@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -7,8 +8,10 @@ export const metadata: Metadata = {
 
 export default function Projects() {
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      Project page
-    </div>
+    <PageTransitionLayout>
+      <div className="min-h-screen flex justify-center items-center">
+        Project page
+      </div>
+    </PageTransitionLayout>
   );
 }

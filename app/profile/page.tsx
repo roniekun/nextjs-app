@@ -1,13 +1,15 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 export const metadata: Metadata = {
-  title: "Profile"
-}
+  title: "Profile",
+};
 export default function Profile() {
-
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      Profile
-    </div>
-  )
+    <PageTransitionLayout>
+      <div className="min-h-screen flex justify-center items-center">
+        Profile
+      </div>
+    </PageTransitionLayout>
+  );
 }
