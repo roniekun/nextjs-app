@@ -1,8 +1,8 @@
 "use client";
 import { DataContext } from "@/provider/context/DataContext";
-import Links from "./util/links";
-import Social from "./util/social";
-import Container from "./util/container";
+import Links from "./utils/links";
+import Social from "./utils/social";
+import Container from "./utils/container";
 import { useContext, useLayoutEffect } from "react";
 import gsap from "gsap";
 

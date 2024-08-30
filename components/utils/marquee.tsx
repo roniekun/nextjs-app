@@ -20,6 +20,19 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
   let xProgress = 0;
   let direction = -1;
 
+  const animation = () => {
+    if (xProgress <= -100) {
+      xProgress = 0;
+    }
+    if (xProgress > 0) {
+      xProgress = -100;
+    }
+    gsap.set(firsttextRef.current, { xPercent: xProgress });
+    gsap.set(secondtextRef.current, { xPercent: xProgress });
+    xProgress += speed * direction;
+    requestAnimationFrame(animation);
+  };
+
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     requestAnimationFrame(animation);
@@ -34,19 +47,6 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
       },
     });
   }, []);
-
-  const animation = () => {
-    if (xProgress <= -100) {
-      xProgress = 0;
-    }
-    if (xProgress > 0) {
-      xProgress = -100;
-    }
-    gsap.set(firsttextRef.current, { xPercent: xProgress });
-    gsap.set(secondtextRef.current, { xPercent: xProgress });
-    xProgress += speed * direction;
-    requestAnimationFrame(animation);
-  };
 
   return (
     <div

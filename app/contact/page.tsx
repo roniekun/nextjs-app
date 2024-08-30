@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
-import Container from "@/components/util/container";
+import Container from "@/components/utils/container";
 
 export const metadata: Metadata = {
   title: "Contact",

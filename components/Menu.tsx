@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Button from "./util/button";
+import Button from "./utils/button";
 import { useContext } from "react";
 import { DataContext } from "@/provider/context/DataContext";
 import { GrMenu } from "react-icons/gr";

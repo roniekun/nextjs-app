@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { questions } from "./util/data/question";
-import Container from "./util/container";
+import { questions } from "./utils/data/question";
+import Container from "./utils/container";
 import { motion } from "framer-motion";
 import { GrAdd } from "react-icons/gr";
 

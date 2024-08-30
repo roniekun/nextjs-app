@@ -12,11 +12,10 @@ export default function Social({ className }: SocialProps) {
     { name: "Github", to: "http://www.github.com/roniekun" },
   ];
   const linksItem = links.map((item, idx) => (
-    <li>
+    <li key={idx}>
       <a
         className={twMerge("inline-flex transition duration-300", className)}
         target="_blank"
-        key={idx}
         href={item.to}
       >
         {item.name}

@@ -1,5 +1,5 @@
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
-import Container from "@/components/util/container";
+import Container from "@/components/utils/container";
 import Accordion from "@/components/Accordion";
 import Hero from "@/components/Hero";
 export default function Home() {
