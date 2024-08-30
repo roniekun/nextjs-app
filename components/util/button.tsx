@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     <button
       type="button"
       className={twMerge(
-        "py-1 px-2 border rounded-full w-fit m-1",
+        "flex place-content-center py-1 px-2 border rounded-full w-fit m-1",
         sizeClasses[size],
         className
       )}

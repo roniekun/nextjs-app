@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="relative bg-neutral-950 flex flex-col md:px-[5vw] justify-center item-center bottom-0 h-auto w-full text-neutral-50">
       <Container className="max-w-[1200px]">
         <section className="flex flex-col relative justify-start pb-0">
-          <h2 className="text-2xl font-medium text-neutral-300">
+          <h2 className="lg:text-2xl text-xl font-medium text-neutral-300">
             Thinking of a Project?
           </h2>
           <br />
@@ -22,9 +22,9 @@ export default function Footer() {
         </section>
 
         <section className="flex flex-col gap-y-1">
-          <div className="flex flex-row gap-1">
+          <ul className="flex flex-row gap-2 l">
             <Social className="text-base hover:text-blue-500 text-neutral-300" />
-          </div>
+          </ul>
           <Button handleClick={EmailTo} name="Say Hello" size="lg" />
         </section>
         <section className="flex flex-col md:justify-end font-medium md:items-end py-5">

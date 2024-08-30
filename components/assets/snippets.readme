@@ -23,3 +23,7 @@ const MyComponent = () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
+
+
+  *spreading ref 
+   ref={(el) => (array.current[idx] = el)}

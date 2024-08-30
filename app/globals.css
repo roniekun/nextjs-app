@@ -11,6 +11,9 @@
   .text-balance {
     text-wrap: balance;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @font-face {

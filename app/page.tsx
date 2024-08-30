@@ -8,9 +8,7 @@ export default function Home() {
       <div className="relative flex min-h-screen flex-col w-full items-center">
         <Container className="py-0 flex flex-col items-center justify-center max-w-[1200px]">
           <Hero />
-          <Container>
-            <Accordion />
-          </Container>
+          <Accordion />
         </Container>
       </div>
     </PageTransitionLayout>

@@ -36,15 +36,16 @@ export default function Navbar() {
       >
         <Container
           className="rounded-lg md:p-[2vw] container scale-75 absolute top-[--header-height] 
-        lg:right-[10vw] right-[5vw] flex flex-col lg:w-[30vw] sm:w-[50vw] w-[70%] h-[70%] overflow-hidden
-         gap-y-5 opacity-0 bg-neutral-200 shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow"
+        lg:right-[10vw] right-[5vw] flex flex-col lg:w-[30vw] sm:w-[50vw] w-[70%] h-fit overflow-hidden
+         gap-y-5 opacity-0 bg-neutral-200"
         >
           <div>
             <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
               <h1 className=" font-medium my-1">Navigations</h1>
             </Container>
-
-            <Links className=" hover:text-black transition-all duration-300 text-base " />
+            <ul>
+              <Links className=" hover:text-black transition-all duration-300 text-base " />
+            </ul>
           </div>
           <div className="flex flex-col flex-1 ">
             <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
@@ -52,7 +53,16 @@ export default function Navbar() {
                 Socials
               </h1>
             </Container>
-            <Social className="text-base hover:text-black" />
+            <ul>
+              <Social className="text-base hover:text-black" />
+            </ul>
+          </div>
+          <div className="flex flex-col flex-1 ">
+            <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
+              <h1 className="w-full relative bg-neutral-300 font-medium my-1">
+                Theme
+              </h1>
+            </Container>
           </div>
         </Container>
       </nav>

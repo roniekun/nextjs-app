@@ -26,7 +26,7 @@ const CookieModal: React.FC = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-0 bg-neutral-950 z-10 rounded-lg right-0 m-[5vw] bg-opacity-80 text-neutral-50">
+    <div className="fixed bottom-0 bg-neutral-950 z-10 backdrop-blur-lg rounded-lg right-0 m-[5vw] bg-opacity-80 text-neutral-50">
       <Container className="w-fit md:p-[2vw] p-[5vw]">
         <h2 className="text-base">We use cookies</h2>
         <p className="text-sm">
