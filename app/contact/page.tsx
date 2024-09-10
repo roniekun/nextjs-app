@@ -1,11 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
+import { admin } from "@/components/utils/data/admin";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 import Container from "@/components/utils/container";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: `Contact | ${admin.name}`,
 };
 
 export default function Contact() {

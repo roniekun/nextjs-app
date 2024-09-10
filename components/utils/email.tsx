@@ -1,10 +1,11 @@
+import { admin } from "./data/admin";
+
 export default function EmailTo() {
-  const user = {
-    email: "roniebenitez01@gmail.com",
-    subject: "new project",
-  };
-  const mailtoUrl = `mailto:${user.email}?subject=${encodeURIComponent(
-    user.subject
+  const mailtoUrl = `mailto:${admin.email}?subject=${encodeURIComponent(
+    "project inquiry"
   )}`;
-  window.open(mailtoUrl, "_blank");
+  const newTab = window.open(mailtoUrl, "_blank");
+  if (newTab) {
+    newTab.opener = null;
+  }
 }

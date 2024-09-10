@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { admin } from "@/components/utils/data/admin";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: `Profile | ${admin.name}`,
 };
 export default function Profile() {
   return (

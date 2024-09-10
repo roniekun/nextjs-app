@@ -47,3 +47,24 @@
 body {
   font-family: "Neue", sans-serif;
 }
+
+/* styles/globals.css */
+
+[theme="light"] {
+  --background: #ffffff; /* Light background color */
+  --text-color-primary: #000000; /* Light text color */
+  --border-color-primary: #000000; /* Light border color */
+}
+
+[theme="dark"] {
+  --background: #333333; /* Dark background color */
+  --text-color-primary: #ffffff; /* Dark text color */
+  --border-color-primary: #ffffff; /* Dark border color */
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color-primary);
+  transition: all 0.3s ease;
+  border: var(--border-color-primary);
+}

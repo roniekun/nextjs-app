@@ -4,8 +4,8 @@ import LocalProvider from "@/provider/LocalProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieModal from "@/components/modal/cookie";
+import ShareModal from "@/components/modal/sharer";
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
@@ -22,9 +22,10 @@ export default function RootLayout({
       <body>
         <LocalProvider>
           <main
-            className="flex flex-col p-0 items-center justify-center bg-neutral-50"
+            className="flex flex-col p-0 items-center justify-center"
             style={{ fontFamily: "Neue, sans-serif" }}
           >
+            <ShareModal />
             <Header />
             <Navbar />
             {children}

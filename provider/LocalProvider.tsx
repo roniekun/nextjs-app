@@ -1,6 +1,6 @@
-import { ThemeProvider } from "./context/ThemeContext";
 import { DataProvider } from "./context/DataContext";
 import SmoothScrolling from "./SmoothScrolling";
+import { ThemeProvider } from "./context/ThemeContext";
 
 type Props = {
   children: React.ReactNode;

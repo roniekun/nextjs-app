@@ -16,6 +16,7 @@ export default function Social({ className }: SocialProps) {
       <a
         className={twMerge("inline-flex transition duration-300", className)}
         target="_blank"
+        rel="noopener noreferrer"
         href={item.to}
       >
         {item.name}

@@ -1,9 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
+import { admin } from "@/components/utils/data/admin";
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: `Projects | ${admin.name}`,
 };
 
 export default function Projects() {

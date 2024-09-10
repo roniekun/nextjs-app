@@ -5,6 +5,7 @@ import Social from "./utils/social";
 import Container from "./utils/container";
 import { useContext, useLayoutEffect } from "react";
 import gsap from "gsap";
+import ToggleTheme from "./utils/toggle-theme";
 
 export default function Navbar() {
   const { isToggleMenu } = useContext(DataContext);
@@ -59,10 +60,9 @@ export default function Navbar() {
           </div>
           <div className="flex flex-col flex-1 ">
             <Container className="w-full  p-0 relative bg-neutral-300 rounded-sm">
-              <h1 className="w-full relative bg-neutral-300 font-medium my-1">
-                Theme
-              </h1>
+              <span>Theme</span>
             </Container>
+            <ToggleTheme />
           </div>
         </Container>
       </nav>
