@@ -1,13 +1,24 @@
 "use client";
-import { createContext, useState, useContext, ReactNode } from "react";
+import {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
+
+export interface SearchItemProps {
+  history: string;
+  status: "Deleted" | "Default";
+}
 
 interface SearchContextProps {
-  searchItem: string | null;
-  setSearchItem: React.Dispatch<React.SetStateAction<string | null>>;
+  searchItems: SearchItemProps[];
+  setSearchItem: React.Dispatch<React.SetStateAction<SearchItemProps[]>>;
 }
 
 const DefaultContext: SearchContextProps = {
-  searchItem: null,
+  searchItems: [],
   setSearchItem: () => {},
 };
 
@@ -18,12 +29,24 @@ interface SearchProviderProps {
 }
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
-  const [searchItem, setSearchItem] = useState<string | null>(null);
+  const [searchItems, setSearchItem] = useState<SearchItemProps[]>([]);
+
+  useEffect(() => {
+    const searchHistory = localStorage.getItem("searcHistory");
+    if (searchHistory) {
+      setSearchItem(JSON.parse(searchHistory));
+    }
+    console.log(searchItems);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("searchHistory", JSON.stringify(searchItems));
+  }, [searchItems]);
 
   return (
     <SearchContext.Provider
       value={{
-        searchItem,
+        searchItems,
         setSearchItem,
       }}
     >

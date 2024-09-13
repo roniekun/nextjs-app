@@ -3,7 +3,7 @@ import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import Container from "@/components/utils/container";
 import Accordion from "@/components/Accordion";
 import Hero from "@/components/Hero";
-import Search from "@/components/utils/search";
+import SearchBar from "@/components/utils/search";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
           <Accordion />
         </Container>
         <div>
-          <Search />
+          <SearchBar />
         </div>
       </div>
     </PageTransitionLayout>
