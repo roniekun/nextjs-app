@@ -40,8 +40,8 @@ const SearchResult = () => {
     <>
       {results.length > 0 ? (
         <ul>
-          <h1 className="text-xl ">
-            <strong>Search result for:</strong> "{query}"
+          <h1 className="text-xl">
+            <strong>Search result for:</strong> &ldquo;{query}&rdquo;
           </h1>
           {results.map((item) => (
             <li key={item.id} className="w-full relative p-[1vw]">
@@ -56,8 +56,8 @@ const SearchResult = () => {
         </ul>
       ) : (
         <div className="flex flex-col">
-          <h1 className="text-xl ">
-            <strong>Search result for:</strong> "{query}"
+          <h1 className="text-xl">
+            <strong>Search result for:</strong> &ldquo;{query}&rdquo;
           </h1>
 
           <p>No results found</p>

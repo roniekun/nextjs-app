@@ -18,7 +18,7 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
   const secondtextRef = useRef(null);
 
   let xProgress = 0;
-  let direction = -1;
+  const directionRef = useRef(1);
 
   const animation = () => {
     if (xProgress <= -100) {
@@ -29,7 +29,7 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
     }
     gsap.set(firsttextRef.current, { xPercent: xProgress });
     gsap.set(secondtextRef.current, { xPercent: xProgress });
-    xProgress += speed * direction;
+    xProgress += speed * directionRef.current;
     requestAnimationFrame(animation);
   };
 
@@ -42,7 +42,7 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
         end: window.innerHeight,
         scrub: 0.25,
         onUpdate: (e) => {
-          direction = e.direction * -1;
+          directionRef.current = e.direction * -1;
         },
       },
     });
