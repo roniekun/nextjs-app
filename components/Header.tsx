@@ -1,13 +1,12 @@
 "use client";
 import Container from "./utils/container";
 import Logo from "./utils/logo";
-import Links from "./utils/links";
+// import Links from "./utils/links";
 import Menu from "./Menu";
-import { useContext } from "react";
-import { DataContext } from "@/provider/context/DataContext";
+import { useMenu } from "@/provider/context/MenuContext";
 
 const Header = () => {
-  const { isToggleMenu } = useContext(DataContext);
+  const { isToggleMenu } = useMenu();
   return (
     <header
       className={`${

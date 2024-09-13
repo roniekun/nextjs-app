@@ -30,11 +30,13 @@ export default function Hero() {
         style={{ opacity: sm }}
         className="sticky top-[44px] h-[--hero-height] flex flex-col py-[5vw]"
       >
-        <h1 className="text-xl font-medium">Elevate your Creative Vision:</h1>
+        <h1 className="text-xl font-medium text-[--text-color-muted]">
+          Elevate your Creative Vision:
+        </h1>
         <h1 className="text-4xl font-bold ">Your Website, Your Platform!</h1>
         <br />
         <Button
-          className="font-medium border-2"
+          className="font-medium border-2 border-[--border-color-secondary]"
           name="roniebenitez01@gmail.com"
           size="lg"
           handleClick={EmailTo}

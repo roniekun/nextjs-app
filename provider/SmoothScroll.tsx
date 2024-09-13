@@ -1,17 +1,17 @@
 "use client";
-import { ReactLenis } from "@studio-freight/react-lenis";
+import { Lenis as ReactLenis } from "@studio-freight/react-lenis";
 
 type Props = {
   children: React.ReactNode;
 };
-function SmoothScrolling({ children }: Props) {
+function SmoothScroll({ children }: Props) {
   return (
     <ReactLenis
       root
       options={{
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         lerp: 0.1,
         duration: 1.5,
-        smoothWheel: true,
       }}
       // autoRaf={false}
     >
@@ -20,4 +20,4 @@ function SmoothScrolling({ children }: Props) {
   );
 }
 
-export default SmoothScrolling;
+export default SmoothScroll;

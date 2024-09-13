@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
 import Button from "./utils/button";
-import { useContext } from "react";
-import { DataContext } from "@/provider/context/DataContext";
+import { useMenu } from "@/provider/context/MenuContext";
 import { GrMenu } from "react-icons/gr";
 import { RiCloseLargeFill } from "react-icons/ri";
 
 export default function Menu() {
-  const { setToggleMenu, isToggleMenu } = useContext(DataContext);
+  const { setToggleMenu, isToggleMenu } = useMenu();
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
   };

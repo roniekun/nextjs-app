@@ -29,7 +29,7 @@ const Accordion = () => {
               <li
                 key={idx}
                 className={`flex flex-col relative  lg:py-5 py-2 overflow-hidden  justify-center 
-            bg-opacity-15 border-[--border-color] border-t ${
+            bg-opacity-15 border-[--border-color-secondary] border-t ${
               idx === 0 && "border-t-0 pt-2"
             } `}
               >
@@ -57,7 +57,7 @@ const Accordion = () => {
                   className="transition h-0 duration-300 rounded-md  self-end"
                 >
                   <p
-                    className={`text-lg text-left leading-normal  md:text-lg list-none md:mt-5 mt-3 opacity-0 transition-opacity duration-1000 mb-3  ${
+                    className={`text-lg text-left leading-normal  md:text-lg list-none md:mt-5 mt-3 opacity-0 transition-opacity duration-1000 mb-3 text-[--text-color-muted] ${
                       isActive[idx] && "opacity-100"
                     }`}
                   >

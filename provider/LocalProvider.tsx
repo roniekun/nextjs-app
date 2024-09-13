@@ -1,6 +1,8 @@
-import { DataProvider } from "./context/DataContext";
-import SmoothScrolling from "./SmoothScrolling";
+import { MenuProvider } from "./context/MenuContext";
+import { LayoutProvider } from "./context/LayoutContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { SearchProvider } from "./context/SearchContext";
+import SmoothScroll from "./SmoothScroll";
 
 type Props = {
   children: React.ReactNode;
@@ -8,11 +10,15 @@ type Props = {
 
 const LocalProvider = ({ children }: Props) => {
   return (
-    <DataProvider>
-      <ThemeProvider>
-        <SmoothScrolling>{children}</SmoothScrolling>
-      </ThemeProvider>
-    </DataProvider>
+    <SearchProvider>
+      <LayoutProvider>
+        <MenuProvider>
+          <ThemeProvider>
+            <SmoothScroll>{children}</SmoothScroll>
+          </ThemeProvider>
+        </MenuProvider>
+      </LayoutProvider>
+    </SearchProvider>
   );
 };
 

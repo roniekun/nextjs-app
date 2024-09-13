@@ -14,7 +14,7 @@ export default function Social({ className }: SocialProps) {
   const linksItem = links.map((item, idx) => (
     <li key={idx}>
       <a
-        className={twMerge("inline-flex transition duration-300", className)}
+        className={twMerge("inline-flex", className)}
         target="_blank"
         rel="noopener noreferrer"
         href={item.to}

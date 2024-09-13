@@ -2,15 +2,14 @@
 
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { useContext } from "react";
-import { DataContext } from "@/provider/context/DataContext";
+import { useMenu } from "@/provider/context/MenuContext";
 
 type Props = {
   className?: string;
 };
 
 export default function Links({ className }: Props) {
-  const { setToggleMenu } = useContext(DataContext);
+  const { setToggleMenu } = useMenu();
   const linkLists = [
     {
       name: "profile",
