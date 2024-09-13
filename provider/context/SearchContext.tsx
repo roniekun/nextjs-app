@@ -32,11 +32,10 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [searchItems, setSearchItem] = useState<SearchItemProps[]>([]);
 
   useEffect(() => {
-    const searchHistory = localStorage.getItem("searcHistory");
+    const searchHistory = localStorage.getItem("searchHistory");
     if (searchHistory) {
       setSearchItem(JSON.parse(searchHistory));
     }
-    console.log(searchItems);
   }, []);
 
   useEffect(() => {

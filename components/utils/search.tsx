@@ -109,7 +109,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           {searchItems.map((item, idx) => (
             <div
               key={idx}
-              className="flex bg-neutral-200 px-[2vw] justify-between p-0 gap-x-1 "
+              className="flex bg-[--backgound] px-[2vw] justify-between p-0 gap-x-1 "
             >
               <p
                 ref={(el) => setRef(el, idx)}
