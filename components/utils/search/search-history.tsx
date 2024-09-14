@@ -43,18 +43,16 @@ export default function SearchHistoryModal() {
           idx < 5 && (
             <div
               key={idx}
-              className="flex bg-[--backgound] px-[2vw] justify-between p-0 gap-x-1 "
+              className="flex bg-[--background] px-[2vw] p-[1vw] justify-between gap-x-1 "
             >
-              <p
+              <div
                 ref={(el) => setRef(el, idx)}
                 onClick={() => handleClick(idx)}
-                className="flex-1 cursor-pointer"
+                className="flex-1 cursor-pointer flex"
               >
-                <span>
-                  <MdHistory />
-                </span>
-                {item.history}
-              </p>
+                <MdHistory />
+                <span>{item.history}</span>
+              </div>
               <button
                 className="cursor-pointer"
                 type="button"
