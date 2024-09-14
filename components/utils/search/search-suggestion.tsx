@@ -13,7 +13,9 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
     <ul className="flex flex-col">
       {filteredResults?.map((result, idx) => (
         <li key={idx}>
-          <a href={result.link}> {result.title}</a>
+          <a className="cursor-pointer hover:bg-neutral-300" href={result.link}>
+            {result.title}
+          </a>
         </li>
       ))}
     </ul>

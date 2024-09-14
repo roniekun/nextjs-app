@@ -38,11 +38,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       });
       setFilteredResult(filteredData);
     }
+    return setFilteredResult([]);
   };
-
-  useEffect(() => {
-    console.log(filteredResult);
-  }, [filteredResult]);
 
   const handleSearch = () => {
     if (query) {
@@ -80,7 +77,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder="Search..."
-          className="border-none flex-1 leading-tight focus:outline-none md:w-[300px]"
+          className="border-none flex-1 p-1 leading-tight focus:outline-none md:w-[300px]"
         />
         {isInFocus && (
           <button

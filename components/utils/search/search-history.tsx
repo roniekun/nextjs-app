@@ -39,7 +39,7 @@ export default function SearchHistoryModal() {
             <li
               key={idx}
               ref={(el) => setRef(el, idx)}
-              className="flex list-none w-full mx-1 px-1 relative hover:bg-neutral-300 justify-between gap-x-1 "
+              className="flex list-none w-full relative hover:bg-neutral-300 justify-between gap-x-1 "
             >
               <MdHistory />
               <a
