@@ -3,20 +3,10 @@ import SearchHistoryModal from "@/components/utils/search/search-history";
 import { useSearch } from "@/provider/context/SearchContext";
 
 export default function SearchComponent() {
-  const { isInFocus, setInFocus } = useSearch();
-
-  const handleFocus = () => {
-    setInFocus(true);
-  };
-
-  const handleBlur = () => {
-    setInFocus(false);
-  };
+  const { isInFocus } = useSearch();
 
   return (
     <div
-      onFocusCapture={handleFocus}
-      onBlurCapture={handleBlur}
       className="flex flex-col rounded-md m-1 relative border-gray-300 border
      bg-neutral-50 h-auto overflow-hidden"
     >

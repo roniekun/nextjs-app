@@ -11,11 +11,12 @@ type SearchProps = {
 
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const router = useRouter();
-  const { isInFocus, setSearchItem, setQuery, query } = useSearch();
+  const { isInFocus, setInFocus setSearchItem, setQuery, query } = useSearch();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+    setInFocus(true);
     if (e) {
       setQuery(e.target.value);
     }

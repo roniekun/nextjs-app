@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 export default function SearchHistoryModal() {
   const router = useRouter();
   const { searchItems, setSearchItem, setQuery } = useSearch();
-  const historyRef = useRef<HTMLParagraphElement[]>([]);
+  const historyRef = useRef<HTMLLIElement[]>([]);
 
-  const setRef = (el: HTMLParagraphElement | null, idx: number) => {
+  const setRef = (el: HTMLLIElement | null, idx: number) => {
     if (el) {
       historyRef.current[idx] = el;
     }
@@ -31,28 +31,27 @@ export default function SearchHistoryModal() {
     setSearchItem(updatedItems);
   };
 
-  useEffect(() => {
-    console.log(searchItems);
-    console.log("cli");
-  }, [searchItems]);
+  const handleClear = () => {
+    setSearchItem([]);
+  };
 
   return (
-    <div className="relative w-full rounded-b-md h-auto text-[--text-color-secondary]">
+    <div className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
       {searchItems.map(
         (item, idx) =>
           idx < 5 && (
-            <div
+            <ul
               key={idx}
-              className="flex bg-[--background] px-[2vw] relative p-1 justify-between gap-x-1 "
+              className="flex list-none bg-[--background] px-[2vw] relative p-1 justify-between gap-x-1 "
             >
-              <div
+              <li
                 ref={(el) => setRef(el, idx)}
                 onClick={() => handleClick(idx)}
-                className="flex-1 cursor-pointer flex item-center justify-center relative gap-x-1"
+                className="flex-1 cursor-pointer flex item-center relative gap-x-1"
               >
                 <MdHistory />
                 <p className="text-[--text-color-secondary] ">{item.history}</p>
-              </div>
+              </li>
               <button
                 className="cursor-pointer relative"
                 type="button"
@@ -60,9 +59,10 @@ export default function SearchHistoryModal() {
               >
                 <IoIosClose />
               </button>
-            </div>
+            </ul>
           )
       )}
+      <button onClick={handleClear}> clear all</button>
     </div>
   );
 }
