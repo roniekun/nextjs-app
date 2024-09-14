@@ -38,16 +38,16 @@ export default function SearchHistoryModal() {
           idx < 5 && (
             <li
               key={idx}
-              className="flex list-none w-full mx-1 px-1 relative  justify-between gap-x-1 "
+              ref={(el) => setRef(el, idx)}
+              className="flex list-none w-full mx-1 px-1 relative hover:bg-neutral-300 justify-between gap-x-1 "
             >
               <MdHistory />
-              <li
-                ref={(el) => setRef(el, idx)}
+              <a
                 onClick={() => handleClick(idx)}
                 className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "
               >
                 {item.history}
-              </li>
+              </a>
               <button
                 className="cursor-pointer relative"
                 type="button"

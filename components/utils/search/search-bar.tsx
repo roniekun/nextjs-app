@@ -1,24 +1,45 @@
 "use client";
 import { useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
+import Container from "../container";
 import { useRouter } from "next/navigation";
 import { useSearch, SearchItemProps } from "@/provider/context/SearchContext";
 import { twMerge } from "tailwind-merge";
+import {
+  SearchSuggestionModal,
+  filteredResultProps,
+} from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
+import { contentData, IContentData } from "../data/content-data";
 
 type SearchProps = {
+  placeholder?: string;
   className?: string;
 };
 
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const router = useRouter();
-  const { isInFocus, setInFocus, setSearchItem, setQuery, query } = useSearch();
+  const { isInFocus, setInFocus, setSearchItem, searchItems, setQuery, query } =
+    useSearch();
+
+  const [filteredResult, setFilteredResult] = useState<filteredResultProps[]>(
+    []
+  );
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  //input logic setting the query and suggestion result
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
-      setQuery(e.target.value);
+      const enteredQuery = e.target.value;
+      setQuery(enteredQuery);
+      const filteredData = contentData.filter((data) => {
+        return data.title
+          .toLowerCase()
+          .trim()
+          .includes(enteredQuery.trim().toLowerCase());
+      });
+      setFilteredResult(filteredData);
     }
   };
 
@@ -48,8 +69,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   };
 
   return (
-    <div className={twMerge(`flex relative px-2 flex-col`, className)}>
-      <div className="relative flex items-center">
+    <div className={twMerge(`flex relative p-1 flex-col`, className)}>
+      <Container className="p-2 flex items-center">
         <input
           type="text"
           value={query ?? ""}
@@ -58,8 +79,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder="Search..."
-          className="appearance-none bg-transparent border-none flex-1 text-gray-700 mr-3 p-2 leading-tight
-        focus:outline-none"
+          className="border-none flex-1 leading-tight focus:outline-none md:w-[300px]"
         />
         {isInFocus && (
           <button
@@ -70,17 +90,18 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             <IoIosClose />
           </button>
         )}
-      </div>
-      {isInFocus && (
-        <div>
+      </Container>
+      {searchItems.length != 0 && (
+        <Container className="p-2 flex flex-col">
+          <SearchSuggestionModal filteredResults={filteredResult} />
           <SearchHistoryModal />
           <button
             onClick={() => setSearchItem([])}
             className="text-xs text-[--text-color-secondary] justify-end"
           >
-            Clear all
+            Clear history
           </button>
-        </div>
+        </Container>
       )}
     </div>
   );

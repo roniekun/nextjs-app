@@ -9,7 +9,7 @@ export default function SearchComponent() {
     <div
       onBlur={() => setInFocus(false)}
       className="flex flex-col rounded-md relative border-gray-300 border
-     bg-neutral-50 h-auto overflow-hidden md:w-[200px] w-full p-2"
+     bg-neutral-50 h-auto overflow-hidden p-2"
     >
       <SearchBar />
     </div>
