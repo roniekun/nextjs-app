@@ -70,7 +70,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   };
 
   return (
-    <div className={twMerge(`flex relative p-1 flex-col`, className)}>
+    <div className={twMerge(`flex relative flex-col`, className)}>
       <Container className="p-1 flex items-center">
         <input
           type="text"
@@ -92,8 +92,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           </button>
         )}
       </Container>
-      {searchItems.length != 0 && (
-        <Container className="p-2 flex flex-col">
+      {filteredResult.length != 0 && (
+        <Container className="p-1 flex flex-col">
           <SearchSuggestionModal filteredResults={filteredResult} />
           <SearchHistoryModal />
           <button
