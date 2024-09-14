@@ -13,6 +13,8 @@ export interface SearchItemProps {
 }
 
 interface SearchContextProps {
+  isInFocus: boolean;
+  setInFocus: React.Dispatch<React.SetStateAction<boolean>>;
   searchItems: SearchItemProps[];
   setSearchItem: React.Dispatch<React.SetStateAction<SearchItemProps[]>>;
   query: string | null;
@@ -20,6 +22,8 @@ interface SearchContextProps {
 }
 
 const DefaultContext: SearchContextProps = {
+  isInFocus: false,
+  setInFocus: () => {},
   searchItems: [],
   setSearchItem: () => {},
   query: null,
@@ -33,6 +37,7 @@ interface SearchProviderProps {
 }
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
+  const [isInFocus, setInFocus] = useState<boolean>(false);
   const [query, setQuery] = useState<string | null>(null);
   const [searchItems, setSearchItem] = useState<SearchItemProps[]>([]);
 
@@ -50,6 +55,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   return (
     <SearchContext.Provider
       value={{
+        isInFocus,
+        setInFocus,
         query,
         setQuery,
         searchItems,

@@ -37,7 +37,7 @@ export default function SearchHistoryModal() {
   }, [searchItems]);
 
   return (
-    <div className="absolute top-[100%] w-full rounded-b-md h-auto text-[--text-color-secondary]">
+    <div className="relative w-full rounded-b-md h-auto text-[--text-color-secondary]">
       {searchItems.map(
         (item, idx) =>
           idx < 5 && (

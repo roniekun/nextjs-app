@@ -11,8 +11,7 @@ type SearchProps = {
 
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const router = useRouter();
-  const { setSearchItem, setQuery, query } = useSearch();
-  const [isInFocus, setInFocus] = useState(false);
+  const { isInFocus, setInFocus, setSearchItem, setQuery, query } = useSearch();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
