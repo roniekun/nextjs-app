@@ -37,24 +37,24 @@ export default function SearchHistoryModal() {
   }, [searchItems]);
 
   return (
-    <div className="absolute top-[100%] w-full z-20 h-auto">
+    <div className="absolute top-[100%] w-full rounded-b-md h-auto text-[--text-color-secondary]">
       {searchItems.map(
         (item, idx) =>
           idx < 5 && (
             <div
               key={idx}
-              className="flex bg-[--background] px-[2vw] p-[1vw] justify-between gap-x-1 "
+              className="flex bg-[--background] px-[2vw] relative  p-[1vw] justify-between gap-x-1 "
             >
               <div
                 ref={(el) => setRef(el, idx)}
                 onClick={() => handleClick(idx)}
-                className="flex-1 cursor-pointer flex"
+                className="flex-1 cursor-pointer flex item-center relative gap-x-1"
               >
                 <MdHistory />
                 <span>{item.history}</span>
               </div>
               <button
-                className="cursor-pointer"
+                className="cursor-pointer relative"
                 type="button"
                 onClick={() => handleDelete(idx)}
               >
