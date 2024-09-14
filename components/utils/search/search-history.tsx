@@ -62,7 +62,13 @@ export default function SearchHistoryModal() {
             </ul>
           )
       )}
-      <button onClick={handleClear}> clear all</button>
+      <button
+        onClick={handleClear}
+        className="text-xs text-[--text-color-secondary] self-end"
+      >
+        {" "}
+        clear all
+      </button>
     </div>
   );
 }

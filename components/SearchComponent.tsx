@@ -8,7 +8,7 @@ export default function SearchComponent() {
   return (
     <div
       className="flex flex-col rounded-md m-1 relative border-gray-300 border
-     bg-neutral-50 h-auto overflow-hidden"
+     bg-neutral-50 h-auto overflow-hidden md:w-[200px] w-full"
     >
       <SearchBar />
       {isInFocus && <SearchHistoryModal />}
