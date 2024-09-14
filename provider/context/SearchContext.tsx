@@ -9,7 +9,7 @@ import {
 
 export interface SearchItemProps {
   history: string;
-  status: "Deleted" | "Default";
+  status: "deleted" | "default";
 }
 
 interface SearchContextProps {

@@ -27,7 +27,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       const trimQuery = query.trim();
       const newItem: SearchItemProps = {
         history: trimQuery,
-        status: "Default",
+        status: "default",
       };
       setSearchItem((prevItems) => [...prevItems, newItem]);
 
@@ -42,22 +42,34 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       handleSearch();
     }
   };
+
   const handleFocus = () => {
     setInFocus(true);
   };
+
+  const handleBlur = () => {
+    setInFocus(false);
+  };
+
   const handleClear = () => {
     setQuery(null);
   };
 
   return (
-    <div className={twMerge(`flex relative px-2 md:max-w-[50vw]`, className)}>
+    <div
+      className={twMerge(
+        `flex relative px-2 md:max-w-[50vw] items-center`,
+        className
+      )}
+    >
       <input
         type="text"
         value={query ?? ""}
         ref={inputRef}
         onChange={(e) => handleInputChange(e)}
         onKeyDown={handleKeyDown}
-        onFocusCapture={handleFocus}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         placeholder="Search..."
         className="appearance-none bg-transparent border-none flex-1 text-gray-700 mr-3 py-1 px-2 leading-tight
         focus:outline-none"

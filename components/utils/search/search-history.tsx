@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { MdHistory } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 import { useSearch } from "@/provider/context/SearchContext";
@@ -9,12 +9,6 @@ export default function SearchHistoryModal() {
   const router = useRouter();
   const { searchItems, setSearchItem, setQuery } = useSearch();
   const historyRef = useRef<HTMLParagraphElement[]>([]);
-
-  // const handleClick = (idx: number) => {
-  //   if (historyRef.current[idx] && inputRef.current) {
-  //     inputRef.current.textContent = historyRef.current[idx].textContent ?? "";
-  //   }
-  // };
 
   const setRef = (el: HTMLParagraphElement | null, idx: number) => {
     if (el) {
@@ -31,12 +25,19 @@ export default function SearchHistoryModal() {
     );
   };
 
+  //deleting items in history
   const handleDelete = (i: number) => {
     const updatedItems = searchItems.filter((_, idx) => idx !== i);
     setSearchItem(updatedItems);
   };
+
+  useEffect(() => {
+    console.log(searchItems);
+    console.log("cli");
+  }, [searchItems]);
+
   return (
-    <div className="absolute top-[100%] w-full z-20 ">
+    <div className="absolute top-[100%] w-full z-20 h-auto">
       {searchItems.map(
         (item, idx) =>
           idx < 5 && (
