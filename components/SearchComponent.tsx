@@ -9,21 +9,10 @@ export default function SearchComponent() {
     <div
       onFocus={() => setInFocus(true)}
       onBlurCapture={() => setInFocus(false)}
-      className="flex flex-col rounded-md m-1 relative border-gray-300 border
-     bg-neutral-50 h-auto overflow-hidden md:w-[200px] w-full"
+      className="flex flex-col rounded-md relative border-gray-300 border
+     bg-neutral-50 h-auto overflow-hidden md:w-[200px] w-full p-2"
     >
       <SearchBar />
-      {isInFocus && (
-        <div>
-          <SearchHistoryModal />
-          <button
-            onClick={() => setSearchItem([])}
-            className="text-xs text-[--text-color-secondary] self-end"
-          >
-            Clear all
-          </button>
-        </div>
-      )}
     </div>
   );
 }

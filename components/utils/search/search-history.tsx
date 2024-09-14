@@ -38,7 +38,7 @@ export default function SearchHistoryModal() {
           idx < 5 && (
             <li
               key={idx}
-              className="flex list-none bg-[--background] w-full mx-1 px-1 relative  justify-between gap-x-1 "
+              className="flex list-none w-full mx-1 px-1 relative  justify-between gap-x-1 "
             >
               <MdHistory />
               <li
