@@ -11,7 +11,7 @@ type SearchProps = {
 
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const router = useRouter();
-  const { isInFocus, setInFocus, setSearchItem, setQuery, query } = useSearch();
+  const { isInFocus, setSearchItem, setQuery, query } = useSearch();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,14 +42,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
     }
   };
 
-  const handleFocus = () => {
-    setInFocus(true);
-  };
-
-  const handleBlur = () => {
-    setInFocus(false);
-  };
-
   const handleClear = () => {
     setQuery(null);
   };
@@ -67,10 +59,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         ref={inputRef}
         onChange={(e) => handleInputChange(e)}
         onKeyDown={handleKeyDown}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         placeholder="Search..."
-        className="appearance-none bg-transparent border-none flex-1 text-gray-700 mr-3 py-1 px-2 leading-tight
+        className="appearance-none bg-transparent border-none flex-1 text-gray-700 mr-3 p-2 leading-tight
         focus:outline-none"
       />
       {isInFocus && (
