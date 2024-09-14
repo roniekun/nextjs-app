@@ -32,21 +32,21 @@ export default function SearchHistoryModal() {
   };
 
   return (
-    <div className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
+    <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
       {searchItems.map(
         (item, idx) =>
           idx < 5 && (
-            <ul
+            <li
               key={idx}
-              className="flex list-none bg-[--background] w-full m-1 relative  justify-between gap-x-1 "
+              className="flex list-none bg-[--background] w-full mx-1 px-1 relative  justify-between gap-x-1 "
             >
+              <MdHistory />
               <li
                 ref={(el) => setRef(el, idx)}
                 onClick={() => handleClick(idx)}
-                className="flex-1 cursor-pointer flex item-center relative gap-x-1"
+                className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "
               >
-                <MdHistory />
-                <p className="text-[--text-color-secondary] ">{item.history}</p>
+                {item.history}
               </li>
               <button
                 className="cursor-pointer relative"
@@ -55,9 +55,9 @@ export default function SearchHistoryModal() {
               >
                 <IoIosClose />
               </button>
-            </ul>
+            </li>
           )
       )}
-    </div>
+    </ul>
   );
 }

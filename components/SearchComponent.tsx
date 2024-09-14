@@ -7,8 +7,8 @@ export default function SearchComponent() {
 
   return (
     <div
-      onFocusCapture={() => setInFocus(true)}
-      onBlur={() => setInFocus(false)}
+      onFocus={() => setInFocus(true)}
+      onBlurCapture={() => setInFocus(false)}
       className="flex flex-col rounded-md m-1 relative border-gray-300 border
      bg-neutral-50 h-auto overflow-hidden md:w-[200px] w-full"
     >
