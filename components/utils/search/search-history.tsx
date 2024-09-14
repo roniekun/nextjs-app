@@ -31,10 +31,6 @@ export default function SearchHistoryModal() {
     setSearchItem(updatedItems);
   };
 
-  const handleClear = () => {
-    setSearchItem([]);
-  };
-
   return (
     <div className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
       {searchItems.map(
@@ -62,13 +58,6 @@ export default function SearchHistoryModal() {
             </ul>
           )
       )}
-      <button
-        onClick={handleClear}
-        className="text-xs text-[--text-color-secondary] self-end"
-      >
-        {" "}
-        clear all
-      </button>
     </div>
   );
 }
