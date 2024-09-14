@@ -35,11 +35,13 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
       if (enteredQuery === "") {
         setFilteredResult([]);
+        setInFocus(false);
       } else {
         const filteredData = contentData.filter((data) =>
           data.title.toLowerCase().trim().includes(enteredQuery)
         );
         setFilteredResult(filteredData);
+        setInFocus(true);
       }
     }
   };
@@ -75,7 +77,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         <input
           type="text"
           value={query ?? ""}
-          onFocusCapture={() => setInFocus(true)}
           ref={inputRef}
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
