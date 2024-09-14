@@ -42,7 +42,7 @@ export default function SearchHistoryModal() {
           idx < 5 && (
             <ul
               key={idx}
-              className="flex list-none bg-[--background] px-[2vw] relative p-1 justify-between gap-x-1 "
+              className="flex list-none bg-[--background] w-full m-1 relative  justify-between gap-x-1 "
             >
               <li
                 ref={(el) => setRef(el, idx)}

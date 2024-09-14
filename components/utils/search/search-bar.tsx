@@ -16,7 +16,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-    setInFocus(true);
     if (e) {
       setQuery(e.target.value);
     }
