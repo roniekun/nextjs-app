@@ -15,11 +15,15 @@ export interface SearchItemProps {
 interface SearchContextProps {
   searchItems: SearchItemProps[];
   setSearchItem: React.Dispatch<React.SetStateAction<SearchItemProps[]>>;
+  query: string | null;
+  setQuery: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const DefaultContext: SearchContextProps = {
   searchItems: [],
   setSearchItem: () => {},
+  query: null,
+  setQuery: () => {},
 };
 
 const SearchContext = createContext<SearchContextProps>(DefaultContext);
@@ -29,6 +33,7 @@ interface SearchProviderProps {
 }
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
+  const [query, setQuery] = useState<string | null>(null);
   const [searchItems, setSearchItem] = useState<SearchItemProps[]>([]);
 
   useEffect(() => {
@@ -45,6 +50,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   return (
     <SearchContext.Provider
       value={{
+        query,
+        setQuery,
         searchItems,
         setSearchItem,
       }}

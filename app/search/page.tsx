@@ -1,6 +1,6 @@
-import SearchResult from "@/components/utils/search-result";
+import SearchResult from "@/components/utils/search/search-result";
 import Container from "@/components/utils/container";
-import SearchBar from "@/components/utils/search";
+import SearchBar from "@/components/utils/search/search-bar";
 import { Suspense } from "react";
 
 export default function Search() {

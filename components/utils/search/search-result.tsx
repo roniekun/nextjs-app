@@ -1,10 +1,10 @@
 "use client";
-import { contentData, IContentData } from "./data/content-data";
+import { contentData, IContentData } from "../data/content-data";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useSearch } from "@/provider/context/SearchContext";
-import Container from "./container";
+import Container from "../container";
 
 const SearchResult = () => {
   const [results, setResults] = useState<IContentData[]>([]);
