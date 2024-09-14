@@ -48,13 +48,12 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   };
 
   return (
-    <div
-      className={twMerge(`flex relative px-2 items-center flex-col`, className)}
-    >
-      <div className=" relative flex">
+    <div className={twMerge(`flex relative px-2 flex-col`, className)}>
+      <div className="relative flex items-center">
         <input
           type="text"
           value={query ?? ""}
+          onFocus={() => setInFocus(true)}
           ref={inputRef}
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
