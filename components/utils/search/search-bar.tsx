@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import Container from "../container";
 import { useRouter } from "next/navigation";
@@ -31,17 +31,18 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   //input logic setting the query and suggestion result
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
-      const enteredQuery = e.target.value;
-      setQuery(enteredQuery);
+      const enteredQuery = e.target.value.trim().toLowerCase();
+      setQuery(e.target.value);
       const filteredData = contentData.filter((data) => {
-        return data.title
-          .toLowerCase()
-          .trim()
-          .includes(enteredQuery.trim().toLowerCase());
+        return data.title.toLowerCase().trim().includes(enteredQuery);
       });
       setFilteredResult(filteredData);
     }
   };
+
+  useEffect(() => {
+    console.log(filteredResult);
+  }, [filteredResult]);
 
   const handleSearch = () => {
     if (query) {
@@ -70,7 +71,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   return (
     <div className={twMerge(`flex relative p-1 flex-col`, className)}>
-      <Container className="p-2 flex items-center">
+      <Container className="p-1 flex items-center">
         <input
           type="text"
           value={query ?? ""}
