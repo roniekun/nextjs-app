@@ -41,6 +41,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         const filteredData = contentData.filter((data) =>
           data.title.toLowerCase().trim().includes(enteredQuery)
         );
+
         setFilteredResult(filteredData);
         setInFocus(true);
       }
@@ -70,6 +71,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const handleClear = () => {
     setQuery(null);
+    setInFocus(false);
   };
 
   return (
@@ -87,7 +89,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         {isInFocus ? (
           <button
             type="button"
-            className=" text-neutral-950 aspect-square bg-neutral-300 rounded-full h-fit w-fit"
+            className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
             onClick={handleClear}
           >
             <IoIosClose />
@@ -95,23 +97,26 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         ) : (
           <button
             type="button"
-            className=" text-neutral-950 aspect-square bg-neutral-300 rounded-full h-fit w-fit"
-            onClick={handleSearch}
+            className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
           >
             <MdOutlineSearch />
           </button>
         )}
       </Container>
-      {filteredResult.length != 0 && (
+      {isInFocus && (
         <Container className="p-1 flex flex-col">
           <SearchSuggestionModal filteredResults={filteredResult} />
-          <SearchHistoryModal />
-          <button
-            onClick={() => setSearchItem([])}
-            className="text-xs text-[--text-color-secondary] justify-end"
-          >
-            Clear history
-          </button>
+          {searchItems.length > 0 && (
+            <div className="flex flex-col">
+              <SearchHistoryModal />
+              <button
+                onClick={() => setSearchItem([])}
+                className="text-xs text-[--text-color-secondary] justify-end"
+              >
+                Clear history
+              </button>
+            </div>
+          )}
         </Container>
       )}
     </div>
