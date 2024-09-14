@@ -3,7 +3,7 @@ import SearchHistoryModal from "@/components/utils/search/search-history";
 import { useSearch } from "@/provider/context/SearchContext";
 
 export default function SearchComponent() {
-  const { isInFocus } = useSearch();
+  const { isInFocus, setInFocus } = useSearch();
 
   return (
     <div
