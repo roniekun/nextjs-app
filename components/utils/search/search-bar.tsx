@@ -30,7 +30,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         status: "default",
       };
       setSearchItem((prevItems) => [...prevItems, newItem]);
-
+      setInFocus(false);
       router.push(`/search?query=${encodeURIComponent(trimQuery)}`);
     }
 
@@ -53,7 +53,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         <input
           type="text"
           value={query ?? ""}
-          onFocus={() => setInFocus(true)}
+          onFocusCapture={() => setInFocus(true)}
           ref={inputRef}
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
