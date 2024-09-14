@@ -28,17 +28,20 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  //input logic setting the query and suggestion result
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
       const enteredQuery = e.target.value.trim().toLowerCase();
       setQuery(e.target.value);
-      const filteredData = contentData.filter((data) => {
-        return data.title.toLowerCase().trim().includes(enteredQuery);
-      });
-      setFilteredResult(filteredData);
+
+      if (enteredQuery === "") {
+        setFilteredResult([]);
+      } else {
+        const filteredData = contentData.filter((data) =>
+          data.title.toLowerCase().trim().includes(enteredQuery)
+        );
+        setFilteredResult(filteredData);
+      }
     }
-    return setFilteredResult([]);
   };
 
   const handleSearch = () => {
