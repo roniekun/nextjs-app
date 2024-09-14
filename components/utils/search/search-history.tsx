@@ -48,10 +48,10 @@ export default function SearchHistoryModal() {
               <div
                 ref={(el) => setRef(el, idx)}
                 onClick={() => handleClick(idx)}
-                className="flex-1 cursor-pointer flex item-center relative gap-x-1"
+                className="flex-1 cursor-pointer flex item-center justify-center relative gap-x-1"
               >
                 <MdHistory />
-                <span>{item.history}</span>
+                <p className="text-[--text-color-secondary] ">{item.history}</p>
               </div>
               <button
                 className="cursor-pointer relative"

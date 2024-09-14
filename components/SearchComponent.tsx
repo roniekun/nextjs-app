@@ -15,8 +15,8 @@ export default function SearchComponent() {
 
   return (
     <div
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onFocusCapture={handleFocus}
+      onBlurCapture={handleBlur}
       className="flex flex-col rounded-md m-1 relative border-gray-300 border
      bg-neutral-50 h-auto overflow-hidden"
     >
