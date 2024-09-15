@@ -77,9 +77,9 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       };
 
       setSearchItems((prevSearch) => {
-        const newFilteredSearchItems = prevSearch.filter((searchItem) => {
-          return newSearch.search !== searchItem.search; // Return the comparison result
-        });
+        const newFilteredSearchItems = prevSearch.filter(
+          (searchItem) => newSearch.search !== searchItem.search // Return the comparison result
+        );
 
         const updatedSearchItems = [...newFilteredSearchItems, newSearch];
 
@@ -147,7 +147,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
           <div>
             <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
-              {searchItems.length > 0 && (
+              {filteredSearchItems.length > 0 && (
                 <div className="flex flex-col">
                   <SearchHistoryModal
                     filteredSearchItems={filteredSearchItems}
