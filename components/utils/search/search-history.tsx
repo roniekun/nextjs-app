@@ -32,30 +32,27 @@ export default function SearchHistoryModal() {
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
-      {searchItems.map(
-        (item, idx) =>
-          idx < 5 && (
-            <li
-              key={idx}
-              ref={(el) => setRef(el, idx)}
-              className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 justify-between gap-x-1 "
-            >
-              <a
-                onClick={() => handleClick(idx)}
-                className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "
-              >
-                {item.history}
-              </a>
-              <button
-                className="cursor-pointer relative"
-                type="button"
-                onClick={() => handleDelete(idx)}
-              >
-                <IoIosClose />
-              </button>
-            </li>
-          )
-      )}
+      {searchItems.slice(0, 5).map((item, idx) => (
+        <li
+          key={idx}
+          ref={(el) => setRef(el, idx)}
+          className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 justify-between gap-x-1 "
+        >
+          <a
+            onClick={() => handleClick(idx)}
+            className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "
+          >
+            {item.history}
+          </a>
+          <button
+            className="cursor-pointer relative"
+            type="button"
+            onClick={() => handleDelete(idx)}
+          >
+            <IoIosClose />
+          </button>
+        </li>
+      ))}
     </ul>
   );
 }

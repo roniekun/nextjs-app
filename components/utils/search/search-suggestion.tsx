@@ -45,7 +45,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   return (
     <ul className="flex flex-col">
-      {filteredResults?.map((result, idx) => (
+      {filteredResults?.slice(0, 10).map((result, idx) => (
         <li
           ref={(el) => setRef(el, idx)}
           onMouseDown={() => handleMouseDown(idx)}
