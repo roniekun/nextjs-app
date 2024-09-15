@@ -31,8 +31,18 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const debounceHandleInputChange = useCallback(
-    debounce((enteredQuery: string) => {
+  // const debounceHandleInputChange = useCallback(
+  //   debounce((enteredQuery: string) => {
+
+  //   }, 300),
+  //   [contentData]
+  // );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+    if (e) {
+      const enteredQuery = e.target.value.trim().toLowerCase();
+      setQuery(e.target.value);
+      //
       if (enteredQuery === "") {
         setFilteredResult([]);
         setInFocus(false);
@@ -44,15 +54,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         setFilteredResult(filteredData);
         setInFocus(true);
       }
-    }, 300),
-    [contentData]
-  );
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-    if (e) {
-      const enteredQuery = e.target.value.trim().toLowerCase();
-      setQuery(e.target.value);
-      debounceHandleInputChange(enteredQuery);
     }
   };
 
