@@ -96,7 +96,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       )}
     >
       <div>
-        <Container className="flex items-center">
+        <Container className="flex relative w-full p-0 items-center">
           <input
             type="text"
             value={query ?? ""}
@@ -104,7 +104,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             placeholder="Search..."
-            className="w-full border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent flex-1 p-1 rounded-sm leading-tight focus:outline-none"
+            className="w-full relative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
           {isInFocus ? (
             <button

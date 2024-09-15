@@ -21,7 +21,9 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   const handleMouseHover = (idx: number) => {
     if (listRef.current) {
-      const searchQuery = listRef.current[idx].textContent;
+      const searchQuery = listRef.current[idx].textContent
+        ?.toLowerCase()
+        .trim();
       setQuery(searchQuery ?? "");
     }
   };
