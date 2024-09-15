@@ -10,6 +10,7 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { contentData, IContentData } from "../data/content-data";
 import debounce from "lodash/debounce";
+import { div } from "framer-motion/client";
 
 type SearchProps = {
   placeholder?: string;
@@ -85,54 +86,57 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        `flex relative flex-col rounded-md h-auto overflow-hidden p-2`,
+        `flex relative flex-col h-auto overflow-hidden`,
         className
       )}
     >
-      <Container className="p-1 flex items-center">
-        <input
-          type="text"
-          value={query ?? ""}
-          ref={inputRef}
-          onChange={(e) => handleInputChange(e)}
-          onKeyDown={handleKeyDown}
-          placeholder="Search..."
-          className=" border-gray-300 border bg-neutral-50  appearance-none bg-transparent flex-1 p-1 mr-1 rounded-md leading-tight focus:outline-none 
-          md:w-[300px]"
-        />
-        {isInFocus ? (
-          <button
-            type="button"
-            className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
-            onClick={handleClear}
-          >
-            <IoIosClose />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
-          >
-            <MdOutlineSearch />
-          </button>
-        )}
-      </Container>
-
-      {isInFocus && (
-        <Container className="flex flex-col relative rounded-md border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
-          <SearchSuggestionModal filteredResults={filteredResult} />
-          {searchItems.length > 0 && (
-            <div className="flex flex-col">
-              <SearchHistoryModal />
-              <button
-                onClick={() => setSearchItem([])}
-                className="text-xs text-[--text-color-secondary] justify-end"
-              >
-                Clear history
-              </button>
-            </div>
+      <div>
+        <Container className="p-2 flex items-center">
+          <input
+            type="text"
+            value={query ?? ""}
+            ref={inputRef}
+            onChange={(e) => handleInputChange(e)}
+            onKeyDown={handleKeyDown}
+            placeholder="Search..."
+            className=" border-gray-300 border bg-neutral-50 px-2  appearance-none bg-transparent flex-1 p-1 rounded-sm leading-tight focus:outline-none md:w-[300px]"
+          />
+          {isInFocus ? (
+            <button
+              type="button"
+              className="text-[--text-color-secondary] aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit mx-1"
+              onClick={handleClear}
+            >
+              <IoIosClose />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
+            >
+              <MdOutlineSearch />
+            </button>
           )}
         </Container>
+      </div>
+
+      {isInFocus && (
+        <div>
+          <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
+            <SearchSuggestionModal filteredResults={filteredResult} />
+            {searchItems.length > 0 && (
+              <div className="flex flex-col">
+                <SearchHistoryModal />
+                <button
+                  onClick={() => setSearchItem([])}
+                  className="text-xs text-[--text-color-secondary] m-1 justify-end"
+                >
+                  Clear history
+                </button>
+              </div>
+            )}
+          </Container>
+        </div>
       )}
     </div>
   );

@@ -35,7 +35,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
           onMouseEnter={() => handleMouseHover(idx)}
           onMouseLeave={handleMouseLeave}
           key={idx}
-          className=" hover:bg-neutral-300"
+          className="rounded-sm hover:bg-neutral-200"
         >
           <a className="cursor-pointer" href={result.link}>
             {result.title}

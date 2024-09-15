@@ -38,7 +38,7 @@ export default function SearchHistoryModal() {
             <li
               key={idx}
               ref={(el) => setRef(el, idx)}
-              className="flex list-none w-full relative hover:bg-neutral-300 justify-between gap-x-1 "
+              className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 justify-between gap-x-1 "
             >
               <a
                 onClick={() => handleClick(idx)}
