@@ -90,8 +90,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        `flex relative flex-col rounded-md  border-gray-300 border
-     bg-neutral-50 h-auto overflow-hidden p-2`,
+        `flex relative flex-col rounded-md h-auto overflow-hidden p-2`,
         className
       )}
     >
@@ -103,7 +102,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder="Search..."
-          className="border-none appearance-none bg-transparent flex-1 p-1 mr-1 rounded-md leading-tight focus:outline-none 
+          className=" border-gray-300 border bg-neutral-50  appearance-none bg-transparent flex-1 p-1 mr-1 rounded-md leading-tight focus:outline-none 
           md:w-[300px]"
         />
         {isInFocus ? (

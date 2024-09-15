@@ -2,6 +2,7 @@ export interface IContentData {
   id: number;
   title: string;
   content: string;
+  link?: string;
 }
 
 export const contentData: IContentData[] = [
