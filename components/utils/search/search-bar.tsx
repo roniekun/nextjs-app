@@ -6,10 +6,7 @@ import Container from "../container";
 import { useRouter } from "next/navigation";
 import { useSearch, SearchItemProps } from "@/provider/context/SearchContext";
 import { twMerge } from "tailwind-merge";
-import {
-  SearchSuggestionModal,
-  filteredResultProps,
-} from "./search-suggestion";
+import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { contentData, IContentData } from "../data/content-data";
 import debounce from "lodash/debounce";
@@ -25,9 +22,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const { isInFocus, setInFocus, setSearchItem, searchItems, setQuery, query } =
     useSearch();
 
-  const [filteredResult, setFilteredResult] = useState<filteredResultProps[]>(
-    []
-  );
+  const [filteredResult, setFilteredResult] = useState<IContentData[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -44,7 +39,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         setFilteredResult(filteredData);
         setInFocus(true);
       }
-    }, 300),
+    }, 1000),
     [contentData]
   );
 
