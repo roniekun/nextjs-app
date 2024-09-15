@@ -45,7 +45,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         setFilteredResult(filteredData);
         setInFocus(true);
       }
-    }, 1000),
+    }, 300),
     [contentData]
   );
 
@@ -107,20 +107,17 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             placeholder="Search..."
             className="w-full elative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
-          <div>
+          <div className="flex justify-center items-center text-[--text-color-secondary]  bg-neutral-300 rounded-r-ful">
             {isInFocus ? (
               <button
                 type="button"
-                className="text-[--text-color-secondary] aspect-square p-1 bg-neutral-300 rounded-r-full h-fit w-fit"
+                className="aspect-square p-1 h-fit w-fit"
                 onClick={handleClear}
               >
                 <IoIosClose />
               </button>
             ) : (
-              <button
-                type="button"
-                className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
-              >
+              <button type="button" className="aspect-square p-1 h-fit w-fit">
                 <MdOutlineSearch />
               </button>
             )}

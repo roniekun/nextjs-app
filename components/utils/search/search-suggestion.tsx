@@ -39,7 +39,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
       };
 
       setSearchItems((prevSearch) => [...prevSearch, newSearch]);
-      router.push(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
+      router.push(`/search_result?query=${encodeURIComponent(newQuery ?? "")}`);
     }
   };
 
