@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import Container from "../container";
@@ -31,18 +31,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // const debounceHandleInputChange = useCallback(
-  //   debounce((enteredQuery: string) => {
-
-  //   }, 300),
-  //   [contentData]
-  // );
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-    if (e) {
-      const enteredQuery = e.target.value.trim().toLowerCase();
-      setQuery(e.target.value);
-      //
+  const debounceHandleInputChange = useCallback(
+    debounce((enteredQuery: string) => {
       if (enteredQuery === "") {
         setFilteredResult([]);
         setInFocus(false);
@@ -54,8 +44,22 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         setFilteredResult(filteredData);
         setInFocus(true);
       }
+    }, 300),
+    [contentData]
+  );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+    if (e) {
+      const enteredQuery = e.target.value.trim().toLowerCase();
+      setQuery(e.target.value);
+      //
+      debounceHandleInputChange(enteredQuery);
     }
   };
+
+  useEffect(() => {
+    console.log(filteredResult);
+  }, [filteredResult]);
 
   const handleSearch = () => {
     if (query) {
@@ -121,7 +125,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       </Container>
 
       {isInFocus && (
-        <Container className="flex flex-col absolute top-[100%] rounded-md border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
+        <Container className="flex flex-col relative rounded-md border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
           <SearchSuggestionModal filteredResults={filteredResult} />
           {searchItems.length > 0 && (
             <div className="flex flex-col">

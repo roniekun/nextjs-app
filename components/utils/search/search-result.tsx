@@ -9,7 +9,7 @@ import Container from "../container";
 const SearchResult = () => {
   const [results, setResults] = useState<IContentData[]>([]);
   const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const query = searchParams.get("query");
   const { searchItems } = useSearch();
 
@@ -48,7 +48,7 @@ const SearchResult = () => {
         item.title.toLowerCase().includes(query.toLowerCase()) ||
         item.content.toLowerCase().includes(query.toLowerCase())
     );
-
+    setLoading(true);
     setResults(filteredResults);
     setLoading(false);
   }, [query]);
