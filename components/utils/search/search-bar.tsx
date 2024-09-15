@@ -86,6 +86,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const handleClear = () => {
     setQuery(null);
     setInFocus(false);
+    router.replace("/search");
   };
 
   return (
@@ -106,11 +107,11 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             placeholder="Search..."
             className="w-full elative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
-          <div className="mx-1">
+          <div>
             {isInFocus ? (
               <button
                 type="button"
-                className="text-[--text-color-secondary] aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
+                className="text-[--text-color-secondary] aspect-square p-1 bg-neutral-300 rounded-r-full h-fit w-fit"
                 onClick={handleClear}
               >
                 <IoIosClose />

@@ -30,17 +30,16 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   const handleClick = (idx: number) => {
     if (listRef.current) {
+      const newQuery = listRef.current[idx].textContent
+        ?.toLocaleLowerCase()
+        .trim();
       const newSearch: SearchItemProps = {
-        history: listRef.current[idx].textContent?.toLocaleLowerCase() ?? "",
+        history: newQuery ?? "",
         status: "default",
       };
 
       setSearchItems((prevSearch) => [...prevSearch, newSearch]);
-      router.push(
-        `/search?query=${encodeURIComponent(
-          listRef.current[idx].textContent ?? ""
-        )}`
-      );
+      router.push(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
     }
   };
 
