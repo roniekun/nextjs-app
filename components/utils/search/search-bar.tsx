@@ -47,8 +47,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         const filteredData = contentData.filter((data) =>
           data.title.toLowerCase().trim().includes(enteredQuery)
         );
-        const newFilteredSearchItem = searchItems.filter((item) =>
-          item.search.toLowerCase().trim().includes(enteredQuery)
+        const newFilteredSearchItem = searchItems.filter(
+          (item) => item.search.toLowerCase().trim() !== enteredQuery
         );
         setFilteredSearchItems(newFilteredSearchItem);
         setFilteredResult(filteredData);
