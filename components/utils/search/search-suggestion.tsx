@@ -1,7 +1,9 @@
 import { IContentData } from "../data/content-data";
 import { useRef } from "react";
-import { useSearch } from "@/provider/context/SearchContext";
-import { SearchItemProps } from "@/provider/context/SearchContext";
+import {
+  SearchHistoryProps,
+  useSearch,
+} from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -33,8 +35,8 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
       const newQuery = listRef.current[idx].textContent
         ?.toLocaleLowerCase()
         .trim();
-      const newSearch: SearchItemProps = {
-        history: newQuery ?? "",
+      const newSearch: SearchHistoryProps = {
+        search: newQuery ?? "",
         id: searchItems.length + 1,
         date: Date.now(),
       };
