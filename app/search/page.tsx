@@ -10,7 +10,7 @@ export default function Search() {
       <Container className="min-h-[400px] lg:px-[10vw] items-center flex flex-col w-full">
         <SearchBar />
         <Suspense>
-          <SearchResult />
+          <SearchResult className="w-full relative flex" />
         </Suspense>
       </Container>
     </PageTransitionLayout>

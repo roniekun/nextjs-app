@@ -7,17 +7,17 @@ import {
   useEffect,
 } from "react";
 
-export interface SearchItemProps {
+export interface SearchHistoryProps {
   id: number;
-  history: string;
+  search: string;
   date: number;
 }
 
 interface SearchContextProps {
   isInFocus: boolean;
   setInFocus: React.Dispatch<React.SetStateAction<boolean>>;
-  searchItems: SearchItemProps[];
-  setSearchItems: React.Dispatch<React.SetStateAction<SearchItemProps[]>>;
+  searchItems: SearchHistoryProps[];
+  setSearchItems: React.Dispatch<React.SetStateAction<SearchHistoryProps[]>>;
   query: string | null;
   setQuery: React.Dispatch<React.SetStateAction<string | null>>;
 }
@@ -40,7 +40,7 @@ interface SearchProviderProps {
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [isInFocus, setInFocus] = useState<boolean>(false);
   const [query, setQuery] = useState<string | null>(null);
-  const [searchItems, setSearchItems] = useState<SearchItemProps[]>([]);
+  const [searchItems, setSearchItems] = useState<SearchHistoryProps[]>([]);
 
   useEffect(() => {
     const searchHistory = localStorage.getItem("searchHistory");

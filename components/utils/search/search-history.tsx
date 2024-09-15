@@ -3,8 +3,13 @@ import { useRef } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
+import { SearchHistoryProps } from "@/provider/context/SearchContext";
 
-export default function SearchHistoryModal() {
+type Props = {
+  filteredSearchItems: SearchHistoryProps[];
+};
+
+const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
   const router = useRouter();
   const { searchItems, setSearchItems, setQuery } = useSearch();
   const historyRef = useRef<HTMLLIElement[]>([]);
@@ -32,7 +37,7 @@ export default function SearchHistoryModal() {
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
-      {searchItems.map((item, idx) => (
+      {filteredSearchItems.map((item, idx) => (
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
@@ -42,7 +47,7 @@ export default function SearchHistoryModal() {
             onClick={() => handleClick(idx)}
             className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "
           >
-            {item.history}
+            {item.search}
           </a>
           <button
             className="cursor-pointer relative"
@@ -55,4 +60,6 @@ export default function SearchHistoryModal() {
       ))}
     </ul>
   );
-}
+};
+
+export default SearchHistoryModal;

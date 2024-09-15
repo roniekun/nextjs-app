@@ -5,11 +5,16 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useSearch } from "@/provider/context/SearchContext";
 import Container from "../container";
+import { twMerge } from "tailwind-merge";
 
-const SearchResult = () => {
+type Props = {
+  className?: string;
+};
+
+const SearchResult: React.FC<Props> = ({ className }) => {
   const [results, setResults] = useState<IContentData[]>([]);
   const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const query = searchParams.get("query");
   const { searchItems } = useSearch();
 
@@ -54,30 +59,32 @@ const SearchResult = () => {
   }, [query]);
 
   return (
-    <>
-      <Container>
-        {results.length > 0 ? (
-          <ul className="w-full relative flex flex-col gap-y-5">
-            <Title />
-            {results.map((item) => (
-              <li key={item.id} className="w-full relative ">
-                <h1 className="font-medium">
-                  {highlightText(item.title, query)}
-                </h1>
-                <p className="text-[--text-color-secondary]">
-                  {highlightText(item.content, query)}
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="flex flex-col w-full relative">
-            <Title />
-            {loading ? <p>Loading...</p> : <p>No results found</p>}
-          </div>
-        )}
-      </Container>
-    </>
+    <div className={twMerge("", className)}>
+      {query && (
+        <Container>
+          {results.length > 0 ? (
+            <ul className="w-full relative flex flex-col gap-y-5">
+              <Title />
+              {results.map((item) => (
+                <li key={item.id} className="w-full relative ">
+                  <h1 className="font-medium">
+                    {highlightText(item.title, query)}
+                  </h1>
+                  <p className="text-[--text-color-secondary]">
+                    {highlightText(item.content, query)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="flex flex-col w-full relative">
+              <Title />
+              {isLoading ? <p>Loading items...</p> : <p>No resultes found.</p>}
+            </div>
+          )}
+        </Container>
+      )}
+    </div>
   );
 };
 

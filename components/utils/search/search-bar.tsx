@@ -4,7 +4,10 @@ import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import Container from "../container";
 import { useRouter } from "next/navigation";
-import { useSearch, SearchItemProps } from "@/provider/context/SearchContext";
+import {
+  useSearch,
+  SearchHistoryProps,
+} from "@/provider/context/SearchContext";
 import { twMerge } from "tailwind-merge";
 import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
@@ -29,6 +32,9 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   } = useSearch();
 
   const [filteredResult, setFilteredResult] = useState<IContentData[]>([]);
+  const [filteredSearchItems, setFilteredSearchItems] = useState<
+    SearchHistoryProps[]
+  >([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +47,10 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         const filteredData = contentData.filter((data) =>
           data.title.toLowerCase().trim().includes(enteredQuery)
         );
-
+        const newFilteredSearchItem = searchItems.filter((item) =>
+          item.search.toLowerCase().trim().includes(enteredQuery)
+        );
+        setFilteredSearchItems(newFilteredSearchItem);
         setFilteredResult(filteredData);
         setInFocus(true);
       }
@@ -65,14 +74,17 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const handleSearch = () => {
     if (query) {
       const trimQuery = query.trim();
-      const newSearch: SearchItemProps = {
-        history: trimQuery,
+      const newSearch: SearchHistoryProps = {
+        search: trimQuery,
         id: searchItems.length + 1,
         date: Date.now(),
       };
       setSearchItems((prevSearch) => {
-        const updatedSearchItems = [...prevSearch, newSearch];
+        const newFilteredSearchItems = prevSearch.filter((searchItem) => {
+          newSearch.search !== searchItem.search;
+        });
 
+        const updatedSearchItems = [...newFilteredSearchItems, newSearch];
         updatedSearchItems.sort((a, b) => b.date - a.date);
 
         return updatedSearchItems;
@@ -115,7 +127,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             placeholder="Search..."
             className="w-full elative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
-          <div className="flex justify-center items-center text-[--text-color-secondary]  bg-neutral-300 rounded-r-full">
+          <div className="flex justify-center h-full w-full items-center text-[--text-color-secondary]  bg-neutral-300 rounded-r-full">
             {isInFocus ? (
               <button
                 type="button"
@@ -139,7 +151,9 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
               {searchItems.length > 0 && (
                 <div className="flex flex-col">
-                  <SearchHistoryModal />
+                  <SearchHistoryModal
+                    filteredSearchItems={filteredSearchItems}
+                  />
                   <button
                     onClick={() => {
                       setSearchItems([]);
