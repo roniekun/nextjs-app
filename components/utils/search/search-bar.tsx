@@ -131,7 +131,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         (searchItems.length > 0 || filteredResult.length > 0) && (
           <div>
             <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
-              <SearchSuggestionModal filteredResults={filteredResult} />
               {searchItems.length > 0 && (
                 <div className="flex flex-col">
                   <SearchHistoryModal />
@@ -139,6 +138,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
                     onClick={() => {
                       setSearchItems([]);
                       setQuery(null);
+                      setInFocus(false);
                     }}
                     className="text-xs text-[--text-color-secondary] m-1 justify-end"
                   >
@@ -146,6 +146,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
                   </button>
                 </div>
               )}
+              <SearchSuggestionModal filteredResults={filteredResult} />
             </Container>
           </div>
         )}

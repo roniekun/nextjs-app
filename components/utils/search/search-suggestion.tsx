@@ -19,7 +19,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
     }
   };
 
-  const handleMouseHover = (idx: number) => {
+  const handleMouseDown = (idx: number) => {
     if (listRef.current) {
       const searchQuery = listRef.current[idx].textContent
         ?.toLowerCase()
@@ -28,14 +28,10 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
     }
   };
 
-  const handleMouseLeave = () => {
-    setQuery("");
-  };
-
   const handleClick = (idx: number) => {
     if (listRef.current) {
       const newSearch: SearchItemProps = {
-        history: listRef.current[idx].textContent ?? "",
+        history: listRef.current[idx].textContent?.toLocaleLowerCase() ?? "",
         status: "default",
       };
 
@@ -53,8 +49,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
       {filteredResults?.map((result, idx) => (
         <li
           ref={(el) => setRef(el, idx)}
-          onMouseEnter={() => handleMouseHover(idx)}
-          onMouseLeave={handleMouseLeave}
+          onMouseDown={() => handleMouseDown(idx)}
           key={idx}
           onClick={() => handleClick(idx)}
           className="rounded-sm hover:bg-neutral-200"
