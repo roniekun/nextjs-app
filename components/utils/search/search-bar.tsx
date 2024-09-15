@@ -123,7 +123,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             placeholder="Search..."
-            className="w-full shadow-sm elative flex-1 border-[--border-color-secondary] borderpx-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
+            className="w-full shadow-md elative flex-1 border-[--border-color-secondary] border px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
           <div className="flex justify-center h-full items-center text-[--text-color-secondary] rounded-r-full">
             {isInFocus ? (
