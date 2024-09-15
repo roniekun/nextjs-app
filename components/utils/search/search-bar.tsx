@@ -47,15 +47,15 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         const filteredData = contentData.filter((data) =>
           data.title.toLowerCase().trim().includes(enteredQuery)
         );
-        const newFilteredSearchItem = searchItems.filter(
-          (item) => item.search.toLowerCase().trim() !== enteredQuery
+        const newFilteredSearchItem = searchItems.filter((item) =>
+          item.search.toLowerCase().trim().includes(enteredQuery)
         );
         setFilteredSearchItems(newFilteredSearchItem);
         setFilteredResult(filteredData);
         setInFocus(true);
       }
     }, 300),
-    [contentData]
+    [contentData, searchItems]
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
