@@ -91,7 +91,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        `flex relative flex-col h-auto overflow-hidden `,
+        `flex relative flex-col h-auto overflow-hidden w-[300px]`,
         className
       )}
     >
@@ -104,28 +104,30 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             placeholder="Search..."
-            className="min-w-[200px] w-[400px] relative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
+            className="w-full elative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
-          {isInFocus ? (
-            <button
-              type="button"
-              className="text-[--text-color-secondary] aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit mx-1"
-              onClick={handleClear}
-            >
-              <IoIosClose />
-            </button>
-          ) : (
-            <button
-              type="button"
-              className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
-            >
-              <MdOutlineSearch />
-            </button>
-          )}
+          <div className="mx-1">
+            {isInFocus ? (
+              <button
+                type="button"
+                className="text-[--text-color-secondary] aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
+                onClick={handleClear}
+              >
+                <IoIosClose />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className=" text-neutral-950 aspect-square p-1 bg-neutral-300 rounded-full h-fit w-fit"
+              >
+                <MdOutlineSearch />
+              </button>
+            )}
+          </div>
         </Container>
       </div>
 
-      {(isInFocus || !query) &&
+      {(isInFocus || query) &&
         (searchItems.length > 0 || filteredResult.length > 0) && (
           <div>
             <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
