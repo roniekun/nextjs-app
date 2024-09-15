@@ -70,7 +70,14 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         id: searchItems.length + 1,
         date: Date.now(),
       };
-      setSearchItems((prevSearch) => [...prevSearch, newSearch]);
+      setSearchItems((prevSearch) => {
+        const updatedSearchItems = [...prevSearch, newSearch];
+
+        updatedSearchItems.sort((a, b) => b.date - a.date);
+
+        return updatedSearchItems;
+      });
+
       setInFocus(false);
       router.push(`/search?query=${encodeURIComponent(trimQuery)}`);
     }

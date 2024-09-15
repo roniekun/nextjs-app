@@ -39,7 +39,13 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
         date: Date.now(),
       };
 
-      setSearchItems((prevSearch) => [...prevSearch, newSearch]);
+      setSearchItems((prevSearch) => {
+        const updatedSearchItems = [...prevSearch, newSearch];
+
+        updatedSearchItems.sort((a, b) => b.date - a.date);
+
+        return updatedSearchItems;
+      });
       router.push(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
     }
   };
