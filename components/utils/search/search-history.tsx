@@ -41,7 +41,7 @@ const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
-          className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 justify-between gap-x-1 "
+          className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 bg-opacity-50 justify-between gap-x-1 "
         >
           <a
             onClick={() => handleClick(idx)}
