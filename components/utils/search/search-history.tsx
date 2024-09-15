@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function SearchHistoryModal() {
   const router = useRouter();
-  const { searchItems, setSearchItem, setQuery } = useSearch();
+  const { searchItems, setSearchItems, setQuery } = useSearch();
   const historyRef = useRef<HTMLLIElement[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
@@ -27,7 +27,7 @@ export default function SearchHistoryModal() {
   //deleting items in history
   const handleDelete = (i: number) => {
     const updatedItems = searchItems.filter((_, idx) => idx !== i);
-    setSearchItem(updatedItems);
+    setSearchItems(updatedItems);
   };
 
   return (

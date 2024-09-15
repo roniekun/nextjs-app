@@ -1,13 +1,16 @@
 import { IContentData } from "../data/content-data";
 import { useRef } from "react";
 import { useSearch } from "@/provider/context/SearchContext";
+import { SearchItemProps } from "@/provider/context/SearchContext";
+import { useRouter } from "next/navigation";
 
 type Props = {
   filteredResults?: IContentData[];
 };
 
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
-  const { setQuery } = useSearch();
+  const router = useRouter();
+  const { setQuery, setSearchItems } = useSearch();
   const listRef = useRef<HTMLLIElement[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
@@ -27,6 +30,22 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
     setQuery("");
   };
 
+  const handleClick = (idx: number) => {
+    if (listRef.current) {
+      const newSearch: SearchItemProps = {
+        history: listRef.current[idx].textContent ?? "",
+        status: "default",
+      };
+
+      setSearchItems((prevSearch) => [...prevSearch, newSearch]);
+      router.push(
+        `/search?query=${encodeURIComponent(
+          listRef.current[idx].textContent ?? ""
+        )}`
+      );
+    }
+  };
+
   return (
     <ul className="flex flex-col">
       {filteredResults?.map((result, idx) => (
@@ -35,9 +54,10 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
           onMouseEnter={() => handleMouseHover(idx)}
           onMouseLeave={handleMouseLeave}
           key={idx}
+          onClick={() => handleClick(idx)}
           className="rounded-sm hover:bg-neutral-200"
         >
-          <a className="cursor-pointer" href={result.link}>
+          <a className="cursor-pointer lowercase" href={result.link}>
             {result.title}
           </a>
         </li>

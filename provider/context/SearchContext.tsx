@@ -16,7 +16,7 @@ interface SearchContextProps {
   isInFocus: boolean;
   setInFocus: React.Dispatch<React.SetStateAction<boolean>>;
   searchItems: SearchItemProps[];
-  setSearchItem: React.Dispatch<React.SetStateAction<SearchItemProps[]>>;
+  setSearchItems: React.Dispatch<React.SetStateAction<SearchItemProps[]>>;
   query: string | null;
   setQuery: React.Dispatch<React.SetStateAction<string | null>>;
 }
@@ -25,7 +25,7 @@ const DefaultContext: SearchContextProps = {
   isInFocus: false,
   setInFocus: () => {},
   searchItems: [],
-  setSearchItem: () => {},
+  setSearchItems: () => {},
   query: null,
   setQuery: () => {},
 };
@@ -39,12 +39,12 @@ interface SearchProviderProps {
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [isInFocus, setInFocus] = useState<boolean>(false);
   const [query, setQuery] = useState<string | null>(null);
-  const [searchItems, setSearchItem] = useState<SearchItemProps[]>([]);
+  const [searchItems, setSearchItems] = useState<SearchItemProps[]>([]);
 
   useEffect(() => {
     const searchHistory = localStorage.getItem("searchHistory");
     if (searchHistory) {
-      setSearchItem(JSON.parse(searchHistory));
+      setSearchItems(JSON.parse(searchHistory));
     }
   }, []);
 
@@ -60,7 +60,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
         query,
         setQuery,
         searchItems,
-        setSearchItem,
+        setSearchItems,
       }}
     >
       {children}

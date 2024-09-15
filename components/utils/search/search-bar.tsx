@@ -10,9 +10,8 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { contentData, IContentData } from "../data/content-data";
 import debounce from "lodash/debounce";
-import { div } from "framer-motion/client";
 
-type SearchProps = {
+export type SearchProps = {
   placeholder?: string;
   className?: string;
   data?: IContentData[];
@@ -20,8 +19,14 @@ type SearchProps = {
 
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const router = useRouter();
-  const { isInFocus, setInFocus, setSearchItem, searchItems, setQuery, query } =
-    useSearch();
+  const {
+    isInFocus,
+    setInFocus,
+    setSearchItems,
+    searchItems,
+    setQuery,
+    query,
+  } = useSearch();
 
   const [filteredResult, setFilteredResult] = useState<IContentData[]>([]);
 
@@ -60,11 +65,11 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const handleSearch = () => {
     if (query) {
       const trimQuery = query.trim();
-      const newItem: SearchItemProps = {
+      const newSearch: SearchItemProps = {
         history: trimQuery,
         status: "default",
       };
-      setSearchItem((prevItems) => [...prevItems, newItem]);
+      setSearchItems((prevSearch) => [...prevSearch, newSearch]);
       setInFocus(false);
       router.push(`/search?query=${encodeURIComponent(trimQuery)}`);
     }
@@ -86,7 +91,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        `flex relative flex-col h-auto overflow-hidden`,
+        `flex relative flex-col h-auto overflow-hidden w-[50%]`,
         className
       )}
     >
@@ -99,7 +104,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             placeholder="Search..."
-            className=" border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent flex-1 p-1 rounded-sm leading-tight focus:outline-none md:w-[300px]"
+            className="w-full border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent flex-1 p-1 rounded-sm leading-tight focus:outline-none"
           />
           {isInFocus ? (
             <button
@@ -128,7 +133,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
               <div className="flex flex-col">
                 <SearchHistoryModal />
                 <button
-                  onClick={() => setSearchItem([])}
+                  onClick={() => setSearchItems([])}
                   className="text-xs text-[--text-color-secondary] m-1 justify-end"
                 >
                   Clear history
