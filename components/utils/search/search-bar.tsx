@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import Container from "../container";
@@ -16,6 +16,7 @@ import { contentData, IContentData } from "../data/content-data";
 type SearchProps = {
   placeholder?: string;
   className?: string;
+  data?: IContentData[];
 };
 
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
@@ -75,7 +76,14 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   };
 
   return (
-    <div className={twMerge(`flex relative flex-col`, className)}>
+    <div
+      onBlur={() => setInFocus(false)}
+      className={twMerge(
+        `flex relative flex-col rounded-md  border-gray-300 border
+     bg-neutral-50 h-auto overflow-hidden p-2`,
+        className
+      )}
+    >
       <Container className="p-1 flex items-center">
         <input
           type="text"
@@ -103,8 +111,9 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           </button>
         )}
       </Container>
+
       {isInFocus && (
-        <Container className="p-1 flex flex-col">
+        <Container className="flex flex-col rounded-md border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
           <SearchSuggestionModal filteredResults={filteredResult} />
           {searchItems.length > 0 && (
             <div className="flex flex-col">

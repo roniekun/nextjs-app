@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { MdHistory } from "react-icons/md";
+import { useRef } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
@@ -41,7 +40,6 @@ export default function SearchHistoryModal() {
               ref={(el) => setRef(el, idx)}
               className="flex list-none w-full relative hover:bg-neutral-300 justify-between gap-x-1 "
             >
-              <MdHistory />
               <a
                 onClick={() => handleClick(idx)}
                 className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "
