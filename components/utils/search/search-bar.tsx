@@ -75,12 +75,14 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         id: searchItems.length + 1,
         date: Date.now(),
       };
+
       setSearchItems((prevSearch) => {
         const newFilteredSearchItems = prevSearch.filter((searchItem) => {
-          searchItem.search !== newSearch.search;
+          return newSearch.search !== searchItem.search; // Return the comparison result
         });
 
         const updatedSearchItems = [...newFilteredSearchItems, newSearch];
+
         updatedSearchItems.sort((a, b) => b.date - a.date);
 
         return updatedSearchItems;
