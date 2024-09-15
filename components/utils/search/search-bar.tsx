@@ -89,7 +89,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       });
 
       setInFocus(false);
-      router.push(`/search?query=${encodeURIComponent(trimQuery)}`);
+      router.replace(`/search?query=${encodeURIComponent(trimQuery)}`);
     }
 
     setQuery(null);
@@ -123,13 +123,13 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             placeholder="Search..."
-            className="w-full elative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
+            className="w-full shadow-sm elative flex-1 border-[--border-color-secondary] borderpx-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
-          <div className="flex justify-center h-full items-center text-[--text-color-secondary]  bg-neutral-300 rounded-r-full">
+          <div className="flex justify-center h-full items-center text-[--text-color-secondary] rounded-r-full">
             {isInFocus ? (
               <button
                 type="button"
-                className="aspect-square p-1"
+                className="aspect-square p-2"
                 onClick={handleClear}
               >
                 <IoIosClose />
@@ -146,7 +146,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       {(isInFocus || query) &&
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
           <div>
-            <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
+            <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-[--background] h-auto overflow-hidden p-2">
               {filteredSearchItems.length > 0 && (
                 <div className="flex flex-col">
                   <SearchHistoryModal
@@ -158,7 +158,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
                       setQuery(null);
                       setInFocus(false);
                     }}
-                    className="text-xs text-[--text-color-secondary] m-1 justify-end"
+                    className="text-xs text-[--text-color-secondary] m-1 self-end justify-end"
                   >
                     Clear history
                   </button>

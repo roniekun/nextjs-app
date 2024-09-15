@@ -48,7 +48,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
         return updatedSearchItems;
       });
-      router.push(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
+      router.replace(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
     }
   };
 

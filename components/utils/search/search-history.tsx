@@ -22,7 +22,7 @@ const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
 
   const handleClick = (idx: number) => {
     setQuery(historyRef.current[idx].textContent);
-    router.push(
+    router.replace(
       `/search?query=${encodeURIComponent(
         historyRef.current[idx].textContent ?? ""
       )}`
