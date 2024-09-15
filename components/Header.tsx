@@ -21,7 +21,6 @@ const Header = () => {
         <Logo />
         <div className="relative flex gap-1">
           {/* {isDesktop && <Links />} */}
-          <SearchBar />
           <Menu />
         </div>
       </Container>

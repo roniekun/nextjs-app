@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import Container from "../container";
@@ -12,6 +12,7 @@ import {
 } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { contentData, IContentData } from "../data/content-data";
+import debounce from "lodash/debounce";
 
 type SearchProps = {
   placeholder?: string;
@@ -30,11 +31,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
-    if (e) {
-      const enteredQuery = e.target.value.trim().toLowerCase();
-      setQuery(e.target.value);
-
+  const debounceHandleInputChange = useCallback(
+    debounce((enteredQuery: string) => {
       if (enteredQuery === "") {
         setFilteredResult([]);
         setInFocus(false);
@@ -46,6 +44,15 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         setFilteredResult(filteredData);
         setInFocus(true);
       }
+    }, 300),
+    [contentData]
+  );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+    if (e) {
+      const enteredQuery = e.target.value.trim().toLowerCase();
+      setQuery(e.target.value);
+      debounceHandleInputChange(enteredQuery);
     }
   };
 
