@@ -8,8 +8,9 @@ import {
 } from "react";
 
 export interface SearchItemProps {
+  id: number;
   history: string;
-  status: "deleted" | "default";
+  date: number;
 }
 
 interface SearchContextProps {

@@ -25,16 +25,16 @@ export default function SearchHistoryModal() {
   };
 
   //deleting items in history
-  const handleDelete = (i: number) => {
-    const updatedItems = searchItems.filter((_, idx) => idx !== i);
+  const handleDelete = (id: number) => {
+    const updatedItems = searchItems.filter((item) => item.id !== id);
     setSearchItems(updatedItems);
   };
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
       {searchItems
-        .slice(-5)
         .reverse()
+        .slice(5)
         .map((item, idx) => (
           <li
             key={idx}
@@ -50,7 +50,7 @@ export default function SearchHistoryModal() {
             <button
               className="cursor-pointer relative"
               type="button"
-              onClick={() => handleDelete(idx)}
+              onClick={() => handleDelete(item.id)}
             >
               <IoIosClose />
             </button>

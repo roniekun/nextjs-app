@@ -10,7 +10,7 @@ type Props = {
 
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
   const router = useRouter();
-  const { setQuery, setSearchItems } = useSearch();
+  const { setQuery, setSearchItems, searchItems } = useSearch();
   const listRef = useRef<HTMLLIElement[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
@@ -35,11 +35,12 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
         .trim();
       const newSearch: SearchItemProps = {
         history: newQuery ?? "",
-        status: "default",
+        id: searchItems.length + 1,
+        date: Date.now(),
       };
 
       setSearchItems((prevSearch) => [...prevSearch, newSearch]);
-      router.push(`/search_result?query=${encodeURIComponent(newQuery ?? "")}`);
+      router.push(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
     }
   };
 
