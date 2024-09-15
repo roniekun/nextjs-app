@@ -4,6 +4,7 @@ import { IoIosClose } from "react-icons/io";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
 import { SearchHistoryProps } from "@/provider/context/SearchContext";
+import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
 
 type Props = {
   filteredSearchItems: SearchHistoryProps[];
@@ -41,8 +42,9 @@ const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
-          className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 bg-opacity-50 justify-between gap-x-1 "
+          className="flex list-none w-full relative rounded-sm hover:bg-neutral-200 hover:bg-opacity-50 justify-between gap-x-1 "
         >
+          <UpdateOutlinedIcon />
           <a
             onClick={() => handleClick(idx)}
             className="flex-1 cursor-pointer flex item-center relative gap-x-1 text-[--text-color-secondary] "

@@ -5,6 +5,7 @@ import {
   useSearch,
 } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 type Props = {
   filteredResults?: IContentData[];
@@ -60,9 +61,10 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
           onMouseDown={() => handleMouseDown(idx)}
           key={idx}
           onClick={() => handleClick(idx)}
-          className="rounded-sm hover:bg-neutral-200 bg-opacity-50"
+          className="rounded-sm flex hover:bg-neutral-200 hover:bg-opacity-50"
         >
-          <a className="cursor-pointer lowercase" href={result.link}>
+          <SearchSharpIcon />
+          <a className="cursor-pointer lowercase flex-1" href={result.link}>
             {result.title}
           </a>
         </li>
