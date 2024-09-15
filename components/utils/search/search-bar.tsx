@@ -91,7 +91,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        `flex relative flex-col h-auto overflow-hidden w-[50%]`,
+        `flex relative flex-col h-auto overflow-hidden `,
         className
       )}
     >
@@ -104,7 +104,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             onChange={(e) => handleInputChange(e)}
             onKeyDown={handleKeyDown}
             placeholder="Search..."
-            className="w-full relative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
+            className="min-w-[200px] w-[400px] relative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
           {isInFocus ? (
             <button
@@ -125,24 +125,28 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         </Container>
       </div>
 
-      {isInFocus && (searchItems.length > 0 || filteredResult.length > 0) && (
-        <div>
-          <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
-            <SearchSuggestionModal filteredResults={filteredResult} />
-            {searchItems.length > 0 && (
-              <div className="flex flex-col">
-                <SearchHistoryModal />
-                <button
-                  onClick={() => setSearchItems([])}
-                  className="text-xs text-[--text-color-secondary] m-1 justify-end"
-                >
-                  Clear history
-                </button>
-              </div>
-            )}
-          </Container>
-        </div>
-      )}
+      {(isInFocus || !query) &&
+        (searchItems.length > 0 || filteredResult.length > 0) && (
+          <div>
+            <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
+              <SearchSuggestionModal filteredResults={filteredResult} />
+              {searchItems.length > 0 && (
+                <div className="flex flex-col">
+                  <SearchHistoryModal />
+                  <button
+                    onClick={() => {
+                      setSearchItems([]);
+                      setQuery(null);
+                    }}
+                    className="text-xs text-[--text-color-secondary] m-1 justify-end"
+                  >
+                    Clear history
+                  </button>
+                </div>
+              )}
+            </Container>
+          </div>
+        )}
     </div>
   );
 };
