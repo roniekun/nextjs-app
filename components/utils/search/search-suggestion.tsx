@@ -8,21 +8,32 @@ type Props = {
 
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
   const { setQuery } = useSearch();
-  const listRef = useRef<HTMLLIElement | null>(null);
+  const listRef = useRef<HTMLLIElement[]>([]);
 
-  const handleHover = () => {
+  const setRef = (el: HTMLLIElement | null, idx: number) => {
+    if (el) {
+      listRef.current[idx] = el;
+    }
+  };
+
+  const handleMouseHover = (idx: number) => {
     if (listRef.current) {
-      const searchQuery = listRef.current.textContent;
+      const searchQuery = listRef.current[idx].textContent;
       setQuery(searchQuery ?? "");
     }
+  };
+
+  const handleMouseLeave = () => {
+    setQuery("");
   };
 
   return (
     <ul className="flex flex-col">
       {filteredResults?.map((result, idx) => (
         <li
-          ref={listRef}
-          onMouseEnter={handleHover}
+          ref={(el) => setRef(el, idx)}
+          onMouseEnter={() => handleMouseHover(idx)}
+          onMouseLeave={handleMouseLeave}
           key={idx}
           className=" hover:bg-neutral-300"
         >
