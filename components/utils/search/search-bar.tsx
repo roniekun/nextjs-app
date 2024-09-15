@@ -77,7 +77,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   return (
     <div
-      onBlur={() => setInFocus(false)}
       className={twMerge(
         `flex relative flex-col rounded-md  border-gray-300 border
      bg-neutral-50 h-auto overflow-hidden p-2`,
@@ -92,7 +91,8 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder="Search..."
-          className="border-none appearance-none bg-transparent flex-1 p-1 mr-1 rounded-md leading-tight focus:outline-none md:w-[300px]"
+          className="border-none appearance-none bg-transparent flex-1 p-1 mr-1 rounded-md leading-tight focus:outline-none 
+          md:w-[300px]"
         />
         {isInFocus ? (
           <button
@@ -113,7 +113,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       </Container>
 
       {isInFocus && (
-        <Container className="flex flex-col rounded-md border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
+        <Container className="flex flex-col absolute top-[100%] rounded-md border-gray-300 border bg-neutral-50 h-auto overflow-hidden p-2">
           <SearchSuggestionModal filteredResults={filteredResult} />
           {searchItems.length > 0 && (
             <div className="flex flex-col">
