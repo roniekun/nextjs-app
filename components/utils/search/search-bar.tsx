@@ -127,7 +127,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
             placeholder="Search..."
             className="w-full elative flex-1 border-gray-300 border bg-neutral-50 px-2 m-0 appearance-none bg-transparent  p-1 rounded-sm leading-tight focus:outline-none"
           />
-          <div className="flex justify-center h-full w-full items-center text-[--text-color-secondary]  bg-neutral-300 rounded-r-full">
+          <div className="flex justify-center h-full items-center text-[--text-color-secondary]  bg-neutral-300 rounded-r-full">
             {isInFocus ? (
               <button
                 type="button"
