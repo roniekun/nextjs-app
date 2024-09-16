@@ -1,6 +1,6 @@
 "use client";
 import { contentData, IContentData } from "../data/content-data";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Container from "../container";
 import { twMerge } from "tailwind-merge";
@@ -9,28 +9,47 @@ type Props = {
   className?: string;
 };
 
-const SearchResult: React.FC<Props> = ({ className }) => {
+// Title component
+const Title: React.FC<{ query: string | null }> = ({ query }) => (
+  <div className="my-5">
+    {query && (
+      <h1 className="text-2xl">
+        <strong>Search result for:</strong> &ldquo;{query}&rdquo;
+      </h1>
+    )}
+  </div>
+);
+
+// Custom hook for filtering results
+const useFilteredResults = (
+  query: string | null
+): [IContentData[], boolean] => {
   const [results, setResults] = useState<IContentData[]>([]);
-  const searchParams = useSearchParams();
   const [isLoading, setLoading] = useState(false);
-  const query = searchParams.get("query");
-  const [text, setText] = useState<JSX.Element>();
 
-  function Title() {
-    return (
-      <div className="my-5">
-        <>
-          {query && (
-            <h1 className="text-2xl">
-              <strong>Search result for:</strong> &ldquo;{query}&rdquo;
-            </h1>
-          )}
-        </>
-      </div>
+  useEffect(() => {
+    if (!query) {
+      setResults([]);
+      return;
+    }
+    setLoading(true);
+    const filteredResults = contentData.filter(
+      (item) =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.content.toLowerCase().includes(query.toLowerCase())
     );
-  }
+    setResults(filteredResults);
+    setLoading(false);
+  }, [query]);
 
-  //performing highlight in the matched query in filtered results
+  return [results, isLoading];
+};
+
+// Custom hook for highlighting the query in text
+const useTextWithHighlights = (
+  results: IContentData[],
+  query: string | null
+): JSX.Element => {
   const highlightText = (text: string, query: string | null) => {
     if (!query) return text;
     const parts = text.split(new RegExp(`(${query})`, "gi"));
@@ -43,48 +62,44 @@ const SearchResult: React.FC<Props> = ({ className }) => {
     );
   };
 
-  // setting the text as jsx element to render in the UI
-  useEffect(() => {
-    if (results) {
-      const text = results.map((item) => (
-        <li key={item.id} className="w-full relative ">
-          <h1 className="font-medium">{highlightText(item.title, query)}</h1>
-          <p className="text-[--text-color-secondary]">
-            {highlightText(item.content, query)}
-          </p>
-        </li>
-      ));
-      setText(
+  return useMemo(() => {
+    if (results.length === 0) {
+      return (
         <ul>
-          <Title />
-          {text}
-        </ul>
-      );
-    } else
-      setText(
-        <ul>
-          <Title />
           <h3>No Results found.</h3>
         </ul>
       );
-  }, [results]);
+    }
 
-  //filtering the results of query
-  useEffect(() => {
-    if (!query) return setResults([]);
-    const filteredResults = contentData.filter(
-      (item) =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.content.toLowerCase().includes(query.toLowerCase())
+    return (
+      <ul>
+        {results.map((item) => (
+          <li key={item.id} className="w-full relative">
+            <h1 className="font-medium">{highlightText(item.title, query)}</h1>
+            <p className="text-[--text-color-secondary]">
+              {highlightText(item.content, query)}
+            </p>
+          </li>
+        ))}
+      </ul>
     );
-    setLoading(true);
-    setResults(filteredResults);
-    setLoading(false);
-  }, [query]);
+  }, [results, query]);
+};
+
+const SearchResult: React.FC<Props> = ({ className }) => {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query");
+  const [results, isLoading] = useFilteredResults(query);
+  const textWithHighlights = useTextWithHighlights(results, query);
 
   return (
     <div className={twMerge("", className)}>
-      {query && <Container>{text}</Container>}
+      {query && (
+        <Container>
+          <Title query={query} />
+          {isLoading ? <p>Loading...</p> : textWithHighlights}
+        </Container>
+      )}
     </div>
   );
 };
