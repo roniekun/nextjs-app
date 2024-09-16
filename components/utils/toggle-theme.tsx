@@ -6,12 +6,11 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 export default function ToggleTheme() {
   const { toggleThemeFn, theme } = useTheme();
   return (
-    <div className="flex gap-1">
+    <div
+      className={`text-[--text-color-secondary] border-[--border-color-secondary] flex m-1 border rounded-full`}
+    >
       <button type="button" onClick={toggleThemeFn}>
-        <DarkModeIcon />
-      </button>
-      <button type="button" onClick={toggleThemeFn}>
-        <LightModeIcon />
+        {theme === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
       </button>
     </div>
   );
