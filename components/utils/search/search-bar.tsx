@@ -110,14 +110,14 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        `flex relative flex-col h-auto overflow-hidden w-[300px]`,
+        `flex relative overflow-visible flex-col h-auto w-[300px]`,
         className
       )}
     >
       <div>
         <Container className="flex relative w-full p-0 items-center">
           <input
-            type="text"
+            type="search"
             value={query ?? ""}
             ref={inputRef}
             onChange={(e) => handleInputChange(e)}
@@ -145,7 +145,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
       {(isInFocus || query) &&
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
-          <div>
+          <div className="absolute top-full">
             <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-[--background] h-auto overflow-hidden p-2">
               {filteredSearchItems.length > 0 && (
                 <div className="flex flex-col">

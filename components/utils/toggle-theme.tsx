@@ -1,12 +1,18 @@
 "use client";
-import Button from "./button";
 import { useTheme } from "@/provider/context/ThemeContext";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 export default function ToggleTheme() {
   const { toggleThemeFn, theme } = useTheme();
   return (
-    <Button className="border-none capitalize" handleClick={toggleThemeFn}>
-      {theme}
-    </Button>
+    <div className="flex gap-1">
+      <button type="button" onClick={toggleThemeFn}>
+        <DarkModeIcon />
+      </button>
+      <button type="button" onClick={toggleThemeFn}>
+        <LightModeIcon />
+      </button>
+    </div>
   );
 }

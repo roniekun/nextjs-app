@@ -73,7 +73,13 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   // Toggling theme function
   const toggleThemeFn = () => {
     // const newTheme = theme === "light" ? "dark" : "light";
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    // setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   };
 
   // Loading theme from components
