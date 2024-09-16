@@ -11,7 +11,7 @@ export default function Search() {
         <Container className="min-h-[400px] lg:px-[10vw]  relative items-center flex flex-col w-full">
           <SearchBar />
           <Suspense>
-            <SearchResult className="w-full flex-1 relative flex" />
+            <SearchResult className="w-full flex-1 relative flex justify-start" />
           </Suspense>
         </Container>
       </div>

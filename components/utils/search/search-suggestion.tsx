@@ -6,6 +6,7 @@ import {
 } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import filterSearchItems from "./utils/filterSearchItems";
 
 type Props = {
   filteredResults?: IContentData[];
@@ -13,7 +14,7 @@ type Props = {
 
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
   const router = useRouter();
-  const { setQuery, setSearchItems, searchItems } = useSearch();
+  const { setQuery, setSearchItems, setInFocus, searchItems } = useSearch();
   const listRef = useRef<HTMLLIElement[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
@@ -42,14 +43,12 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
         date: Date.now(),
       };
 
-      setSearchItems((prevSearch) => {
-        const updatedSearchItems = [...prevSearch, newSearch];
+      setSearchItems(
+        (prevSearch) => filterSearchItems({ newSearch, prevSearch }) //calling reusasble utility function passing both object arguments
+      );
 
-        updatedSearchItems.sort((a, b) => b.date - a.date);
-
-        return updatedSearchItems;
-      });
       router.replace(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
+      setInFocus(false);
     }
   };
 

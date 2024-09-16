@@ -13,6 +13,7 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { contentData, IContentData } from "../data/content-data";
 import debounce from "lodash/debounce";
+import filterSearchItems from "./utils/filterSearchItems";
 
 export type SearchProps = {
   placeholder?: string;
@@ -76,17 +77,9 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         date: Date.now(),
       };
 
-      setSearchItems((prevSearch) => {
-        const newFilteredSearchItems = prevSearch.filter(
-          (searchItem) => newSearch.search !== searchItem.search // Return the comparison result
-        );
-
-        const updatedSearchItems = [...newFilteredSearchItems, newSearch];
-
-        updatedSearchItems.sort((a, b) => b.date - a.date);
-
-        return updatedSearchItems;
-      });
+      setSearchItems((prevSearch) =>
+        filterSearchItems({ newSearch, prevSearch })
+      );
 
       setInFocus(false);
       router.replace(`/search?query=${encodeURIComponent(trimQuery)}`);
