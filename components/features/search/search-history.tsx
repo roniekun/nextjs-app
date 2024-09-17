@@ -44,19 +44,25 @@ const SearchHistoryModal: React.FC<Props> = ({
     const updatedItems = searchItems.filter((searchItems) =>
       deletedItem.some((item) => item.id !== searchItems.id)
     ); // updating the original search collection
+    const targetItem = deletedItem[0];
+    const updatedFilteredSearchItems = filteredSearchItems.filter(
+      (item) => item.id !== targetItem.id
+    );
+    setFilteredSearchItems(updatedFilteredSearchItems);
     setSearchItems(updatedItems);
     setDeletedItem(deletedItem[0]);
   };
 
-  useEffect(() => {
-    console.log(deletedItem);
-    if (deletedItem) {
-      const updatedFilteredSearchItems = filteredSearchItems.filter(
-        (item) => !item.search.includes(deletedItem?.search)
-      );
-      setFilteredSearchItems(updatedFilteredSearchItems ?? "");
-    }
-  }, [deletedItem]); //want to update the filtered search items in real time
+  // useEffect(() => {
+  //   console.log(deletedItem);
+  //   if (deletedItem) {
+  //     const updatedFilteredSearchItems = filteredSearchItems.filter(
+  //       (item) => item.id !== deletedItem.id
+  //     );
+
+  //     setFilteredSearchItems(updatedFilteredSearchItems);
+  //   }
+  // }, [deletedItem]);
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
