@@ -36,11 +36,11 @@ const SearchHistoryModal: React.FC<Props> = ({
   };
 
   //deleting items in history
-  const handleDelete = (id: number) => {
-    const deletedItem = filteredSearchItems.find((item) => item.id === id); //storing the  search history user deleted
+  const handleDelete = (i: number) => {
+    const deletedItem = filteredSearchItems.find((item) => item.id === i); //storing the  search history user deleted
     if (deletedItem) {
       const updatedItems = searchItems.filter(
-        (item) => deletedItem.id !== item.id
+        (item) => deletedItem.date !== item.date
       ); // updating the original search collection
       setSearchItems(updatedItems);
       setDeletedItem(deletedItem);
@@ -50,12 +50,12 @@ const SearchHistoryModal: React.FC<Props> = ({
   useEffect(() => {
     if (deletedItem) {
       const updatedFilteredSearchItems = filteredSearchItems.filter(
-        (item) => !item.search.includes(deletedItem.search)
+        (item) => item.date !== deletedItem.date
       );
 
       setFilteredSearchItems(updatedFilteredSearchItems);
     }
-  }, [deletedItem, filteredSearchItems, setFilteredSearchItems]);
+  }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
