@@ -1,19 +1,27 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
 import { SearchHistoryProps } from "@/provider/context/SearchContext";
 import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
+import filterSearchItems from "./utils/filterSearchItems";
 
 type Props = {
   filteredSearchItems: SearchHistoryProps[];
+  setFilteredSearchItems: React.Dispatch<
+    React.SetStateAction<SearchHistoryProps[]>
+  >;
 };
 
-const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
+const SearchHistoryModal: React.FC<Props> = ({
+  filteredSearchItems,
+  setFilteredSearchItems,
+}) => {
   const router = useRouter();
   const { searchItems, setSearchItems, setQuery } = useSearch();
   const historyRef = useRef<HTMLLIElement[]>([]);
+  const [deletedItem, setDeletedItem] = useState<SearchHistoryProps>();
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
     if (el) {
@@ -32,12 +40,23 @@ const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
 
   //deleting items in history
   const handleDelete = (id: number) => {
-    const filteredItems = filteredSearchItems.filter((item) => item.id === id); //storing the  search history user deleted
+    const deletedItem = filteredSearchItems.filter((item) => item.id === id); //storing the  search history user deleted
     const updatedItems = searchItems.filter((searchItems) =>
-      filteredItems.some((item) => item.id !== searchItems.id)
+      deletedItem.some((item) => item.id !== searchItems.id)
     ); // updating the original search collection
     setSearchItems(updatedItems);
+    setDeletedItem(deletedItem[0]);
   };
+
+  useEffect(() => {
+    console.log(deletedItem);
+    if (deletedItem) {
+      const updatedFilteredSearchItems = filteredSearchItems.filter(
+        (item) => !item.search.includes(deletedItem?.search)
+      );
+      setFilteredSearchItems(updatedFilteredSearchItems ?? "");
+    }
+  }, [deletedItem]); //want to update the filtered search items in real time
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
