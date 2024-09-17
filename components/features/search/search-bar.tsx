@@ -126,7 +126,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
                 <IoIosClose />
               </button>
             ) : (
-              <button type="button" className="aspect-square p-1">
+              <button type="button" className="aspect-square p-2">
                 <MdOutlineSearch />
               </button>
             )}

@@ -60,10 +60,13 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
           onMouseDown={() => handleMouseDown(idx)}
           key={idx}
           onClick={() => handleClick(idx)}
-          className="rounded-sm flex hover:bg-neutral-200 hover:bg-opacity-50"
+          className="rounded-sm flex"
         >
           <SearchSharpIcon />
-          <a className="cursor-pointer lowercase flex-1" href={result.link}>
+          <a
+            className="cursor-pointer lowercase flex-1  hover:bg-neutral-200 hover:bg-opacity-50"
+            href={result.link}
+          >
             {result.title}
           </a>
         </li>
