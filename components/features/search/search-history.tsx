@@ -34,6 +34,7 @@ const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
   const handleDelete = (id: number) => {
     const updatedItems = searchItems.filter((item) => item.id !== id);
     setSearchItems(updatedItems);
+    console.log(`deleted, updated search items: ${filteredSearchItems}`);
   };
 
   return (
