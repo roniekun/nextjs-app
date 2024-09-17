@@ -1,12 +1,11 @@
 "use client";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useTheme } from "@/provider/context/ThemeContext";
-import Links from "./utils/links";
-import Social from "./utils/social";
-import Container from "./utils/container";
+import Links from "../libs/links";
+import Social from "../libs/social";
+import Container from "../libs/ui/container";
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
-import ToggleTheme from "./utils/toggle-theme";
+import ToggleTheme from "../libs/ui/toggle-theme";
 
 export default function Navbar() {
   const { isToggleMenu } = useMenu();

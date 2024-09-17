@@ -1,9 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
-import { admin } from "@/components/utils/data/admin";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
+import { admin } from "@/data/admin-data";
 
-import Container from "@/components/utils/container";
+import Container from "@/components/libs/ui/container";
 
 export const metadata: Metadata = {
   title: `Contact | ${admin.name}`,

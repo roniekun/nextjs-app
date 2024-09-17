@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { admin } from "../utils/data/admin";
+import { admin } from "../../data/admin-data";
 
 type Props = {
   isShareModalOpen?: boolean;

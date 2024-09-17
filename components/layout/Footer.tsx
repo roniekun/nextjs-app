@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
-import Container from "./utils/container";
-import Social from "./utils/social";
-import Button from "./utils/button";
-import EmailTo from "./utils/email";
+import Container from "../libs/ui/container";
+import Social from "../libs/social";
+import Button from "../libs/ui/button";
+import EmailTo from "../utils/email";
 
 export default function Footer() {
   const date = new Date();

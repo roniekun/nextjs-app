@@ -4,7 +4,7 @@
 
 @layer utilities {
   :root {
-    --header-height: 44px;
+    --header-height: 55px;
     --hero-height: calc(100vh - var(--header-height));
   }
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { admin } from "@/components/utils/data/admin";
+import { admin } from "@/data/admin-data";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 export const metadata: Metadata = {

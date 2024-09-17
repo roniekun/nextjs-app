@@ -2,7 +2,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
-import Container from "../container";
 import { useRouter } from "next/navigation";
 import {
   useSearch,
@@ -11,7 +10,7 @@ import {
 import { twMerge } from "tailwind-merge";
 import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
-import { contentData, IContentData } from "../data/content-data";
+import { contentData, IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
 import filterSearchItems from "./utils/filterSearchItems";
 
@@ -108,7 +107,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       )}
     >
       <div>
-        <Container className="flex relative w-full p-0 items-center">
+        <div className="flex relative w-full p-0 items-center">
           <input
             value={query ?? ""}
             ref={inputRef}
@@ -132,32 +131,16 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
               </button>
             )}
           </div>
-        </Container>
+        </div>
       </div>
 
       {(isInFocus || query) &&
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
           <div className="absolute top-full z-10">
-            <Container className="flex flex-col relative rounded-sm border-gray-300 border bg-[--background] h-auto overflow-hidden p-2">
-              {filteredSearchItems.length > 0 && (
-                <div className="flex flex-col">
-                  <SearchHistoryModal
-                    filteredSearchItems={filteredSearchItems}
-                  />
-                  <button
-                    onClick={() => {
-                      setSearchItems([]);
-                      setQuery(null);
-                      setInFocus(false);
-                    }}
-                    className="text-xs text-[--text-color-secondary] m-1 self-end justify-end"
-                  >
-                    Clear history
-                  </button>
-                </div>
-              )}
+            <div className="flex flex-col relative rounded-sm border-gray-300 border bg-[--background] h-auto overflow-hidden p-2">
+              <SearchHistoryModal filteredSearchItems={filteredSearchItems} />
               <SearchSuggestionModal filteredResults={filteredResult} />
-            </Container>
+            </div>
           </div>
         )}
     </div>

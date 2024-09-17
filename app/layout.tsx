@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LocalProvider from "@/provider/LocalProvider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import CookieModal from "@/components/modal/cookie";
 import ShareModal from "@/components/modal/sharer";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",

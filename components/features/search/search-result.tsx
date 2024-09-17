@@ -1,8 +1,8 @@
 "use client";
-import { contentData, IContentData } from "../data/content-data";
+import { contentData, IContentData } from "../../../data/content-data";
 import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import Container from "../container";
+import Container from "@/components/libs/ui/container";
 import { twMerge } from "tailwind-merge";
 
 type Props = {

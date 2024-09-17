@@ -1,4 +1,4 @@
-import { IContentData } from "../data/content-data";
+import { IContentData } from "../../../data/content-data";
 import { useRef } from "react";
 import {
   SearchHistoryProps,
