@@ -32,9 +32,11 @@ const SearchHistoryModal: React.FC<Props> = ({ filteredSearchItems }) => {
 
   //deleting items in history
   const handleDelete = (id: number) => {
-    const updatedItems = filteredSearchItems.filter((item) => item.id !== id);
+    const filteredItems = filteredSearchItems.filter((item) => item.id === id); //storing the  search history user deleted
+    const updatedItems = searchItems.filter((searchItems) =>
+      filteredItems.some((item) => item.id !== searchItems.id)
+    ); // updating the original search collection
     setSearchItems(updatedItems);
-    console.log(`deleted, updated search items: ${filteredSearchItems}`);
   };
 
   return (
