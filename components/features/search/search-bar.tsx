@@ -36,7 +36,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
     SearchHistoryProps[]
   >([]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const debounceHandleInputChange = useCallback(
     debounce((enteredQuery: string) => {

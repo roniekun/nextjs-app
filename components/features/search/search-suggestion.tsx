@@ -15,7 +15,7 @@ type Props = {
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
   const router = useRouter();
   const { setQuery, setSearchItems, setInFocus, searchItems } = useSearch();
-  const listRef = useRef<HTMLLIElement[]>([]);
+  const listRef = useRef<(HTMLLIElement | null)[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
     if (el) {
@@ -25,7 +25,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   const handleMouseDown = (idx: number) => {
     if (listRef.current) {
-      const searchQuery = listRef.current[idx].textContent
+      const searchQuery = listRef.current[idx]?.textContent
         ?.toLowerCase()
         .trim();
       setQuery(searchQuery ?? "");
@@ -34,7 +34,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   const handleClick = (idx: number) => {
     if (listRef.current) {
-      const newQuery = listRef.current[idx].textContent
+      const newQuery = listRef.current[idx]?.textContent
         ?.toLocaleLowerCase()
         .trim();
       const newSearch: SearchHistoryProps = {

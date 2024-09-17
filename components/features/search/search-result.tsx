@@ -4,6 +4,23 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/libs/ui/container";
 import { twMerge } from "tailwind-merge";
+import Head from "next/head";
+
+function generateTitle(query: string) {
+  const [title, setTitle] = useState<string>(query);
+
+  useEffect(() => {
+    const newTitle = `Result: ${title}`;
+    setTitle(newTitle);
+  }, [title]);
+
+  return (
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={`search result for ${query}`} />
+    </Head>
+  );
+}
 
 type Props = {
   className?: string;
@@ -25,7 +42,7 @@ const useFilteredResults = (
   query: string | null
 ): [IContentData[], boolean] => {
   const [results, setResults] = useState<IContentData[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!query) {
@@ -65,23 +82,32 @@ const useTextWithHighlights = (
   return useMemo(() => {
     if (results.length === 0) {
       return (
-        <ul>
-          <h3>No Results found.</h3>
-        </ul>
+        <div>
+          {generateTitle("Not Found")}
+
+          <ul>
+            <h3>No Results found.</h3>
+          </ul>
+        </div>
       );
     }
 
     return (
-      <ul>
-        {results.map((item) => (
-          <li key={item.id} className="w-full relative">
-            <h1 className="font-medium">{highlightText(item.title, query)}</h1>
-            <p className="text-[--text-color-secondary]">
-              {highlightText(item.content, query)}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <div>
+        {generateTitle(`Results: ${query}`)}
+        <ul>
+          {results.map((item) => (
+            <li key={item.id} className="w-full relative">
+              <h1 className="font-medium">
+                {highlightText(item.title, query)}
+              </h1>
+              <p className="text-[--text-color-secondary]">
+                {highlightText(item.content, query)}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }, [results, query]);
 };
