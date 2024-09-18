@@ -12,7 +12,7 @@ import gsap from "gsap";
 
 const Header = () => {
   const { isToggleMenu, setToggleMenu } = useMenu();
-  const { setOpenSearch } = useSearch();
+  const { isOpenSearch, setOpenSearch } = useSearch();
 
   const handleCLick = () => {
     setOpenSearch((prevState) => !prevState);
