@@ -7,7 +7,7 @@ export default function ToggleTheme() {
   const { toggleThemeFn, theme } = useTheme();
   return (
     <div
-      className={`text-[--text-color-secondary] w-fit aspect-square border-[--border-color-secondary] flex m-1 border 
+      className={`w-fit aspect-square border-[--border-color-secondary] flex m-1 border 
         rounded-full`}
     >
       <button type="button" onClick={toggleThemeFn}>

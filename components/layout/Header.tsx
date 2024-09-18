@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <header
-      className={`header transition text-neutral-50 bg-neutral-950 duration-700 flex h-auto flex-col justify-center z-10 top-0 w-full fixed`}
+      className={`header backdrop-blur-3xl transition text-neutral-50 bg-neutral-950 duration-700 flex h-auto flex-col justify-center z-10 top-0 w-full fixed`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />

@@ -34,10 +34,7 @@ export default function Links({ className }: Props) {
       <Link
         onClick={handleClick}
         href={item.to}
-        className={twMerge(
-          "w-fit capitalize hover:text-neutral-200",
-          className
-        )}
+        className={twMerge("w-fit capitalize ", className)}
       >
         {item.name}
       </Link>

@@ -7,8 +7,7 @@ import ToggleTheme from "../libs/ui/toggle-theme";
 export default function Navbar() {
   return (
     <nav
-      className={`flex justify-center 
-      backdrop-blur-3xl w-full h-auto`}
+      className={`flex justify-center relative w-full h-auto text-neutral-50`}
     >
       <Container
         className={`rounded-lg md:p-[2vw] flex flex-col lg:w-[30vw] h-fit 
@@ -19,7 +18,7 @@ export default function Navbar() {
             <h1 className=" font-medium my-1">Navigations</h1>
           </Container>
           <ul>
-            <Links className="text-base " />
+            <Links className="text-base text-neutral-50" />
           </ul>
         </div>
         <div className="flex flex-col flex-1 ">
@@ -27,10 +26,10 @@ export default function Navbar() {
             <h1 className="w-full relative font-medium my-1">Socials</h1>
           </Container>
           <ul>
-            <Social className="text-base" />
+            <Social className="text-base text-neutral-50" />
           </ul>
         </div>
-        <div className="flex flex-col flex-1 ">
+        <div className="flex flex-col flex-1 text-neutral-50">
           <ToggleTheme />
         </div>
       </Container>
