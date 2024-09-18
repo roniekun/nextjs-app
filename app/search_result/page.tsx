@@ -1,10 +1,9 @@
-"use client";
-import { contentData, IContentData } from "@/data/content-data";
+import { contentData } from "@/data/content-data";
 import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "search",
+  title: "Search",
 };
 
 function SearchResultPage({
