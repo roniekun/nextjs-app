@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/libs/ui/container";
 import { twMerge } from "tailwind-merge";
+import GenerateTitle from "./libs/GererateTitle";
 
 type Props = {
   className?: string;
