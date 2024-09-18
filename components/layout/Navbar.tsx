@@ -11,7 +11,7 @@ export default function Navbar() {
     >
       <Container
         className={`rounded-lg md:p-[2vw] flex flex-col lg:w-[30vw] h-fit 
-          gap-y-5 opacity-0`}
+          gap-y-5`}
       >
         <div>
           <Container className="w-full  p-0 relative rounded-sm">
