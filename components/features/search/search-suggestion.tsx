@@ -47,7 +47,9 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
         (prevSearch) => filterSearchItems({ newSearch, prevSearch }) //calling reusasble utility function passing both object arguments
       );
 
-      router.replace(`/search?query=${encodeURIComponent(newQuery ?? "")}`);
+      router.replace(
+        `/search_result?query=${encodeURIComponent(newQuery ?? "")}`
+      );
       setInFocus(false);
     }
   };

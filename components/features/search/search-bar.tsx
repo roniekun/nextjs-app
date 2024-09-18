@@ -81,7 +81,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       );
 
       setInFocus(false);
-      router.replace(`/search?query=${encodeURIComponent(trimQuery)}`);
+      router.replace(`/search_result?query=${encodeURIComponent(trimQuery)}`);
     }
   };
 

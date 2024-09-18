@@ -32,7 +32,7 @@ const SearchHistoryModal: React.FC<Props> = ({
   const handleClick = (idx: number) => {
     const textContent = historyRefs.current[idx]?.textContent ?? "";
     setQuery(textContent);
-    router.replace(`/search?query=${encodeURIComponent(textContent)}`);
+    router.replace(`/search_result?query=${encodeURIComponent(textContent)}`);
   };
 
   //deleting items in history
