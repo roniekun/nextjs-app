@@ -99,12 +99,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   };
 
   return (
-    <div
-      className={twMerge(
-        `flex relative overflow-visible flex-col h-auto w-full`,
-        className
-      )}
-    >
+    <div className={twMerge(`flex relative flex-col h-auto w-full`, className)}>
       <div className="flex relative w-full p-0 items-center my-2">
         <input
           value={query ?? ""}

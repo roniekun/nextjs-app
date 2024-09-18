@@ -14,16 +14,18 @@ export default function Navbar() {
           gap-y-5`}
         >
           <div>
-            <Container className="w-full  p-0 relative rounded-sm">
-              <h1 className=" font-medium my-1">Navigations</h1>
+            <Container className="w-full  p-0 relative rounded-xs">
+              <h1 className=" font-medium uppercase my-1">Navigations</h1>
             </Container>
             <ul>
               <Links className="text-lg" />
             </ul>
           </div>
           <div className="flex flex-col flex-1 ">
-            <Container className="w-full  p-0 relative rounded-sm">
-              <h1 className="w-full relative font-medium my-1">Socials</h1>
+            <Container className="w-full  p-0 relative rounded-xs">
+              <h1 className="w-full relative uppercase font-medium my-1">
+                Socials
+              </h1>
             </Container>
             <ul>
               <Social className="text-lg" />

@@ -22,7 +22,7 @@ const Header = () => {
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
       gsap.to(".header", {
-        height: "auto",
+        height: "100vh",
         duration: 0.3,
         ease: "power2.inOut",
       });
@@ -51,7 +51,7 @@ const Header = () => {
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
         <div className="relative flex gap-1 justify-center items-center">
-          <button onClick={handleCLick}>
+          <button onClick={handleCLick} className="mx-1">
             <CiSearch />
           </button>
 
