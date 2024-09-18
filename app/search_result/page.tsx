@@ -19,7 +19,7 @@ function SearchResultPage({
   console.log(filteredData);
 
   return (
-    <div className="flex flex-col min-h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full items-center relative justify-center">
       {filteredData.map((data, idx) => (
         <div key={idx}>
           <Link href={`/search_result/${data.id}`}>

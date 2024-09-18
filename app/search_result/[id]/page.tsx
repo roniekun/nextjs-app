@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { contentData } from "@/data/content-data";
+import Container from "@/components/libs/ui/container";
 
 // This function dynamically generates the metadata based on the result.
 export async function generateMetadata({
@@ -35,17 +36,17 @@ export default function SearchResultPage({
   const result = contentData.find((data) => data.id === id);
 
   return (
-    <div className="min-h-[screen] flex flex-col">
+    <div className="relative justify-center items-center flex flex-col">
       {isNaN(id) ? (
-        <div>
-          <h1>Result Not Found</h1>
+        <Container className="relative min-h-[screen] flex flex-col">
+          <h1 className="text-xl">Result Not Found</h1>
           <p>Invalid ID</p>
-        </div>
+        </Container>
       ) : (
-        <div>
-          <h1>{result?.title || "Result Not Found"}</h1>
+        <Container className="relative min-h-[screen] flex flex-col">
+          <h1 className="text-lg">{result?.title || "Result Not Found"}</h1>
           <p>{result?.content || "No content available"}</p>
-        </div>
+        </Container>
       )}
     </div>
   );

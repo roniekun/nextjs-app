@@ -39,13 +39,13 @@ const Header = () => {
     if (isOpenSearch || isToggleMenu) {
       setTimeout(() => {
         setVisible(true);
-      }, 700);
+      }, 1000);
     }
   }, [isOpenSearch, isToggleMenu]);
 
   return (
     <header
-      className={`header backdrop-blur-3xl overflow-hidden  text-neutral-50 bg-neutral-950 flexflex-col
+      className={`header backdrop-blur-3xl overflow-hidden h-[--header-height] text-neutral-50 bg-neutral-950 flexflex-col
          justify-center z-10 top-0 w-full fixed`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">

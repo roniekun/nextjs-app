@@ -18,7 +18,7 @@ export default function Navbar() {
               <h1 className=" font-medium my-1">Navigations</h1>
             </Container>
             <ul>
-              <Links className="text-base" />
+              <Links className="text-lg" />
             </ul>
           </div>
           <div className="flex flex-col flex-1 ">
@@ -26,7 +26,7 @@ export default function Navbar() {
               <h1 className="w-full relative font-medium my-1">Socials</h1>
             </Container>
             <ul>
-              <Social className="text-base" />
+              <Social className="text-lg" />
             </ul>
           </div>
           <div className="flex flex-col flex-1">
