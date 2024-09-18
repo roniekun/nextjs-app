@@ -9,6 +9,7 @@ import Search from "../common/Search";
 import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 import gsap from "gsap";
+import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 const Header = () => {
   const { isToggleMenu, setToggleMenu } = useMenu();
@@ -49,14 +50,18 @@ const Header = () => {
         </div>
       </Container>
       {isOpenSearch && (
-        <Container className="py-0 flex items-center justify-between max-w-[1400px]">
-          <Search />
-        </Container>
+        <PageTransitionLayout>
+          <Container className="py-0 flex items-center justify-between max-w-[1400px]">
+            <Search />
+          </Container>
+        </PageTransitionLayout>
       )}
       {isToggleMenu && (
-        <Container className="py-0 flex items-center justify-between max-w-[1400px]">
-          <Navbar />
-        </Container>
+        <PageTransitionLayout>
+          <Container className="py-0 flex items-center justify-between max-w-[1400px]">
+            <Navbar />
+          </Container>
+        </PageTransitionLayout>
       )}
     </header>
   );
