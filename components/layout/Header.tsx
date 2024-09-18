@@ -45,7 +45,7 @@ const Header = () => {
             <CiSearch />
           </button>
 
-          <Menu setOpenSearch={setOpenSearch} />
+          <Menu />
         </div>
       </Container>
       {isOpenSearch && (

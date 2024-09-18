@@ -2,12 +2,11 @@ import Button from "../libs/ui/button";
 import { useMenu } from "@/provider/context/MenuContext";
 import { GrMenu } from "react-icons/gr";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { useSearch } from "@/provider/context/SearchContext";
 
-type Props = {
-  setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
-};
-const Menu: React.FC<Props> = ({ setOpenSearch }) => {
+const Menu = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
+  const { setOpenSearch } = useSearch();
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
     setOpenSearch(false);
