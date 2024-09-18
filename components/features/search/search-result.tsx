@@ -6,21 +6,21 @@ import Container from "@/components/libs/ui/container";
 import { twMerge } from "tailwind-merge";
 import Head from "next/head";
 
-function generateTitle(query: string) {
+const GenerateTitle = ({ query }: { query: string }) => {
   const [title, setTitle] = useState<string>(query);
 
   useEffect(() => {
-    const newTitle = `Result: ${title}`;
+    const newTitle = `${title}`;
     setTitle(newTitle);
   }, [title]);
 
   return (
     <Head>
       <title>{title}</title>
-      <meta name="description" content={`search result for ${query}`} />
+      <meta name="description" content={`Search result`} />
     </Head>
   );
-}
+};
 
 type Props = {
   className?: string;
@@ -83,8 +83,7 @@ const useTextWithHighlights = (
     if (results.length === 0) {
       return (
         <div>
-          {generateTitle("Not Found")}
-
+          <GenerateTitle query={"Result Not Found"} />
           <ul>
             <h3>No Results found.</h3>
           </ul>
@@ -94,7 +93,7 @@ const useTextWithHighlights = (
 
     return (
       <div>
-        {generateTitle(`Results: ${query}`)}
+        <GenerateTitle query={`Search Result for: ${query} `} />
         <ul>
           {results.map((item) => (
             <li key={item.id} className="w-full relative">
