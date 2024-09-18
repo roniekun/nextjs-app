@@ -2,6 +2,7 @@
 import Logo from "../libs/ui/logo";
 import { useMenu } from "@/provider/context/MenuContext";
 import Menu from "../common/Menu";
+import Search from "../common/Search";
 import Container from "../libs/ui/container";
 
 const Header = () => {
@@ -18,7 +19,7 @@ const Header = () => {
       <Container className="py-0 flex items-center justify-between max-w-[1400px]">
         <Logo />
         <div className="relative flex gap-1">
-          {/* {isDesktop && <Links />} */}
+          <Search />
           <Menu />
         </div>
       </Container>

@@ -1,4 +1,3 @@
-import { useParams } from "next/navigation";
 import { Metadata } from "next";
 import { contentData } from "@/data/content-data";
 
@@ -8,7 +7,16 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const result = contentData.find((data) => data.id === Number(params.id));
+  // Convert params.id to a number and check if it is valid
+  const id = Number(params.id);
+  if (isNaN(id)) {
+    return {
+      title: "Not Found",
+      description: "Invalid ID",
+    };
+  }
+
+  const result = contentData.find((data) => data.id === id);
 
   return {
     title: result ? result.title : "Not Found",
@@ -18,10 +26,23 @@ export async function generateMetadata({
   };
 }
 
-export default function SearchResultPage() {
-  const { id } = useParams();
+export default function SearchResultPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  // Convert params.id to a number and check if it is valid
+  const id = Number(params.id);
+  if (isNaN(id)) {
+    return (
+      <div>
+        <h1>Result Not Found</h1>
+        <p>Invalid ID</p>
+      </div>
+    );
+  }
 
-  const result = contentData.find((data) => data.id === Number(id));
+  const result = contentData.find((data) => data.id === id);
 
   return (
     <div>
