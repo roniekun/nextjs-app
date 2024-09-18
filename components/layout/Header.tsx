@@ -14,11 +14,11 @@ const Header = () => {
           ? "bg-opacity-80 bg-black backdrop-blur-3xl"
           : "bg-neutral-950"
       } transition duration-700 flex justify-center z-10 top-0 w-full sticky
-    text-neutral-50 overflow-hidden h-[--header-height]`}
+    text-neutral-50 overflow-visible h-[--header-height]`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px]">
         <Logo />
-        <div className="relative flex gap-1">
+        <div className="relative flex gap-1 justify-center items-center">
           <Search />
           <Menu />
         </div>

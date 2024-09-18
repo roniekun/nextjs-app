@@ -13,8 +13,10 @@ function SearchResultPage({
 }) {
   const filteredData = contentData.filter((data) => {
     const title = data.title.trim().toLowerCase();
-    return title === searchParams.query;
+    return title.includes(searchParams.query);
   });
+
+  console.log(filteredData);
 
   return (
     <div className="flex flex-col min-h-screen w-full">
