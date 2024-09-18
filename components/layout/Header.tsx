@@ -9,11 +9,11 @@ import Search from "../common/Search";
 import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 import gsap from "gsap";
-import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 const Header = () => {
   const { isToggleMenu, setToggleMenu } = useMenu();
   const { isOpenSearch, setOpenSearch } = useSearch();
+  const [isVisible, setVisible] = useState(false);
 
   const handleCLick = () => {
     setOpenSearch((prevState) => !prevState);
@@ -35,6 +35,14 @@ const Header = () => {
     }
   }, [isOpenSearch, isToggleMenu]);
 
+  useEffect(() => {
+    if (isOpenSearch || isToggleMenu) {
+      setTimeout(() => {
+        setVisible(true);
+      }, 700);
+    }
+  }, [isOpenSearch, isToggleMenu]);
+
   return (
     <header
       className={`header backdrop-blur-3xl overflow-hidden  text-neutral-50 bg-neutral-950 flexflex-col
@@ -51,8 +59,8 @@ const Header = () => {
         </div>
       </Container>
       <Container className="py-0 flex items-center justify-between max-w-[1400px] mb-[--header-height]">
-        {isOpenSearch && <Search />}
-        {isToggleMenu && <Navbar />}
+        {isOpenSearch && isVisible && <Search />}
+        {isToggleMenu && isVisible && <Navbar />}
       </Container>
     </header>
   );

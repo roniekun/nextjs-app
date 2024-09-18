@@ -1,11 +1,12 @@
 import SearchBar from "../features/search/search-bar";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
+import Container from "../libs/ui/container";
 const Search: React.FC = () => {
   return (
     <PageTransitionLayout>
-      <div className="mx-5 relative w-full lg:h-auto h-[--hero-height] justify-center items-center">
+      <Container className="relative w-full lg:h-auto h-[--hero-height] justify-center items-center">
         <SearchBar />
-      </div>
+      </Container>
     </PageTransitionLayout>
   );
 };
