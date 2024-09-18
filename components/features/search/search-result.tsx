@@ -4,23 +4,6 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/libs/ui/container";
 import { twMerge } from "tailwind-merge";
-import Head from "next/head";
-
-const GenerateTitle = ({ query }: { query: string }) => {
-  const [title, setTitle] = useState<string>(query);
-
-  useEffect(() => {
-    const newTitle = `${title}`;
-    setTitle(newTitle);
-  }, [title]);
-
-  return (
-    <Head>
-      <title>{title}</title>
-      <meta name="description" content={`Search result`} />
-    </Head>
-  );
-};
 
 type Props = {
   className?: string;

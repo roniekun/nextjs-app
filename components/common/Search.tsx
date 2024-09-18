@@ -1,7 +1,7 @@
 import SearchBar from "../features/search/search-bar";
 const Search: React.FC = () => {
   return (
-    <div>
+    <div className="m-5">
       <SearchBar />
     </div>
   );
