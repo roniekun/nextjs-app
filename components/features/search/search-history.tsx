@@ -58,18 +58,17 @@ const SearchHistoryModal: React.FC<Props> = ({
   }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
 
   return (
-    <ul className="relative flex flex-col w-full rounded-b-md h-auto text-[--text-color-secondary]">
+    <ul className="relative flex flex-col w-full rounded-b-md h-auto ">
       {filteredSearchItems.map((item, idx) => (
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
-          className="flex list-none w-full relative rounded-sm justify-between gap-x-1 "
+          className="flex list-none w-full relative rounded-sm justify-between gap-x-1"
         >
           <UpdateOutlinedIcon />
           <a
             onClick={() => handleClick(idx)}
-            className="flex-1 cursor-pointer  hover:bg-neutral-200 hover:bg-opacity-50 flex item-center relative gap-x-1 
-            text-[--text-color-secondary] "
+            className="flex-1 cursor-pointer  flex item-center relative gap-x-1"
           >
             {item.search}
           </a>
