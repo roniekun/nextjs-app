@@ -17,7 +17,7 @@ const SearchHistoryModal: React.FC<Props> = ({
   setFilteredSearchItems,
 }) => {
   const router = useRouter();
-  const { searchItems, setSearchItems, setQuery } = useSearch();
+  const { setOpenSearch, searchItems, setSearchItems, setQuery } = useSearch();
   const historyRefs = useRef<(HTMLLIElement | null)[]>([]);
   const [deletedItem, setDeletedItem] = useState<SearchHistoryProps | null>(
     null
@@ -32,6 +32,7 @@ const SearchHistoryModal: React.FC<Props> = ({
   const handleClick = (idx: number) => {
     const textContent = historyRefs.current[idx]?.textContent ?? "";
     setQuery(textContent);
+    setOpenSearch((prevState) => !prevState);
     router.replace(`/search_result?query=${encodeURIComponent(textContent)}`);
   };
 
@@ -58,12 +59,12 @@ const SearchHistoryModal: React.FC<Props> = ({
   }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
 
   return (
-    <ul className="relative flex flex-col w-full rounded-b-md h-auto ">
+    <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 ">
       {filteredSearchItems.map((item, idx) => (
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
-          className="flex list-none w-full relative rounded-sm justify-between gap-x-1"
+          className="flex list-none w-full relative justify-between gap-x-1"
         >
           <UpdateOutlinedIcon />
           <a

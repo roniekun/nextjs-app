@@ -14,7 +14,8 @@ type Props = {
 
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
   const router = useRouter();
-  const { setQuery, setSearchItems, setInFocus, searchItems } = useSearch();
+  const { setOpenSearch, setQuery, setSearchItems, setInFocus, searchItems } =
+    useSearch();
   const listRef = useRef<(HTMLLIElement | null)[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
@@ -50,12 +51,13 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
       router.replace(
         `/search_result?query=${encodeURIComponent(newQuery ?? "")}`
       );
+      setOpenSearch((prevState) => !prevState);
       setInFocus(false);
     }
   };
 
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-col relative gap-y-1">
       {filteredResults?.slice(0, 10).map((result, idx) => (
         <li
           ref={(el) => setRef(el, idx)}

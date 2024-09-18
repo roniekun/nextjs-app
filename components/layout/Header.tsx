@@ -37,7 +37,8 @@ const Header = () => {
 
   return (
     <header
-      className={`header backdrop-blur-3xl  text-neutral-50 bg-neutral-950 flexflex-col justify-center z-10 top-0 w-full fixed`}
+      className={`header backdrop-blur-3xl overflow-hidden  text-neutral-50 bg-neutral-950 flexflex-col
+         justify-center z-10 top-0 w-full fixed`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
@@ -49,11 +50,10 @@ const Header = () => {
           <Menu />
         </div>
       </Container>
-      <PageTransitionLayout>
-        <Container className="py-0 flex items-center justify-between max-w-[1400px] mb-[--header-height]">
-          {isOpenSearch ? <Search /> : <Navbar />}
-        </Container>
-      </PageTransitionLayout>
+      <Container className="py-0 flex items-center justify-between max-w-[1400px] mb-[--header-height]">
+        {isOpenSearch && <Search />}
+        {isToggleMenu && <Navbar />}
+      </Container>
     </header>
   );
 };

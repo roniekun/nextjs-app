@@ -23,6 +23,7 @@ export type SearchProps = {
 const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const router = useRouter();
   const {
+    setOpenSearch,
     isInFocus,
     setInFocus,
     setSearchItems,
@@ -103,38 +104,36 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         className
       )}
     >
-      <div>
-        <div className="flex relative w-full p-0 items-center">
-          <input
-            value={query ?? ""}
-            ref={inputRef}
-            onChange={(e) => handleInputChange(e)}
-            onKeyDown={handleKeyDown}
-            placeholder="Search..."
-            className="w-full shadow-md relative flex-1 border-[--border-color-secondary] border-b px-2 m-0 appearance-none bg-transparent  p-1 leading-tight focus:outline-none"
-          />
-          <div className="flex justify-center h-full items-center rounded-r-full">
-            {isInFocus ? (
-              <button
-                type="button"
-                className="aspect-square p-2"
-                onClick={handleClear}
-              >
-                <IoIosClose />
-              </button>
-            ) : (
-              <button type="button" className="aspect-square p-2">
-                <MdOutlineSearch />
-              </button>
-            )}
-          </div>
+      <div className="flex relative w-full p-0 items-center my-2">
+        <input
+          value={query ?? ""}
+          ref={inputRef}
+          onChange={(e) => handleInputChange(e)}
+          onKeyDown={handleKeyDown}
+          placeholder="Search..."
+          className="w-full text-lg relative flex-1 border-[--border-color-secondary] border-b px-2 m-0 appearance-none bg-transparent  p-1 leading-tight focus:outline-none"
+        />
+        <div className="flex justify-center h-full items-center rounded-r-full">
+          {isInFocus ? (
+            <button
+              type="button"
+              className="aspect-square p-2"
+              onClick={handleClear}
+            >
+              <IoIosClose />
+            </button>
+          ) : (
+            <button type="button" className="aspect-square p-2">
+              <MdOutlineSearch />
+            </button>
+          )}
         </div>
       </div>
 
       {(isInFocus || query) &&
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
           <div className="relative h-auto">
-            <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2">
+            <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-xs">
               <SearchHistoryModal
                 filteredSearchItems={filteredSearchItems}
                 setFilteredSearchItems={setFilteredSearchItems}
