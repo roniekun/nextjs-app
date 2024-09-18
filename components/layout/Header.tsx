@@ -1,6 +1,7 @@
 "use client";
 import Logo from "../libs/ui/logo";
 import { useMenu } from "@/provider/context/MenuContext";
+import { useSearch } from "@/provider/context/SearchContext";
 import Menu from "../common/Menu";
 import Container from "../libs/ui/container";
 import { CiSearch } from "react-icons/ci";
@@ -11,7 +12,7 @@ import gsap from "gsap";
 
 const Header = () => {
   const { isToggleMenu, setToggleMenu } = useMenu();
-  const [isOpenSearch, setOpenSearch] = useState<boolean>(false);
+  const { setOpenSearch } = useSearch();
 
   const handleCLick = () => {
     setOpenSearch((prevState) => !prevState);
@@ -44,7 +45,7 @@ const Header = () => {
             <CiSearch />
           </button>
 
-          <Menu />
+          <Menu setOpenSearch={setOpenSearch} />
         </div>
       </Container>
       {isOpenSearch && (

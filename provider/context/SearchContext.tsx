@@ -14,6 +14,8 @@ export interface SearchHistoryProps {
 }
 
 interface SearchContextProps {
+  isOpenSearch: boolean;
+  setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
   isInFocus: boolean;
   setInFocus: React.Dispatch<React.SetStateAction<boolean>>;
   searchItems: SearchHistoryProps[];
@@ -23,6 +25,8 @@ interface SearchContextProps {
 }
 
 const DefaultContext: SearchContextProps = {
+  isOpenSearch: false,
+  setOpenSearch: () => {},
   isInFocus: false,
   setInFocus: () => {},
   searchItems: [],
@@ -41,6 +45,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   const [isInFocus, setInFocus] = useState<boolean>(false);
   const [query, setQuery] = useState<string | null>(null);
   const [searchItems, setSearchItems] = useState<SearchHistoryProps[]>([]);
+  const [isOpenSearch, setOpenSearch] = useState<boolean>(false);
 
   useEffect(() => {
     const searchHistory = localStorage.getItem("searchHistory");
@@ -56,6 +61,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   return (
     <SearchContext.Provider
       value={{
+        isOpenSearch,
+        setOpenSearch,
         isInFocus,
         setInFocus,
         query,
