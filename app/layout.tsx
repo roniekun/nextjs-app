@@ -27,7 +27,6 @@ export default function RootLayout({
           >
             <ShareModal />
             <Header />
-            <Navbar />
             {children}
             <CookieModal />
             <Footer />

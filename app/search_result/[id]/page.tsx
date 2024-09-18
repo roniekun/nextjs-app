@@ -31,23 +31,22 @@ export default function SearchResultPage({
 }: {
   params: { id: string };
 }) {
-  // Convert params.id to a number and check if it is valid
   const id = Number(params.id);
-  if (isNaN(id)) {
-    return (
-      <div>
-        <h1>Result Not Found</h1>
-        <p>Invalid ID</p>
-      </div>
-    );
-  }
-
   const result = contentData.find((data) => data.id === id);
 
   return (
-    <div>
-      <h1>{result?.title || "Result Not Found"}</h1>
-      <p>{result?.content || "No content available"}</p>
+    <div className="min-h-[screen] flex flex-col">
+      {isNaN(id) ? (
+        <div>
+          <h1>Result Not Found</h1>
+          <p>Invalid ID</p>
+        </div>
+      ) : (
+        <div>
+          <h1>{result?.title || "Result Not Found"}</h1>
+          <p>{result?.content || "No content available"}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -6,9 +6,7 @@ import ToggleTheme from "../libs/ui/toggle-theme";
 
 export default function Navbar() {
   return (
-    <nav
-      className={`flex justify-center relative w-full h-auto text-neutral-50`}
-    >
+    <nav className={`flex relative w-full h-auto text-neutral-50`}>
       <Container
         className={`rounded-lg md:p-[2vw] flex flex-col lg:w-[30vw] h-fit 
           gap-y-5`}
