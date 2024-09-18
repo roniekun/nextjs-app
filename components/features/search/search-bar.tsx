@@ -134,7 +134,7 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
       {(isInFocus || query) &&
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
-          <div className="absolute top-full z-10 w-[300px]">
+          <div className="relative h-auto">
             <div className="flex flex-col relative rounded-sm border-gray-300 border bg-[--background] h-auto overflow-hidden p-2">
               <SearchHistoryModal
                 filteredSearchItems={filteredSearchItems}
