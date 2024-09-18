@@ -83,8 +83,6 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
       setInFocus(false);
       router.replace(`/search?query=${encodeURIComponent(trimQuery)}`);
     }
-
-    setQuery(null);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

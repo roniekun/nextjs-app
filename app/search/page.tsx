@@ -1,7 +1,7 @@
 "use client";
 import { contentData, IContentData } from "@/data/content-data";
 import { useEffect, useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearch } from "@/provider/context/SearchContext";
 import Container from "@/components/libs/ui/container";
 import Search from "@/components/common/Search";
 import GenerateTitle from "@/components/features/search/libs/GererateTitle";
@@ -46,7 +46,7 @@ const useFilteredResults = (
   return [results, isLoading];
 };
 
-// Custom hook for highlighting the query in text
+//  for highlighting the query in text
 const useTextWithHighlights = (
   results: IContentData[],
   query: string | null
@@ -66,45 +66,38 @@ const useTextWithHighlights = (
   return useMemo(() => {
     if (results.length === 0) {
       return (
-        <div>
-          <ul>
-            <h3>No Results found.</h3>
-          </ul>
-        </div>
+        <ul>
+          <h3>No Results found.</h3>
+        </ul>
       );
     }
 
     return (
-      <div>
-        <ul>
-          {results.map((item) => (
-            <li key={item.id} className="w-full relative">
-              <h1 className="font-medium">
-                {highlightText(item.title, query)}
-              </h1>
-              <p className="text-[--text-color-secondary]">
-                {highlightText(item.content, query)}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {results.map((item) => (
+          <li key={item.id} className="w-full relative">
+            <h1 className="font-medium">{highlightText(item.title, query)}</h1>
+            <p className="text-[--text-color-secondary]">
+              {highlightText(item.content, query)}
+            </p>
+          </li>
+        ))}
+      </ul>
     );
   }, [results, query]);
 };
 
 function SearchPage() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query");
+  const { query } = useSearch();
   const [results, isLoading] = useFilteredResults(query);
   const textWithHighlights = useTextWithHighlights(results, query);
 
   return (
-    <div>
+    <div className="flex flex-col">
       <GenerateTitle query={results ? `${query}` : "Search Not Found"} />
-      <div>
+      <>
         <Search />
-      </div>
+      </>
       {query && (
         <Container>
           <Title query={query} />
