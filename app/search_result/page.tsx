@@ -1,14 +1,20 @@
+"use client";
 import { contentData, IContentData } from "@/data/content-data";
-import { useSearchParams } from "next/navigation";
+import { Metadata } from "next";
 import Link from "next/link";
 
-function SearchResultPage() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("query");
+export const metadata: Metadata = {
+  title: "search",
+};
 
+function SearchResultPage({
+  searchParams,
+}: {
+  searchParams: { query: string };
+}) {
   const filteredData = contentData.filter((data) => {
     const title = data.title.trim().toLowerCase();
-    return title === query;
+    return title === searchParams.query;
   });
 
   return (
