@@ -3,10 +3,14 @@ import { useMenu } from "@/provider/context/MenuContext";
 import { GrMenu } from "react-icons/gr";
 import { RiCloseLargeFill } from "react-icons/ri";
 
-export default function Menu() {
+type Props = {
+  setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
+};
+const Menu: React.FC<Props> = ({ setOpenSearch }) => {
   const { setToggleMenu, isToggleMenu } = useMenu();
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
+    setOpenSearch(false);
   };
 
   return (
@@ -21,4 +25,5 @@ export default function Menu() {
       </Button>
     </div>
   );
-}
+};
+export default Menu;

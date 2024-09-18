@@ -94,13 +94,12 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
   const handleClear = () => {
     setQuery(null);
     setInFocus(false);
-    router.replace("/search");
   };
 
   return (
     <div
       className={twMerge(
-        `flex relative overflow-visible flex-col h-auto w-[300px]`,
+        `flex relative overflow-visible flex-col h-auto w-full`,
         className
       )}
     >

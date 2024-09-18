@@ -10,11 +10,12 @@ import { useState, useEffect } from "react";
 import gsap from "gsap";
 
 const Header = () => {
-  const { isToggleMenu } = useMenu();
+  const { isToggleMenu, setToggleMenu } = useMenu();
   const [isOpenSearch, setOpenSearch] = useState<boolean>(false);
 
   const handleCLick = () => {
     setOpenSearch((prevState) => !prevState);
+    setToggleMenu(false);
   };
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
@@ -34,7 +35,7 @@ const Header = () => {
 
   return (
     <header
-      className={`header transition duration-700 flex h-auto flex-col justify-center z-10 top-0 w-full sticky `}
+      className={`header transition duration-700 flex h-auto flex-col justify-center z-10 top-0 w-full fixed`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
