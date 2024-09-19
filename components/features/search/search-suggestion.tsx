@@ -6,7 +6,7 @@ import {
 } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import filterSearchItems from "./utils/filterSearchItems";
+import filterSearchItems from "./util/filterSearchItems";
 
 type Props = {
   filteredResults?: IContentData[];
@@ -35,9 +35,7 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   const handleClick = (idx: number) => {
     if (listRef.current) {
-      const newQuery = listRef.current[idx]?.textContent
-        ?.toLocaleLowerCase()
-        .trim();
+      const newQuery = listRef.current[idx]?.textContent?.toLowerCase().trim();
       const newSearch: SearchHistoryProps = {
         search: newQuery ?? "",
         id: searchItems.length + 1,

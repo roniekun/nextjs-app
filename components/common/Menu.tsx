@@ -1,4 +1,4 @@
-import Button from "../libs/ui/button";
+import Button from "../lib/ui/button";
 import { useMenu } from "@/provider/context/MenuContext";
 import { GrMenu } from "react-icons/gr";
 import { RiCloseLargeFill } from "react-icons/ri";

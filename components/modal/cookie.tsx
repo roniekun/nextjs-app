@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import Container from "../libs/ui/container";
-import Button from "../libs/ui/button";
+import Container from "../lib/ui/container";
+import Button from "../lib/ui/button";
 
 const CookieModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

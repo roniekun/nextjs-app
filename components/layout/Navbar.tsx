@@ -1,8 +1,8 @@
 "use client";
-import Links from "../libs/links";
-import Social from "../libs/social";
-import Container from "../libs/ui/container";
-import ToggleTheme from "../libs/ui/toggle-theme";
+import Links from "../lib/links";
+import Social from "../lib/social";
+import Container from "../lib/ui/container";
+import ToggleTheme from "../lib/ui/toggle-theme";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 
 export default function Navbar() {

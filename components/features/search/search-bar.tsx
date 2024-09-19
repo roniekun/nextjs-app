@@ -12,7 +12,7 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { contentData, IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
-import filterSearchItems from "./utils/filterSearchItems";
+import filterSearchItems from "./util/filterSearchItems";
 
 export type SearchProps = {
   placeholder?: string;

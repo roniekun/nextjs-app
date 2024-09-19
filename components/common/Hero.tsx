@@ -2,8 +2,8 @@
 import React from "react";
 import { useRef } from "react";
 import { motion, useTransform, useScroll, MotionValue } from "framer-motion";
-import Button from "../libs/ui/button";
-import EmailTo from "../utils/email";
+import Button from "../lib/ui/button";
+import EmailTo from "../util/email";
 
 export default function Hero() {
   const targetRef = useRef(null);

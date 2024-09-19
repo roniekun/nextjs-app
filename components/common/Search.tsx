@@ -1,6 +1,6 @@
 import SearchBar from "../features/search/search-bar";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
-import Container from "../libs/ui/container";
+import Container from "../lib/ui/container";
 const Search: React.FC = () => {
   return (
     <PageTransitionLayout>

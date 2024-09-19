@@ -1,6 +1,6 @@
 "use client";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
-import Container from "@/components/libs/ui/container";
+import Container from "@/components/lib/ui/container";
 import Accordion from "@/components/features/accordion/Accordion";
 import Hero from "@/components/common/Hero";
 

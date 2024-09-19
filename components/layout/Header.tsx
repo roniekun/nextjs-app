@@ -1,9 +1,9 @@
 "use client";
-import Logo from "../libs/ui/logo";
+import Logo from "../lib/ui/logo";
 import { useMenu } from "@/provider/context/MenuContext";
 import { useSearch } from "@/provider/context/SearchContext";
 import Menu from "../common/Menu";
-import Container from "../libs/ui/container";
+import Container from "../lib/ui/container";
 import { CiSearch } from "react-icons/ci";
 import Search from "../common/Search";
 import Navbar from "./Navbar";
@@ -15,7 +15,7 @@ const Header = () => {
   const { isOpenSearch, setOpenSearch } = useSearch();
   const [isVisible, setVisible] = useState(false);
 
-  const handleCLick = () => {
+  const handleCLickSearch = () => {
     setOpenSearch((prevState) => !prevState);
     setToggleMenu(false);
   };
@@ -39,7 +39,11 @@ const Header = () => {
     if (isOpenSearch || isToggleMenu) {
       setTimeout(() => {
         setVisible(true);
-      }, 1000);
+      }, 700);
+    } else {
+      setTimeout(() => {
+        setVisible(false);
+      }, 700);
     }
   }, [isOpenSearch, isToggleMenu]);
 
@@ -51,7 +55,7 @@ const Header = () => {
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
         <div className="relative flex gap-1 justify-center items-center">
-          <button onClick={handleCLick} className="mx-1">
+          <button onClick={handleCLickSearch} className="mx-1">
             <CiSearch />
           </button>
 

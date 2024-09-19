@@ -1,7 +1,7 @@
 import { contentData } from "@/data/content-data";
 import { Metadata } from "next";
 import Link from "next/link";
-import Container from "@/components/libs/ui/container";
+import Container from "@/components/lib/ui/container";
 
 export const metadata: Metadata = {
   title: "Search",
@@ -12,9 +12,12 @@ function SearchResultPage({
 }: {
   searchParams: { query: string };
 }) {
+  //filtering data to display as result
   const filteredData = contentData.filter((data) => {
+    const query = searchParams.query.trim().toLowerCase();
     const title = data.title.trim().toLowerCase();
-    return title.includes(searchParams.query);
+    const content = data.content.trim().toLowerCase();
+    return title.includes(query) || content.includes(query);
   });
 
   console.log(filteredData);
