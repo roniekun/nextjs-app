@@ -60,7 +60,7 @@ const SearchHistoryModal: React.FC<Props> = ({
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 ">
-      {filteredSearchItems.map((item, idx) => (
+      {filteredSearchItems.slice(0, 10).map((item, idx) => (
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}

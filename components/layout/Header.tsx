@@ -21,29 +21,23 @@ const Header = () => {
   };
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
+      setTimeout(() => {
+        setVisible(true);
+      }, 300);
       gsap.to(".header", {
         height: "100vh",
         duration: 0.3,
         ease: "power2.inOut",
       });
     } else {
+      setTimeout(() => {
+        setVisible(false);
+      }, 300);
       gsap.to(".header", {
         height: "55px",
         duration: 0.3,
         ease: "power2.inOut",
       });
-    }
-  }, [isOpenSearch, isToggleMenu]);
-
-  useEffect(() => {
-    if (isOpenSearch || isToggleMenu) {
-      setTimeout(() => {
-        setVisible(true);
-      }, 700);
-    } else {
-      setTimeout(() => {
-        setVisible(false);
-      }, 700);
     }
   }, [isOpenSearch, isToggleMenu]);
 

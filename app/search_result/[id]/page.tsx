@@ -36,14 +36,14 @@ export default function SearchResultPage({
   const result = contentData.find((data) => data.id === id);
 
   return (
-    <div className="relative justify-center items-center flex flex-col">
+    <div className="relative w-full bg-gray-300 justify-center items-start flex flex-col">
       {isNaN(id) ? (
         <Container className="relative min-h-[screen] flex flex-col">
           <h1 className="text-xl">Result Not Found</h1>
           <p>Invalid ID</p>
         </Container>
       ) : (
-        <Container className="relative min-h-[screen] flex flex-col">
+        <Container className="relative min-h-[screen] bg-red-500 flex flex-col">
           <h1 className="text-lg">{result?.title || "Result Not Found"}</h1>
           <p>{result?.content || "No content available"}</p>
         </Container>
