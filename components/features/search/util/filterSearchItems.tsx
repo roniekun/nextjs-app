@@ -15,10 +15,9 @@ const filterSearchItems = ({
 
   // Combine newSearch with filtered previous searches
   const updatedSearchItems = [...newFilteredSearchItems, newSearch];
+  const sortedSearchItems = updatedSearchItems.sort((a, b) => b.date - a.date);
 
-  updatedSearchItems.sort((a, b) => b.date - a.date);
-
-  return updatedSearchItems;
+  return sortedSearchItems;
 };
 
 export default filterSearchItems;
