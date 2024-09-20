@@ -18,7 +18,7 @@ export default function Navbar() {
               <h1 className=" font-medium uppercase my-1">Navigations</h1>
             </Container>
             <ul>
-              <Links className="text-lg" />
+              <Links className="text-lg hover:text-green-500" />
             </ul>
           </div>
           <div className="flex flex-col flex-1 ">

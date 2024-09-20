@@ -8,7 +8,7 @@ export default function Footer() {
   const date = new Date();
   return (
     <footer className="relative bg-neutral-950 flex flex-col md:px-[5vw] justify-center item-center bottom-0 h-auto w-full text-neutral-50">
-      <Container className="max-w-[1200px]">
+      <Container className="max-w-[1400px]">
         <section className="flex flex-col relative justify-start pb-0">
           <h2 className="lg:text-2xl text-xl font-medium text-neutral-300">
             Thinking of a Project?

@@ -27,7 +27,7 @@ const Header = () => {
       gsap.to(".header", {
         height: "100vh",
         duration: 0.3,
-        ease: "power2.inOut",
+        ease: "cubic-bezier(0.76, 0, 0.24, 1)", //https://easings.net/#easeInOutQuart
       });
     } else {
       setTimeout(() => {
@@ -36,7 +36,7 @@ const Header = () => {
       gsap.to(".header", {
         height: "55px",
         duration: 0.3,
-        ease: "power2.inOut",
+        ease: "cubic-bezier(0.76, 0, 0.24, 1)",
       });
     }
   }, [isOpenSearch, isToggleMenu]);
