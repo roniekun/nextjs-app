@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <LocalProvider>
           <main
-            className="flex flex-col p-0 items-center justify-center"
+            className="flex flex-col p-0"
             style={{ fontFamily: "Neue, sans-serif" }}
           >
             <ShareModal />

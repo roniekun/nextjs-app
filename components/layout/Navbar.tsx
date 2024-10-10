@@ -41,7 +41,7 @@ export default function Navbar() {
   return (
     <PageTransitionLayout>
       <nav
-        className={`navbar flex fixed w-screen h-0 text-neutral-50 bg-neutral-950 z-10`}
+        className={`navbar flex fixed left-0 top-0 w-screen h-0 text-neutral-50 bg-neutral-950 z-10`}
       >
         {!isOpenSearch && isToggleMenu && isVisible && (
           <Container

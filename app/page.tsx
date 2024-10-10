@@ -2,7 +2,7 @@
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import Container from "@/components/lib/ui/container";
 import Hero from "@/components/common/Hero";
-import Accordion from "@/components/features/accordion/Accordion2";
+import Accordion from "@/components/features/accordion/Accordion";
 
 export default function Home() {
   return (

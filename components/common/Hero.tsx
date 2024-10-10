@@ -25,10 +25,10 @@ export default function Hero() {
   );
 
   return (
-    <div ref={targetRef} className="h-[200vh] w-full">
+    <div ref={targetRef} className="h-[200vh] w-full ">
       <motion.div
         style={{ opacity: sm }}
-        className="sticky top-[44px] h-[--hero-height] flex flex-col py-[5vw]"
+        className="sticky top-[--header-height] h-[--hero-height] flex flex-col py-[5vw]"
       >
         <h1 className="text-xl font-medium text-[--text-color-muted]">
           Elevate your Creative Vision:
