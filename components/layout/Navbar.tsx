@@ -40,7 +40,9 @@ export default function Navbar() {
 
   return (
     <PageTransitionLayout>
-      <nav className={`navbar flex fixed w-full h-0 text-neutral-50`}>
+      <nav
+        className={`navbar flex fixed w-full h-0 text-neutral-50 bg-neutral-950 z-10`}
+      >
         {!isOpenSearch && isToggleMenu && isVisible && (
           <Container
             className={`pt-[--header-height] rounded-lg md:p-[2vw] flex flex-col lg:w-[30vw] h-fit 
