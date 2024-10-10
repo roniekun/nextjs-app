@@ -13,15 +13,15 @@ export default function Links({ className }: Props) {
   const linkLists = [
     {
       name: "profile",
-      to: "/profile",
+      url: "/profile",
     },
     {
       name: "projects",
-      to: "/projects",
+      url: "/projects",
     },
     {
       name: "contact",
-      to: "/contact",
+      url: "/contact",
     },
   ];
 
@@ -33,7 +33,7 @@ export default function Links({ className }: Props) {
     <li key={idx} className="flex flex-col">
       <Link
         onClick={handleClick}
-        href={item.to}
+        href={item.url}
         className={twMerge("w-fit capitalize ", className)}
       >
         {item.name}

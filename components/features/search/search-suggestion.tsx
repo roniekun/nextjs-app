@@ -56,20 +56,24 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
 
   return (
     <ul className="flex flex-col relative gap-y-1">
-      {filteredResults?.slice(0, 10).map((result, idx) => (
-        <li
-          ref={(el) => setRef(el, idx)}
-          onMouseDown={() => handleMouseDown(idx)}
-          key={idx}
-          onClick={() => handleClick(idx)}
-          className="rounded-sm flex"
-        >
-          <SearchSharpIcon />
-          <a className="cursor-pointer lowercase flex-1 " href={result.link}>
-            {result.title}
-          </a>
-        </li>
-      ))}
+      {filteredResults
+        // [...new Set(filteredResults.map(result => result.title))] //optional for removing duplicates
+        ?.sort((a, b) => a.title.localeCompare(b.title)) //sorting the result alphabetically
+        .slice(0, 10)
+        .map((result, idx) => (
+          <li
+            ref={(el) => setRef(el, idx)}
+            onMouseDown={() => handleMouseDown(idx)}
+            key={idx}
+            onClick={() => handleClick(idx)}
+            className="rounded-sm flex"
+          >
+            <SearchSharpIcon />
+            <a className="cursor-pointer lowercase flex-1 " href={result.link}>
+              {result.title}
+            </a>
+          </li>
+        ))}
     </ul>
   );
 };

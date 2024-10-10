@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
@@ -10,17 +10,21 @@ import {
 import { twMerge } from "tailwind-merge";
 import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
-import { contentData, IContentData } from "../../../data/content-data";
+import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
 import filterSearchItems from "./util/filterSearchItems";
 
 export type SearchProps = {
   placeholder?: string;
   className?: string;
-  data?: IContentData[];
+  contentData: IContentData[];
 };
 
-const SearchBar: React.FC<SearchProps> = ({ className }) => {
+const SearchBar: React.FC<SearchProps> = ({
+  className,
+  placeholder,
+  contentData,
+}) => {
   const router = useRouter();
   const {
     setOpenSearch,
@@ -39,19 +43,24 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
+  // filtering the result every 300 miliseconds as value of the query changes using
+  // useCallback and debounce/lodash
   const debounceHandleInputChange = useCallback(
     debounce((enteredQuery: string) => {
-      if (enteredQuery === "") {
+      const formattedQuery = enteredQuery.trim().toLowerCase();
+
+      if (formattedQuery === "") {
         setFilteredResult([]);
         setInFocus(false);
       } else {
-        const filteredData = contentData.filter((data) =>
-          data.title.toLowerCase().trim().includes(enteredQuery)
+        const filteredData = contentData?.filter((data) =>
+          data.title.toLowerCase().trim().includes(formattedQuery)
         );
         const newFilteredSearchItem = searchItems.filter((item) =>
-          item.search.toLowerCase().trim().includes(enteredQuery)
+          item.search.toLowerCase().trim().includes(formattedQuery)
         );
         setFilteredSearchItems(newFilteredSearchItem);
+
         setFilteredResult(filteredData);
         setInFocus(true);
       }
@@ -61,10 +70,17 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
-      const enteredQuery = e.target.value.trim().toLowerCase();
-      setQuery(e.target.value);
-      //
+      const enteredQuery = e.target.value;
+      setQuery(enteredQuery);
+      //calling the debounced search result
       debounceHandleInputChange(enteredQuery);
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
+    setInFocus(true);
+    if (e) {
+      setQuery(e.currentTarget.value);
     }
   };
 
@@ -104,9 +120,12 @@ const SearchBar: React.FC<SearchProps> = ({ className }) => {
         <input
           value={query ?? ""}
           ref={inputRef}
+          onClick={(e) => {
+            handleClick(e);
+          }}
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
-          placeholder="Search..."
+          placeholder={placeholder}
           className="w-full text-lg relative flex-1 border-[--border-color-secondary] border-b px-2 m-0 
           appearance-none bg-transparent  p-1 leading-tight focus:outline-none"
         />

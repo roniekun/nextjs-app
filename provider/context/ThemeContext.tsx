@@ -8,6 +8,8 @@ import {
   useContext,
 } from "react";
 
+type Theme = "light" | "dark" | "system";
+
 interface LoadedThemeType {
   loadedBg: string | null;
   loadedTextColor: string | null;
@@ -15,7 +17,7 @@ interface LoadedThemeType {
 
 interface ThemeContextType {
   isScrolled: boolean;
-  setTheme: (theme: string) => void;
+  setTheme: (theme: Theme) => void;
   theme: string;
   isLoadedTheme: boolean | undefined;
   setIsLoadedTheme: (isLoaded: boolean) => void;
@@ -61,7 +63,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   }, []);
 
   // Loading stored theme from local storage
-  const [theme, setTheme] = useState<string>("light");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -114,7 +116,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
         loadedTheme,
       }}
     >
-      {children}
+      <div className={`theme ${theme}`}>{children}</div>
     </ThemeContext.Provider>
   );
 };
