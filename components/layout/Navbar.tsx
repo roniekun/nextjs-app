@@ -45,7 +45,7 @@ export default function Navbar() {
       >
         {!isOpenSearch && isToggleMenu && isVisible && (
           <Container
-            className={`pt-[--header-height] rounded-lg md:p-[2vw] flex flex-col h-fit 
+            className={`mt-[--header-height] rounded-lg md:p-[2vw] flex flex-col h-fit 
           gap-y-5`}
           >
             <div>

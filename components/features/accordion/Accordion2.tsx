@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { questions as data } from "./data/question";
 
@@ -17,12 +17,15 @@ const Accordion2 = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto my-8 space-y-4">
+    <div className="w-full mx-auto my-8 space-y-4">
       {data.map((item, index) => (
-        <div key={index} className="border border-gray-300 rounded-lg">
+        <div
+          key={index}
+          className="border border-[--border-color-secondary] rounded-lg"
+        >
           <button
             onClick={() => handleToggle(index)}
-            className="w-full p-4 text-left bg-gray-200 focus:outline-none flex justify-between items-center"
+            className="w-full p-4 text-left  focus:outline-none flex justify-between items-center"
           >
             <span>{item.question}</span>
             <span>{activeIndices.includes(index) ? "-" : "+"}</span>
@@ -32,7 +35,7 @@ const Accordion2 = () => {
               activeIndices.includes(index) ? "max-h-screen" : "max-h-0"
             }`}
           >
-            <div className="p-4 bg-white">{item.answer}</div>
+            <div className="p-4">{item.answer}</div>
           </div>
         </div>
       ))}

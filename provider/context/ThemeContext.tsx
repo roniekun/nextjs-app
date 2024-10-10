@@ -99,7 +99,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   // Saving the theme to local storage
   useEffect(() => {
-    document.body.setAttribute("theme", theme);
+    // document.body.setAttribute("theme", theme);
     localStorage.setItem("theme", JSON.stringify(theme));
   }, [theme]);
 
@@ -116,7 +116,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
         loadedTheme,
       }}
     >
-      <div className={`theme ${theme}`}>{children}</div>
+      <div className={`theme ${theme} transition-all duration-300`}>
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };
