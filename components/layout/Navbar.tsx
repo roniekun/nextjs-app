@@ -9,6 +9,7 @@ import { useMenu } from "@/provider/context/MenuContext";
 import { useEffect, useState } from "react";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
+import gsap from "gsap";
 
 export default function Navbar() {
   const { isOpenSearch } = useSearch();
