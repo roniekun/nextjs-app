@@ -51,14 +51,13 @@ export default function Navbar() {
       <nav
         className={`${
           theme === "dark"
-            ? "bg-[--bg-dark] text-[--text-light-color-primary]"
-            : "bg-[--bg-light] text-[--text-dark-color-primary]"
-        } navbar flex overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
+            ? "bg-[--background-dark] text-[--text-light-color-primary]"
+            : "bg-[--background-light] text-[--text-dark-color-primary]"
+        } navbar flex justify-between items-center overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
       >
         {!isOpenSearch && isVisible && (
           <div
-            className={`mt-[--header-height] lg:max-w-7xl rounded-lg md:p-[2vw] w-auto flex flex-col h-fit 
-          gap-y-5`}
+            className={`mt-[--header-height] lg:max-w-7xl rounded-lg md:p-[2vw] w-full relative flex flex-col h-fit gap-y-5`}
           >
             <div>
               <h1 className=" font-medium uppercase my-1">Navigations</h1>
