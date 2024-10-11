@@ -13,10 +13,16 @@ import { contentData } from "@/data/content-data";
 import gsap from "gsap";
 
 export default function Navbar() {
-  const { isOpenSearch } = useSearch();
+  const { isOpenSearch, setOpenSearch } = useSearch();
   const { theme } = useTheme();
   const { isToggleMenu } = useMenu();
   const [isVisible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (isToggleMenu) {
+      setOpenSearch(false);
+    }
+  }, [isToggleMenu]);
 
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
@@ -49,7 +55,7 @@ export default function Navbar() {
             : "bg-[--background-light] text-neutral-900"
         } navbar flex justify-between items-start overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
       >
-        {!isOpenSearch && isToggleMenu && isVisible && (
+        {isToggleMenu && isVisible && (
           <div
             className={`mt-[--header-height] lg:max-w-7xl p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
           >
@@ -73,7 +79,7 @@ export default function Navbar() {
           </div>
         )}
 
-        {isVisible && isOpenSearch && isToggleMenu && (
+        {isVisible && isOpenSearch && (
           <div className="mt-[--header-height] ">
             <Search placeholder="Search..." contentData={contentData} />
           </div>
