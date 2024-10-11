@@ -18,12 +18,6 @@ export default function Navbar() {
   const { isToggleMenu } = useMenu();
   const [isVisible, setVisible] = useState(false);
 
-  // useLayoutEffect(() => {
-  //   if (isOpenSearch) {
-  //     setToggleMenu(true);
-  //   }
-  // }, [isOpenSearch]);
-
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
       setTimeout(() => {
@@ -32,7 +26,7 @@ export default function Navbar() {
       gsap.to(".navbar", {
         height: "100vh",
         duration: 0.3,
-        ease: "cubic-bezier(0.76, 0, 0.24, 1)", //https://easings.net/#easeInOutQuart
+        ease: "power2.out", //https://easings.net/#easeInOutQuart
       });
     } else {
       setTimeout(() => {
@@ -55,9 +49,9 @@ export default function Navbar() {
             : "bg-[--background-light] text-neutral-900"
         } navbar flex justify-between items-start overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
       >
-        {!isOpenSearch && isVisible && (
+        {!isOpenSearch && isToggleMenu && isVisible && (
           <div
-            className={`mt-[--header-height] lg:max-w-7xl rounded-lg p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
+            className={`mt-[--header-height] lg:max-w-7xl p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
           >
             <div>
               <h1 className=" font-medium uppercase my-1">Navigations</h1>
@@ -79,7 +73,7 @@ export default function Navbar() {
           </div>
         )}
 
-        {isVisible && isOpenSearch && (
+        {isVisible && isOpenSearch && isToggleMenu && (
           <div className="mt-[--header-height] ">
             <Search placeholder="Search..." contentData={contentData} />
           </div>
