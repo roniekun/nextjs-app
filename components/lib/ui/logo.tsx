@@ -6,7 +6,7 @@ import { useLayout } from "@/provider/context/LayoutContext";
 const Logo = () => {
   const { isMobile } = useLayout();
   return (
-    <Container className="p-0 m-1 font-medium uppercase">
+    <Container className="p-0 m-1 font-medium uppercase leading-tight">
       {isMobile ? (
         <Link href="/">
           R<br /> B

@@ -47,17 +47,17 @@ export default function Navbar() {
   return (
     <PageTransitionLayout>
       <nav
-        className={`navbar flex fixed left-0 top-0 w-screen h-0 text-neutral-50 bg-neutral-950 z-10`}
+        className={`navbar flex overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
       >
         {!isOpenSearch && isVisible && (
           <Container
-            className={`mt-[--header-height] max-w-7xl rounded-lg md:p-[2vw] flex flex-col h-fit 
+            className={`mt-[--header-height] max-w-7xl rounded-lg md:p-[2vw] w-auto flex flex-col h-fit 
           gap-y-5`}
           >
             <div>
               <h1 className=" font-medium uppercase my-1">Navigations</h1>
               <ul>
-                <Links className="text-lg hover:text-green-500" />
+                <Links className="text-3xl" />
               </ul>
             </div>
             <div className="flex flex-col flex-1 ">
@@ -65,7 +65,7 @@ export default function Navbar() {
                 Socials
               </h1>
               <ul>
-                <Social className="text-lg" />
+                <Social className="text-3xl" />
               </ul>
             </div>
             <div className="flex flex-col flex-1">
