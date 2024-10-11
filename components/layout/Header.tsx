@@ -12,7 +12,6 @@ const Header = () => {
 
   const handleCLickSearch = () => {
     setOpenSearch((prevState) => !prevState);
-    setToggleMenu((prevState) => !prevState);
   };
 
   return (

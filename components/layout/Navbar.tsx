@@ -6,15 +6,21 @@ import ToggleTheme from "../lib/ui/toggle-theme";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
 import gsap from "gsap";
 
 export default function Navbar() {
   const { isOpenSearch } = useSearch();
-  const { isToggleMenu } = useMenu();
+  const { isToggleMenu, setToggleMenu } = useMenu();
   const [isVisible, setVisible] = useState(false);
+
+  // useLayoutEffect(() => {
+  //   if (isOpenSearch) {
+  //     setToggleMenu(true);
+  //   }
+  // }, [isOpenSearch]);
 
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
@@ -43,9 +49,9 @@ export default function Navbar() {
       <nav
         className={`navbar flex fixed left-0 top-0 w-screen h-0 text-neutral-50 bg-neutral-950 z-10`}
       >
-        {!isOpenSearch && isToggleMenu && isVisible && (
+        {!isOpenSearch && isVisible && (
           <Container
-            className={`mt-[--header-height] rounded-lg md:p-[2vw] flex flex-col h-fit 
+            className={`mt-[--header-height] max-w-7xl rounded-lg md:p-[2vw] flex flex-col h-fit 
           gap-y-5`}
           >
             <div>
@@ -68,7 +74,7 @@ export default function Navbar() {
           </Container>
         )}
 
-        {isVisible && isOpenSearch && isToggleMenu && (
+        {isVisible && isOpenSearch && (
           <Container>
             <Search placeholder="Search..." contentData={contentData} />
           </Container>

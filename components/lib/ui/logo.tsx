@@ -1,21 +1,23 @@
 "use client";
-import { DataContext } from "@/provider/context/DataContext";
 import Link from "next/link";
-import { useContext } from "react";
 import Container from "./container";
+import { useLayout } from "@/provider/context/LayoutContext";
 
 const Logo = () => {
-  const { isToggleMenu } = useContext(DataContext);
+  const { isMobile } = useLayout();
   return (
-    <>
-      <Container className="p-0">
-        {!isToggleMenu && (
-          <Link href="/" className="m-1 font-medium">
-            Ronie Benitez
-          </Link>
-        )}
-      </Container>
-    </>
+    <Container className="p-0 m-1 font-medium uppercase">
+      {isMobile ? (
+        <Link href="/">
+          R<br /> B
+        </Link>
+      ) : (
+        <Link href="/">
+          RONIE
+          <br /> BENITEZ
+        </Link>
+      )}
+    </Container>
   );
 };
 
