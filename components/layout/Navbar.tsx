@@ -51,8 +51,8 @@ export default function Navbar() {
       <nav
         className={`${
           theme === "dark"
-            ? "bg-[--background-dark] text-[--text-light-color-primary]"
-            : "bg-[--background-light] text-[--text-dark-color-primary]"
+            ? "bg-[--background-dark] text-neutral-100"
+            : "bg-[--background-light] text-neutral-900"
         } navbar flex justify-between items-center overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
       >
         {!isOpenSearch && isVisible && (
