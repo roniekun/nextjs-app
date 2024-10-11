@@ -6,14 +6,16 @@ import ToggleTheme from "../lib/ui/toggle-theme";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "@/provider/context/ThemeContext";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
 import gsap from "gsap";
 
 export default function Navbar() {
   const { isOpenSearch } = useSearch();
-  const { isToggleMenu, setToggleMenu } = useMenu();
+  const { theme } = useTheme();
+  const { isToggleMenu } = useMenu();
   const [isVisible, setVisible] = useState(false);
 
   // useLayoutEffect(() => {
@@ -47,11 +49,15 @@ export default function Navbar() {
   return (
     <PageTransitionLayout>
       <nav
-        className={`navbar flex overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
+        className={`${
+          theme === "dark"
+            ? "bg-[--bg-dark] text-[--text-light-color-primary]"
+            : "bg-[--bg-light] text-[--text-dark-color-primary]"
+        } navbar flex overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
       >
         {!isOpenSearch && isVisible && (
-          <Container
-            className={`mt-[--header-height] max-w-7xl rounded-lg md:p-[2vw] w-auto flex flex-col h-fit 
+          <div
+            className={`mt-[--header-height] lg:max-w-7xl rounded-lg md:p-[2vw] w-auto flex flex-col h-fit 
           gap-y-5`}
           >
             <div>
@@ -71,7 +77,7 @@ export default function Navbar() {
             <div className="flex flex-col flex-1">
               <ToggleTheme />
             </div>
-          </Container>
+          </div>
         )}
 
         {isVisible && isOpenSearch && (
