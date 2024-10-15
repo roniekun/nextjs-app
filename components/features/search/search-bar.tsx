@@ -65,7 +65,7 @@ const SearchBar: React.FC<SearchProps> = ({
         setInFocus(true);
       }
     }, 300),
-    [contentData, searchItems]
+    [contentData, searchItems, isInFocus]
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {

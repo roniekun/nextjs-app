@@ -1,12 +1,11 @@
 "use client";
 import Links from "../lib/links";
 import Social from "../lib/social";
-import Container from "../lib/ui/container";
 import ToggleTheme from "../lib/ui/toggle-theme";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useTheme } from "@/provider/context/ThemeContext";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
@@ -17,6 +16,7 @@ export default function Navbar() {
   const { theme } = useTheme();
   const { isToggleMenu } = useMenu();
   const [isVisible, setVisible] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (isToggleMenu) {
@@ -26,43 +26,48 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
-      setTimeout(() => {
-        setVisible(true);
-      }, 300);
       gsap.to(".navbar", {
-        height: "100vh",
-        duration: 0.3,
-        ease: "power2.out", //https://easings.net/#easeInOutQuart
+        display: "flex",
+        onComplete: () => {
+          gsap.to(".navbar", {
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out", //https://easings.net/#easeInOutQuart,
+          });
+        },
       });
     } else {
-      setTimeout(() => {
-        setVisible(false);
-      }, 300);
       gsap.to(".navbar", {
-        height: 0,
+        opacity: 0,
         duration: 0.3,
         ease: "cubic-bezier(0.76, 0, 0.24, 1)",
+        onComplete: () => {
+          if (navRef.current) {
+            navRef.current.style.display = "none";
+          }
+        },
       });
     }
-  }, [isOpenSearch, isToggleMenu]);
+  }, [isOpenSearch, isToggleMenu, navRef]);
 
   return (
     <PageTransitionLayout>
       <nav
+        ref={navRef}
         className={`${
           theme === "dark"
             ? "bg-[--background-dark] text-neutral-100"
             : "bg-[--background-light] text-neutral-900"
-        } navbar flex justify-between items-start overflow-clip fixed left-0 top-0 w-screen h-0 z-10`}
+        } navbar justify-between items-start overflow-clip hidden fixed left-0 top-0 w-screen opacity-0 z-10`}
       >
-        {isToggleMenu && isVisible && (
+        {isToggleMenu && (
           <div
             className={`mt-[--header-height] lg:max-w-7xl p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
           >
             <div>
               <h1 className=" font-medium uppercase my-1">Navigations</h1>
               <ul>
-                <Links className="text-3xl" />
+                <Links className="text-3xl font-medium" />
               </ul>
             </div>
             <div className="flex flex-col flex-1 ">
@@ -79,7 +84,7 @@ export default function Navbar() {
           </div>
         )}
 
-        {isVisible && isOpenSearch && (
+        {isOpenSearch && (
           <div className="mt-[--header-height] ">
             <Search placeholder="Search..." contentData={contentData} />
           </div>

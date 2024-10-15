@@ -1,9 +1,9 @@
 // pages/form.tsx
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { z } from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod/src/zod";
 
 // Define a Zod schema for form validation
 const schema = z.object({
