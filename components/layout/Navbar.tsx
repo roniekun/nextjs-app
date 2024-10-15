@@ -10,12 +10,10 @@ import { useTheme } from "@/provider/context/ThemeContext";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
 import gsap from "gsap";
-
 export default function Navbar() {
   const { isOpenSearch, setOpenSearch } = useSearch();
   const { theme } = useTheme();
   const { isToggleMenu } = useMenu();
-  const [isVisible, setVisible] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -29,7 +27,7 @@ export default function Navbar() {
       gsap.to(".navbar", {
         display: "flex",
         onComplete: () => {
-          gsap.to(".navbar", {
+          gsap.to(".container", {
             opacity: 1,
             duration: 0.3,
             ease: "power2.out", //https://easings.net/#easeInOutQuart,
@@ -37,10 +35,10 @@ export default function Navbar() {
         },
       });
     } else {
-      gsap.to(".navbar", {
+      gsap.to(".container", {
         opacity: 0,
         duration: 0.3,
-        ease: "cubic-bezier(0.76, 0, 0.24, 1)",
+        ease: "power2.out",
         onComplete: () => {
           if (navRef.current) {
             navRef.current.style.display = "none";
@@ -56,39 +54,41 @@ export default function Navbar() {
         ref={navRef}
         className={`${
           theme === "dark"
-            ? "bg-[--background-dark] text-neutral-100"
+            ? "bg-[--background-dark] text-neutral-200"
             : "bg-[--background-light] text-neutral-900"
-        } navbar justify-between items-start overflow-clip hidden fixed left-0 top-0 w-screen opacity-0 z-10`}
+        } navbar justify-between items-start overflow-clip hidden fixed h-[100vh] left-0 top-0 w-screen z-10`}
       >
-        {isToggleMenu && (
-          <div
-            className={`mt-[--header-height] lg:max-w-7xl p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
-          >
-            <div>
-              <h1 className=" font-medium uppercase my-1">Navigations</h1>
-              <ul>
-                <Links className="text-3xl font-medium" />
-              </ul>
+        <div className="container opacity-0">
+          {isToggleMenu && (
+            <div
+              className={`mt-[--header-height] lg:max-w-7xl p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
+            >
+              <div>
+                <h1 className=" font-medium uppercase my-1">Navigations</h1>
+                <ul>
+                  <Links className="text-3xl font-medium" />
+                </ul>
+              </div>
+              <div className="flex flex-col flex-1 ">
+                <h1 className="w-full relative uppercase font-medium my-1">
+                  Socials
+                </h1>
+                <ul>
+                  <Social className="text-3xl" />
+                </ul>
+              </div>
+              <div className="flex flex-col flex-1">
+                <ToggleTheme />
+              </div>
             </div>
-            <div className="flex flex-col flex-1 ">
-              <h1 className="w-full relative uppercase font-medium my-1">
-                Socials
-              </h1>
-              <ul>
-                <Social className="text-3xl" />
-              </ul>
-            </div>
-            <div className="flex flex-col flex-1">
-              <ToggleTheme />
-            </div>
-          </div>
-        )}
+          )}
 
-        {isOpenSearch && (
-          <div className="mt-[--header-height] ">
-            <Search placeholder="Search..." contentData={contentData} />
-          </div>
-        )}
+          {isOpenSearch && (
+            <div className="mt-[--header-height] ">
+              <Search placeholder="Search..." contentData={contentData} />
+            </div>
+          )}
+        </div>
       </nav>
     </PageTransitionLayout>
   );
