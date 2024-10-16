@@ -11,11 +11,12 @@ import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
+import Button from "../lib/ui/button";
 
 export default function Navbar() {
   const { isOpenSearch, setOpenSearch } = useSearch();
   const { theme } = useTheme();
-  const { isToggleMenu } = useMenu();
+  const { isToggleMenu, setToggleMenu } = useMenu();
   // const [isVisible, setVisible] = useState(false)
   const navRef = useRef<HTMLElement | null>(null);
 
@@ -61,6 +62,11 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-10`}
     >
+      <Button
+        className="place-self-end uppercase"
+        name="close"
+        handleClick={() => setToggleMenu((prevState) => !prevState)}
+      />
       <div>
         {isToggleMenu && (
           <div
@@ -80,12 +86,12 @@ export default function Navbar() {
             <div className="flex flex-col flex-1 ">
               <h1
                 style={{ fontFamily: "Montreal Mono, sans-serif" }}
-                className="w-full relative uppercase font-medium my-1"
+                className="w-full relative uppercase font-semibold my-1"
               >
                 Socials
               </h1>
               <ul>
-                <Social className="text-3xl font-medium uppercase" />
+                <Social className="text-3xl font-semibold uppercase" />
               </ul>
             </div>
             <div className="flex flex-col flex-1">
