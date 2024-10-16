@@ -18,8 +18,8 @@ const ToggleTheme: React.FC<Props> = ({ className }) => {
         onClick={toggleThemeFn}
         className="h-fit justify-center items-centerflex gap-1 whitespace-nowrap flex-nowrap uppercase"
       >
-        {isDesktop &&
-          (theme === "dark" ? "Turn-off NightMode" : "Turn-on NigthMode")}
+        {/* {isDesktop &&
+          (theme === "dark" ? "Turn-off NightMode" : "Turn-on NigthMode")} */}
         <DarkModeIcon />
       </button>
     </div>

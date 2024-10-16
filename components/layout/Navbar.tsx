@@ -2,10 +2,9 @@
 import Links from "../lib/links";
 import Social from "../lib/social";
 import ToggleTheme from "../lib/ui/toggle-theme";
-import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTheme } from "@/provider/context/ThemeContext";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
@@ -72,7 +71,7 @@ export default function Navbar() {
           <div
             className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
           >
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center flex-col">
               <h1
                 style={{ fontFamily: "Montreal Mono, sans-serif" }}
                 className=" font-medium uppercase my-1"
@@ -97,12 +96,6 @@ export default function Navbar() {
             <div className="flex flex-col flex-1">
               <ToggleTheme />
             </div>
-          </div>
-        )}
-
-        {isOpenSearch && (
-          <div className="mt-[--header-height] ">
-            <Search placeholder="Search..." contentData={contentData} />
           </div>
         )}
       </div>

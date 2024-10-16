@@ -7,10 +7,11 @@ const Header = () => {
   return (
     <header
       className={`header backdrop-blur-lg overflow-hidden h-[--header-height] 
-         bg-transparent flex flex-col justify-center w-full sticky top-0`}
+         bg-transparent flex flex-col justify-center w-full sticky z-10 top-0`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
+
         <Menu />
       </Container>
     </header>
