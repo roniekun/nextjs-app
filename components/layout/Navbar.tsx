@@ -60,18 +60,18 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col`}
     >
-      <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
+      <div className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
         <Button
           className="uppercase bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
           name="close"
           handleClick={() => setToggleMenu((prevState) => !prevState)}
         />
-      </Container>
-      <Container
-        className={`transition-all duration-300 p-0 px-[5vw] w-full relative flex flex-col h-fit gap-y-5 flex-1`}
+      </div>
+      <div
+        className={`transition-all duration-300 p-0 px-[5vw] w-full relative flex flex-col h-[--hero-height]`}
       >
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-5">
           <h1
             style={{ fontFamily: "Montreal Mono, sans-serif" }}
             className=" font-medium uppercase my-1"
@@ -82,7 +82,7 @@ export default function Navbar() {
             <Links className="text-3xl font-semibold uppercase" />
           </ul>
         </div>
-        <div className="flex flex-col flex-1 ">
+        <div className="flex flex-col">
           <h1
             style={{ fontFamily: "Montreal Mono, sans-serif" }}
             className="w-full relative uppercase font-medium  my-1"
@@ -93,7 +93,7 @@ export default function Navbar() {
             <Social className="text-3xl font-semibold uppercase" />
           </ul>
         </div>
-      </Container>
+      </div>
     </nav>
   );
 }
