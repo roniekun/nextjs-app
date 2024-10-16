@@ -6,8 +6,7 @@ import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
 import { useEffect, useRef } from "react";
 import { useTheme } from "@/provider/context/ThemeContext";
-import Search from "../common/Search";
-import { contentData } from "@/data/content-data";
+import Container from "../lib/ui/container";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import Button from "../lib/ui/button";
@@ -61,44 +60,46 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col`}
     >
-      <Button
-        className="self end uppercase"
-        name="close"
-        handleClick={() => setToggleMenu((prevState) => !prevState)}
-      />
-      <div className="flex-1">
-        {isToggleMenu && (
-          <div
-            className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
+      <Container>
+        <Button
+          className="uppercase bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
+        rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
+          name="close"
+          handleClick={() => setToggleMenu((prevState) => !prevState)}
+        />
+      </Container>
+      <Container
+        className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
+      >
+        <div className="flex flex-col">
+          <h1
+            style={{ fontFamily: "Montreal Mono, sans-serif" }}
+            className=" font-medium uppercase my-1"
           >
-            <div className="flex justify-center items-center flex-col">
-              <h1
-                style={{ fontFamily: "Montreal Mono, sans-serif" }}
-                className=" font-medium uppercase my-1"
-              >
-                Navigations
-              </h1>
-              <ul>
-                <Links className="text-3xl font-semibold uppercase" />
-              </ul>
-            </div>
-            <div className="flex flex-col flex-1 ">
-              <h1
-                style={{ fontFamily: "Montreal Mono, sans-serif" }}
-                className="w-full relative uppercase font-medium  my-1"
-              >
-                Socials
-              </h1>
-              <ul>
-                <Social className="text-3xl font-semibold uppercase" />
-              </ul>
-            </div>
-            <div className="flex flex-col flex-1">
-              <ToggleTheme />
-            </div>
-          </div>
-        )}
-      </div>
+            Navigations
+          </h1>
+          <ul>
+            <Links className="text-3xl font-semibold uppercase" />
+          </ul>
+        </div>
+        <div className="flex flex-col flex-1 ">
+          <h1
+            style={{ fontFamily: "Montreal Mono, sans-serif" }}
+            className="w-full relative uppercase font-medium  my-1"
+          >
+            Socials
+          </h1>
+          <ul>
+            <Social className="text-3xl font-semibold uppercase" />
+          </ul>
+        </div>
+        <div className="flex flex-col flex-1">
+          <ToggleTheme
+            className="uppercase"
+            label={theme === "dark" ? "dark mode" : "light mode"}
+          />
+        </div>
+      </Container>
     </nav>
   );
 }
