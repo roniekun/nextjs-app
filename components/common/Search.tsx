@@ -1,10 +1,11 @@
 "use client";
 import SearchBar from "../features/search/search-bar";
-import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import Container from "../lib/ui/container";
 import { IContentData } from "@/data/content-data";
 import { useEffect, useRef } from "react";
 import { useSearch } from "@/provider/context/SearchContext";
+import gsap from "gsap";
+
 interface Props {
   contentData: IContentData[];
   placeholder: string;
