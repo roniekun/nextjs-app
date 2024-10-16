@@ -16,6 +16,7 @@ export default function Navbar() {
   const { isOpenSearch, setOpenSearch } = useSearch();
   const { theme } = useTheme();
   const { isToggleMenu } = useMenu();
+  // const [isVisible, setVisible] = useState(false)
   const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -60,43 +61,45 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-10`}
     >
-      {isToggleMenu && (
-        <div
-          className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
-        >
-          <div>
-            <h1
-              style={{ fontFamily: "Montreal Mono, sans-serif" }}
-              className=" font-medium uppercase my-1"
-            >
-              Navigations
-            </h1>
-            <ul>
-              <Links className="text-3xl font-medium uppercase" />
-            </ul>
+      <div>
+        {isToggleMenu && (
+          <div
+            className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
+          >
+            <div>
+              <h1
+                style={{ fontFamily: "Montreal Mono, sans-serif" }}
+                className=" font-medium uppercase my-1"
+              >
+                Navigations
+              </h1>
+              <ul>
+                <Links className="text-3xl font-medium uppercase" />
+              </ul>
+            </div>
+            <div className="flex flex-col flex-1 ">
+              <h1
+                style={{ fontFamily: "Montreal Mono, sans-serif" }}
+                className="w-full relative uppercase font-medium my-1"
+              >
+                Socials
+              </h1>
+              <ul>
+                <Social className="text-3xl font-medium uppercase" />
+              </ul>
+            </div>
+            <div className="flex flex-col flex-1">
+              <ToggleTheme />
+            </div>
           </div>
-          <div className="flex flex-col flex-1 ">
-            <h1
-              style={{ fontFamily: "Montreal Mono, sans-serif" }}
-              className="w-full relative uppercase font-medium my-1"
-            >
-              Socials
-            </h1>
-            <ul>
-              <Social className="text-3xl font-medium uppercase" />
-            </ul>
-          </div>
-          <div className="flex flex-col flex-1">
-            <ToggleTheme />
-          </div>
-        </div>
-      )}
+        )}
 
-      {isOpenSearch && (
-        <div className="mt-[--header-height] ">
-          <Search placeholder="Search..." contentData={contentData} />
-        </div>
-      )}
+        {isOpenSearch && (
+          <div className="mt-[--header-height] ">
+            <Search placeholder="Search..." contentData={contentData} />
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
