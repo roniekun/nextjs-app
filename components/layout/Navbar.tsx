@@ -60,19 +60,19 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-20`}
+      } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col`}
     >
       <Button
         className="self end uppercase"
         name="close"
         handleClick={() => setToggleMenu((prevState) => !prevState)}
       />
-      <div>
+      <div className="flex-1">
         {isToggleMenu && (
           <div
             className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
           >
-            <div className="flex justif-center items-center">
+            <div className="flex justify-center items-center">
               <h1
                 style={{ fontFamily: "Montreal Mono, sans-serif" }}
                 className=" font-medium uppercase my-1"

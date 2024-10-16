@@ -2,18 +2,21 @@
 import { useTheme } from "@/provider/context/ThemeContext";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useLayout } from "@/provider/context/LayoutContext";
+import { twMerge } from "tailwind-merge";
 
-export default function ToggleTheme() {
+type Props = {
+  className?: string;
+};
+
+const ToggleTheme: React.FC<Props> = ({ className }) => {
   const { toggleThemeFn, theme } = useTheme();
   const { isDesktop } = useLayout();
   return (
-    <div
-      className={`w-fit aspect-square border-[--border-color-secondary] flex m-1 border `}
-    >
+    <div className={twMerge(`w-fit aspect-square flex mx-1  `, className)}>
       <button
         type="button"
         onClick={toggleThemeFn}
-        className="flex gap-1 whitespace-nowrap flex-nowrap"
+        className="h-fit justify-center items-centerflex gap-1 whitespace-nowrap flex-nowrap uppercase"
       >
         {isDesktop &&
           (theme === "dark" ? "Turn-off NightMode" : "Turn-on NigthMode")}
@@ -21,4 +24,5 @@ export default function ToggleTheme() {
       </button>
     </div>
   );
-}
+};
+export default ToggleTheme;

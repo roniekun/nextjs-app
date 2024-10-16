@@ -11,7 +11,7 @@ const Banner = () => {
         </h3>
       </div>
       <TextSlider title="Available for freelance work - Available for freelance work - Available for freelance work - Available for freelance work - Available for freelance work -" />
-      <ToggleTheme />
+      <ToggleTheme className="h-fit" />
     </div>
   );
 };
