@@ -69,7 +69,7 @@ export default function Navbar() {
         />
       </Container>
       <Container
-        className={`transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5 flex-1`}
+        className={`transition-all duration-300 p-0 px-[5vw] w-full relative flex flex-col h-fit gap-y-5 flex-1`}
       >
         <div className="flex flex-col">
           <h1
@@ -93,7 +93,7 @@ export default function Navbar() {
             <Social className="text-3xl font-semibold uppercase" />
           </ul>
         </div>
-        <Container className="flex flex-col flex-1">
+        <Container className="flex flex-col p-0 px-[5vw]">
           <ToggleTheme
             className="uppercase"
             label={theme === "dark" ? "dark mode" : "light mode"}

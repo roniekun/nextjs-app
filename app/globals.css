@@ -27,7 +27,7 @@
 
 @media (min-width: 1025px) {
   :root {
-    --header-height: 94px;
+    --header-height: 76px;
     --hero-height: calc(100vh - var(--header-height));
   }
 }
