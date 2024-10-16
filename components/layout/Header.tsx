@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <header
       className={`header backdrop-blur-lg overflow-hidden h-[--header-height] 
-         bg-transparent flex flex-col justify-center z-20 top-0 w-full fixed`}
+         bg-transparent flex flex-col justify-center z-20 w-full sticky`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
