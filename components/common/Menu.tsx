@@ -17,8 +17,8 @@ const Menu = () => {
       <Button
         size="md"
         name="menu"
-        className=" bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
-         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300"
+        className="uppercase bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
+         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         handleClick={handleClick}
       />
     </div>

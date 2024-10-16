@@ -60,10 +60,10 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-10`}
+      } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-20`}
     >
       <Button
-        className="place-self-end uppercase"
+        className="self end uppercase"
         name="close"
         handleClick={() => setToggleMenu((prevState) => !prevState)}
       />
@@ -72,7 +72,7 @@ export default function Navbar() {
           <div
             className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
           >
-            <div>
+            <div className="flex justif-center items-center">
               <h1
                 style={{ fontFamily: "Montreal Mono, sans-serif" }}
                 className=" font-medium uppercase my-1"
@@ -80,13 +80,13 @@ export default function Navbar() {
                 Navigations
               </h1>
               <ul>
-                <Links className="text-3xl font-medium uppercase" />
+                <Links className="text-3xl font-semibold uppercase" />
               </ul>
             </div>
             <div className="flex flex-col flex-1 ">
               <h1
                 style={{ fontFamily: "Montreal Mono, sans-serif" }}
-                className="w-full relative uppercase font-semibold my-1"
+                className="w-full relative uppercase font-medium  my-1"
               >
                 Socials
               </h1>
