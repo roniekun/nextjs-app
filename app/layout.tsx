@@ -23,7 +23,7 @@ export default function RootLayout({
         <LocalProvider>
           <main
             className="flex flex-col p-0"
-            style={{ fontFamily: "Neue, sans-serif" }}
+            style={{ fontFamily: "Mori, sans-serif" }}
           >
             <ShareModal />
             <Header />

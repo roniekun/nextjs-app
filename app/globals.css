@@ -86,30 +86,25 @@ body {
 }
 
 /* fonts */
+
 @font-face {
-  font-family: "Neue";
-  src: url("/fonts/PPNeueMontreal-thin.otf") format("opentype");
-  font-weight: 100; /* Thin */
+  font-family: "Neue Mono";
+  src: url("/fonts/montreal-mono/otf/PPNeueMontrealMono-Medium.otf")
+    format("opentype");
+  font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Neue";
-  src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
-  font-weight: 400; /* Normal */
+  font-family: "Mori";
+  src: url("/fonts/mori/otf/PPMori-Regular.otf") format("opentype");
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Neue";
-  src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
-  font-weight: 500; /* Medium */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Neue";
-  src: url("/fonts/PPNeueMontreal-Bold.otf") format("opentype");
-  font-weight: 700; /* Bold */
+  font-family: "Mori";
+  src: url("/fonts/mori/otf/PPMori-SemiBold.otf") format("opentype");
+  font-weight: 600;
   font-style: normal;
 }

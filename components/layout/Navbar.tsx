@@ -32,7 +32,7 @@ export default function Navbar() {
         onComplete: () => {
           gsap.to(".navbar", {
             height: "100vh",
-            duration: 0.5,
+            duration: 0.7,
             ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           });
         },
@@ -40,7 +40,7 @@ export default function Navbar() {
     } else {
       gsap.to(".navbar", {
         height: 0,
-        duration: 0.5,
+        duration: 0.7,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         onComplete: () => {
           if (navRef.current) {
@@ -60,37 +60,43 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-10`}
     >
-      <PageTransitionLayout>
-        {isToggleMenu && (
-          <div
-            className={`mt-[--header-height] lg:max-w-7xl p-[5vw]  w-full relative flex flex-col h-fit gap-y-5`}
-          >
-            <div>
-              <h1 className=" font-medium uppercase my-1">Navigations</h1>
-              <ul>
-                <Links className="text-3xl font-medium uppercase" />
-              </ul>
-            </div>
-            <div className="flex flex-col flex-1 ">
-              <h1 className="w-full relative uppercase font-medium my-1">
-                Socials
-              </h1>
-              <ul>
-                <Social className="text-3xl font-medium uppercase" />
-              </ul>
-            </div>
-            <div className="flex flex-col flex-1">
-              <ToggleTheme />
-            </div>
+      {isToggleMenu && (
+        <div
+          className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
+        >
+          <div>
+            <h1
+              style={{ fontFamily: "Neue-Mono, sans-serif" }}
+              className=" font-medium uppercase my-1"
+            >
+              Navigations
+            </h1>
+            <ul>
+              <Links className="text-3xl font-medium uppercase" />
+            </ul>
           </div>
-        )}
+          <div className="flex flex-col flex-1 ">
+            <h1
+              style={{ fontFamily: "Neue-Mono, sans-serif" }}
+              className="w-full relative uppercase font-medium my-1"
+            >
+              Socials
+            </h1>
+            <ul>
+              <Social className="text-3xl font-medium uppercase" />
+            </ul>
+          </div>
+          <div className="flex flex-col flex-1">
+            <ToggleTheme />
+          </div>
+        </div>
+      )}
 
-        {isOpenSearch && (
-          <div className="mt-[--header-height] ">
-            <Search placeholder="Search..." contentData={contentData} />
-          </div>
-        )}
-      </PageTransitionLayout>
+      {isOpenSearch && (
+        <div className="mt-[--header-height] ">
+          <Search placeholder="Search..." contentData={contentData} />
+        </div>
+      )}
     </nav>
   );
 }
