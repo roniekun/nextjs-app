@@ -4,11 +4,8 @@ import Container from "./container";
 
 const Logo = () => {
   return (
-    <Container className="p-0 m-1 font-medium uppercase leading-tight">
-      <Link href="/">
-        RONIE
-        <br /> BENITEZ
-      </Link>
+    <Container className="p-0 my-1 font-medium uppercase leading-tight">
+      <Link href="/">ronie-next</Link>
     </Container>
   );
 };
