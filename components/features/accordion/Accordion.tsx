@@ -27,7 +27,7 @@ const Accordion = () => {
           {questions.map((data, idx) => (
             <li
               key={idx}
-              className={`flex flex-col relative  lg:py-5 py-2 overflow-hidden  justify-center 
+              className={`flex flex-col relative lg:py-5 py-2 overflow-hidden  justify-center 
             bg-opacity-15 border-[--border-color-secondary] border-t ${
               idx === 0 && "border-t-0 pt-2"
             } `}
@@ -38,9 +38,7 @@ const Accordion = () => {
                 className="group flex items-center cursor-pointer my-2 justify-between gap-x-5"
               >
                 <p
-                  className={` w-full text-lg font-medium text-left leading-relaxed transition duration-300  ${
-                    isActive[idx] && "text-neutral-900"
-                  }`}
+                  className={` w-full text-lg font-medium text-left leading-relaxed transition duration-300`}
                 >
                   {data.question}
                 </p>

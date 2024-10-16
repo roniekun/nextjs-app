@@ -10,6 +10,8 @@ import { useTheme } from "@/provider/context/ThemeContext";
 import Search from "../common/Search";
 import { contentData } from "@/data/content-data";
 import gsap from "gsap";
+import { CustomEase } from "gsap/CustomEase";
+
 export default function Navbar() {
   const { isOpenSearch, setOpenSearch } = useSearch();
   const { theme } = useTheme();
@@ -22,22 +24,24 @@ export default function Navbar() {
     }
   }, [isToggleMenu]);
 
+  gsap.registerPlugin(CustomEase);
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
       gsap.to(".navbar", {
         display: "flex",
         onComplete: () => {
           gsap.to(".navbar", {
-            opacity: 1,
-            ease: "power2.out", //https://easings.net/#easeInOutQuart,
+            height: "100vh",
+            duration: 0.5,
+            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           });
         },
       });
     } else {
       gsap.to(".navbar", {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.out",
+        height: 0,
+        duration: 0.5,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         onComplete: () => {
           if (navRef.current) {
             navRef.current.style.display = "none";
@@ -54,7 +58,7 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar justify-between items-start overflow-clip hidden fixed h-[100vh] left-0 top-0 w-screen z-10`}
+      } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-10`}
     >
       <PageTransitionLayout>
         {isToggleMenu && (
@@ -64,7 +68,7 @@ export default function Navbar() {
             <div>
               <h1 className=" font-medium uppercase my-1">Navigations</h1>
               <ul>
-                <Links className="text-3xl font-medium" />
+                <Links className="text-3xl font-medium uppercase" />
               </ul>
             </div>
             <div className="flex flex-col flex-1 ">
@@ -72,7 +76,7 @@ export default function Navbar() {
                 Socials
               </h1>
               <ul>
-                <Social className="text-3xl font-medium" />
+                <Social className="text-3xl font-medium uppercase" />
               </ul>
             </div>
             <div className="flex flex-col flex-1">
