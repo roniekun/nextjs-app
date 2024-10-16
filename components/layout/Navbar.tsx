@@ -66,7 +66,7 @@ export default function Navbar() {
         >
           <div>
             <h1
-              style={{ fontFamily: "Neue-Mono, sans-serif" }}
+              style={{ fontFamily: "Montreal Mono, sans-serif" }}
               className=" font-medium uppercase my-1"
             >
               Navigations
@@ -77,7 +77,7 @@ export default function Navbar() {
           </div>
           <div className="flex flex-col flex-1 ">
             <h1
-              style={{ fontFamily: "Neue-Mono, sans-serif" }}
+              style={{ fontFamily: "Montreal Mono, sans-serif" }}
               className="w-full relative uppercase font-medium my-1"
             >
               Socials

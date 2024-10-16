@@ -11,11 +11,10 @@ type Props = {
   title?: string;
 };
 
-const TextSlider = ({ title, speed = 0.1, className }: Props) => {
-  const sliderContainerRef = useRef(null);
-  const sliderRef = useRef(null);
-  const firsttextRef = useRef(null);
-  const secondtextRef = useRef(null);
+const TextSlider: React.FC<Props> = ({ title, speed = 0.1, className }) => {
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const firsttextRef = useRef<HTMLDivElement | null>(null);
+  const secondtextRef = useRef<HTMLDivElement | null>(null);
 
   let xProgress = 0;
   const directionRef = useRef(1);
@@ -27,8 +26,10 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
     if (xProgress > 0) {
       xProgress = -100;
     }
-    gsap.set(firsttextRef.current, { xPercent: xProgress });
-    gsap.set(secondtextRef.current, { xPercent: xProgress });
+    if (firsttextRef && secondtextRef) {
+      gsap.set(firsttextRef.current, { xPercent: xProgress });
+      gsap.set(secondtextRef.current, { xPercent: xProgress });
+    }
     xProgress += speed * directionRef.current;
     requestAnimationFrame(animation);
   };
@@ -36,23 +37,22 @@ const TextSlider = ({ title, speed = 0.1, className }: Props) => {
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     requestAnimationFrame(animation);
-    gsap.to(sliderRef.current, {
-      scrollTrigger: {
-        start: 0,
-        end: window.innerHeight,
-        scrub: 0.25,
-        onUpdate: (e) => {
-          directionRef.current = e.direction * -1;
+    if (sliderRef) {
+      gsap.to(sliderRef.current, {
+        scrollTrigger: {
+          start: 0,
+          end: window.innerHeight,
+          scrub: 0.25,
+          onUpdate: (e) => {
+            directionRef.current = e.direction * -1;
+          },
         },
-      },
-    });
-  }, []);
+      });
+    }
+  }, [sliderRef]);
 
   return (
-    <div
-      ref={sliderContainerRef}
-      className={twMerge("overflow-hidden", className)}
-    >
+    <div className={twMerge("overflow-hidden", className)}>
       <div
         ref={sliderRef}
         className="relative flex whitespace-nowrap w-fit overflow-hidden"
