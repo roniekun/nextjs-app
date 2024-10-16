@@ -60,7 +60,7 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar justify-between items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col`}
     >
-      <Container>
+      <Container className="h-[--header-height] p-0 px-[5vw]">
         <Button
           className="uppercase bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
@@ -69,7 +69,7 @@ export default function Navbar() {
         />
       </Container>
       <Container
-        className={`mt-[--header-height] lg:max-w-7xl px-[5vw] transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5`}
+        className={`transition-all duration-300  w-full relative flex flex-col h-fit gap-y-5 flex-1`}
       >
         <div className="flex flex-col">
           <h1
