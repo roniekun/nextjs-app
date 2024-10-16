@@ -58,7 +58,7 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar justify-start items-start overflow-clip hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col`}
+      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col`}
     >
       <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
         <Button
@@ -93,12 +93,6 @@ export default function Navbar() {
             <Social className="text-3xl font-semibold uppercase" />
           </ul>
         </div>
-        <Container className="flex flex-col p-0 px-[5vw]">
-          <ToggleTheme
-            className="uppercase"
-            label={theme === "dark" ? "dark mode" : "light mode"}
-          />
-        </Container>
       </Container>
     </nav>
   );
