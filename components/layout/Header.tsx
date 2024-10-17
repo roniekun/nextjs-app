@@ -11,7 +11,6 @@ const Header = () => {
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
-
         <Menu />
       </Container>
     </header>
