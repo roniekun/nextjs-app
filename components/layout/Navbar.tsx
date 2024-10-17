@@ -4,11 +4,9 @@ import Social from "../lib/social";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
 import { useEffect, useRef } from "react";
-import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import { useTheme } from "@/provider/context/ThemeContext";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
-import Button from "../lib/ui/button";
 import Container from "../lib/ui/container";
 import { useLayout } from "@/provider/context/LayoutContext";
 

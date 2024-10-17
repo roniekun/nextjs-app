@@ -3,13 +3,14 @@ import { useMenu } from "@/provider/context/MenuContext";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { CustomEase } from "gsap/CustomEase";
 
 const Menu = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
   const { setOpenSearch } = useSearch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [textHeight, setTextHeight] = useState<number>();
+  const [textHeight, setTextHeight] = useState<number>(0);
 
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
@@ -17,19 +18,26 @@ const Menu = () => {
   };
 
   useLayoutEffect(() => {
+    gsap.registerPlugin(CustomEase);
     const buttonHeight = buttonRef.current?.getBoundingClientRect().height;
-    setTextHeight(buttonHeight);
+    console.log(buttonHeight);
+    setTextHeight(buttonHeight ?? 0);
 
     if (sliderRef) {
       gsap.set(sliderRef, { opacity: 1, top: `-${buttonHeight ?? 0 * 2}px` });
     }
 
     if (sliderRef && isToggleMenu && buttonRef) {
-      gsap.to(sliderRef.current, { top: `-${buttonHeight}px`, duration: 0.3 });
+      gsap.to(sliderRef.current, {
+        top: `-${buttonHeight}px`,
+        duration: 0.3,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+      });
     } else {
       gsap.to(sliderRef.current, {
         top: 0,
         duration: 0.3,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         onComplete: () => {
           gsap.set(sliderRef.current, { top: `-${buttonHeight ?? 0 * 2}px` });
         },
@@ -45,10 +53,7 @@ const Menu = () => {
          rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div
-          ref={sliderRef}
-          className="flex flex-col justify-between items-center relative opacity-0"
-        >
+        <div ref={sliderRef} className="flex flex-col relative">
           <p
             style={{ height: `${textHeight}px` }}
             className="flex place-items-center"
