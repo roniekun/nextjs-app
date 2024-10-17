@@ -43,7 +43,7 @@ export default function Navbar() {
       if (contentRef.current) {
         tl.fromTo(
           contentRef.current,
-          { y: 10, opacity: 0 },
+          { y: -10, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.3 },
           "-=.5"
         );
