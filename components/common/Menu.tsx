@@ -25,17 +25,17 @@ const Menu = () => {
 
     if (sliderRef && isToggleMenu && buttonRef) {
       gsap.to(sliderRef.current, {
-        y: `-${buttonHeight}px`,
+        y: `${buttonHeight}px`,
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
       });
     } else {
       gsap.to(sliderRef.current, {
-        y: 0,
+        y: `${buttonHeight ?? 0 * 2}px`,
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         onComplete: () => {
-          gsap.set(sliderRef.current, { y: `-${buttonHeight ?? 0 * 2}px` });
+          gsap.set(sliderRef.current, { y: `-${buttonHeight ?? 0 * 3}px` });
         },
       });
     }
