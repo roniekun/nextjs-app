@@ -14,7 +14,7 @@ export default function Footer() {
             Thinking of a Project?
           </h2>
           <br />
-          <h1 className="text-4xl font-medium uppercase">
+          <h1 className="text-2xl md:text-4xl font-medium uppercase">
             Reach out & Share your visions
           </h1>
           <br />
