@@ -37,7 +37,7 @@ const Accordion2 = () => {
             >
               <button
                 onClick={() => handleToggle(idx)}
-                className="w-full text-left flex justify-between items-center font-medium"
+                className="w-full py-4 px-2 text-left flex justify-between items-center font-medium"
               >
                 <span>{item.question}</span>
                 <div

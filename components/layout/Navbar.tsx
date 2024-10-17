@@ -44,7 +44,13 @@ export default function Navbar() {
         tl.fromTo(
           contentRef.current,
           { y: -10, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.3 }
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+          },
+          "-=.5"
         );
       }
     } else {
@@ -70,33 +76,35 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end rounded-b-md shadow-inner`}
     >
-      <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
-        <Button
-          className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
-        rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
-          name="close"
-          handleClick={() => setToggleMenu((prevState) => !prevState)}
-        />
-      </Container>
-      <div
-        ref={contentRef}
-        className="relative opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
-      >
-        <Container
-          className={`p-0 px-[5vw] relative flex flex-col h-auto text-3xl sm:text-xl `}
+      <Container>
+        <div className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
+          <Button
+            className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
+          rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
+            name="close"
+            handleClick={() => setToggleMenu((prevState) => !prevState)}
+          />
+        </div>
+        <div
+          ref={contentRef}
+          className="relative opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
         >
-          <div className="flex flex-col space-y-5 ">
-            <ul>
-              <Links className="font-medium capitalize leading-normal" />
-            </ul>
+          <div
+            className={`p-0 px-[5vw] relative flex flex-col h-auto text-3xl sm:text-xl `}
+          >
+            <div className="flex flex-col space-y-5 ">
+              <ul>
+                <Links className="font-medium capitalize leading-normal" />
+              </ul>
+            </div>
+            <div className="flex flex-col space-y-5">
+              <ul>
+                <Social className="font-medium capitalize leading-normal" />
+              </ul>
+            </div>
           </div>
-          <div className="flex flex-col space-y-5">
-            <ul>
-              <Social className="font-medium capitalize leading-normal" />
-            </ul>
-          </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </nav>
   );
 }
