@@ -18,8 +18,8 @@ const Menu = () => {
          rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div className="flex flex-col justify-center items-center relative mt-[--header-height]">
-          <AnimatePresence mode="wait">
+        <div className="flex flex-col justify-center items-center relative">
+          <AnimatePresence mode="wait" initial={false}>
             {isToggleMenu && (
               <motion.p
                 initial={{ y: -20 }}
