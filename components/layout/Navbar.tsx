@@ -28,8 +28,9 @@ export default function Navbar() {
 
   gsap.registerPlugin(CustomEase);
   const tl = gsap.timeline();
+
   useEffect(() => {
-    if (isOpenSearch || isToggleMenu) {
+    if (isToggleMenu) {
       tl.to(".navbar", {
         display: "flex",
         onComplete: () => {
@@ -65,7 +66,7 @@ export default function Navbar() {
         },
       });
     }
-  }, [isOpenSearch, isToggleMenu, navRef, isDesktop]);
+  }, [isToggleMenu, navRef, isDesktop, contentRef]);
 
   return (
     <nav
@@ -90,7 +91,7 @@ export default function Navbar() {
           className="relative opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
         >
           <div
-            className={`p-0 px-[5vw] relative flex flex-col h-auto text-3xl sm:text-xl `}
+            className={`p-0 px-[5vw] relative flex flex-col h-auto text-xl md:text-3xl`}
           >
             <div className="flex flex-col space-y-5 ">
               <ul>
