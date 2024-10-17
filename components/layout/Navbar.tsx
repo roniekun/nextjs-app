@@ -69,11 +69,11 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end`}
+      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end rounded-b-md shadow-inner`}
     >
       <div
         ref={contentRef}
-        className="relative lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-5"
+        className="relative lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
       >
         <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
           <Button
@@ -86,14 +86,14 @@ export default function Navbar() {
         <Container
           className={`transition-all duration-300 p-0 px-[5vw] relative flex flex-col h-auto`}
         >
-          <div className="flex flex-col space-y-5">
+          <div className="flex flex-col space-y-5 text-3xl sm:text-xl ">
             <ul>
-              <Links className="text-3xl font-medium capitalize leading-normal" />
+              <Links className="font-medium capitalize leading-normal" />
             </ul>
           </div>
           <div className="flex flex-col space-y-5">
             <ul>
-              <Social className="text-3xl font-medium capitalize leading-normal" />
+              <Social className="font-medium capitalize leading-normal" />
             </ul>
           </div>
         </Container>

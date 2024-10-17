@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import TextSlider from "../lib/ui/text-slider";
 import ToggleTheme from "../lib/ui/toggle-theme";
