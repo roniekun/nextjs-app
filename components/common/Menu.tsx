@@ -25,17 +25,17 @@ const Menu = () => {
 
     if (sliderRef && isToggleMenu && buttonRef) {
       gsap.to(sliderRef.current, {
-        top: `-${buttonHeight}px`,
+        y: `-${buttonHeight}px`,
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
       });
     } else {
       gsap.to(sliderRef.current, {
-        top: 0,
+        y: 0,
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         onComplete: () => {
-          gsap.set(sliderRef.current, { top: `-${buttonHeight ?? 0 * 2}px` });
+          gsap.set(sliderRef.current, { y: `-${buttonHeight ?? 0 * 2}px` });
         },
       });
     }
@@ -51,7 +51,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col -top-2/3 relative transform"
+          className="flex flex-col -translate-y-2/3 relative transform"
         >
           <p
             style={{ height: `${textHeight}px` }}
