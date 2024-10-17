@@ -17,7 +17,8 @@ export default function Navbar() {
   const { theme } = useTheme();
   const { isToggleMenu, setToggleMenu } = useMenu();
   const { isDesktop } = useLayout();
-  const navRef = useRef<HTMLElement | null>(null);
+  const navRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (isToggleMenu) {
@@ -26,9 +27,10 @@ export default function Navbar() {
   }, [isToggleMenu]);
 
   gsap.registerPlugin(CustomEase);
+  const tl = gsap.timeline();
   useEffect(() => {
     if (isOpenSearch || isToggleMenu) {
-      gsap.to(".navbar", {
+      tl.to(".navbar", {
         display: "flex",
         onComplete: () => {
           gsap.to(".navbar", {
@@ -38,6 +40,14 @@ export default function Navbar() {
           });
         },
       });
+      if (contentRef.current) {
+        tl.fromTo(
+          contentRef.current,
+          { y: 10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3 },
+          "-=.5"
+        );
+      }
     } else {
       gsap.to(".navbar", {
         height: 0,
@@ -61,7 +71,10 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end`}
     >
-      <div className="relative lg:max-w-screen-sm flex flex-col h-fit self-end w-full">
+      <div
+        ref={contentRef}
+        className="relative lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-5"
+      >
         <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
           <Button
             className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500

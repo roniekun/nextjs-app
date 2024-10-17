@@ -37,7 +37,7 @@ const Accordion2 = () => {
             >
               <button
                 onClick={() => handleToggle(idx)}
-                className="w-full p-4 text-left flex justify-between items-center"
+                className="w-full p-4 text-left flex justify-between items-center font-medium"
               >
                 <span>{item.question}</span>
                 <GrAdd
@@ -48,12 +48,19 @@ const Accordion2 = () => {
               </button>
               <motion.div
                 animate={{ height: activeIndices.includes(idx) ? "auto" : "0" }}
-                transition={{ ease: [0.87, 0, 0.13, 1], duration: 0.5 }}
-                className={`transition-all duration-300 overflow-hidden ${
-                  activeIndices.includes(idx) ? "max-h-screen" : "max-h-0"
-                }`}
+                transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+                className={`overflow-hidden`}
               >
-                <div className="p-4">{item.answer}</div>
+                <motion.p
+                  initial={{ y: activeIndices.includes(idx) ? "0" : "-5px" }}
+                  animate={{
+                    y: 0,
+                  }}
+                  transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+                  className="p-4"
+                >
+                  {item.answer}
+                </motion.p>
               </motion.div>
             </li>
           ))}
