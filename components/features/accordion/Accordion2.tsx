@@ -30,21 +30,23 @@ const Accordion2 = () => {
           {data.map((item, idx) => (
             <li
               key={idx}
-              className={`flex flex-col relative lg:py-5 py-2 overflow-hidden  justify-center 
+              className={`flex flex-col relative overflow-hidden  justify-center 
             bg-opacity-15 border-[--border-color-secondary] border-t ${
               idx === 0 && "border-t-0 pt-2"
             } `}
             >
               <button
                 onClick={() => handleToggle(idx)}
-                className="w-full p-4 text-left flex justify-between items-center font-medium"
+                className="w-full py-4 px-2 text-left flex justify-between items-center font-medium"
               >
                 <span>{item.question}</span>
-                <GrAdd
-                  className={` flex transition-transform duration-300 text-lg ${
+                <div
+                  className={`flex transition-transform duration-300 text-lg mx-2 rounded-md ${
                     activeIndices.includes(idx) && "rotate-45"
                   }`}
-                />
+                >
+                  <GrAdd />
+                </div>
               </button>
               <motion.div
                 animate={{ height: activeIndices.includes(idx) ? "auto" : "0" }}

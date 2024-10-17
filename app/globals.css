@@ -108,3 +108,17 @@ body {
   font-weight: 600;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Neue Bit";
+  src: url("/fonts/neue-bit/otf/PPNeueBit-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Bit";
+  src: url("/fonts/neue-bit/otf/PPMondwest-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
