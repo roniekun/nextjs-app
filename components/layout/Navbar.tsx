@@ -31,16 +31,13 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isToggleMenu) {
-      tl.to(".navbar", {
-        display: "flex",
-        onComplete: () => {
-          gsap.to(".navbar", {
-            height: isDesktop ? "100vh" : "auto",
-            duration: 1,
-            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-          });
-        },
-      });
+      tl.set(".navbar", { display: "flex" }) // Sets the display instantly
+        .to(".navbar", {
+          height: isDesktop ? "100vh" : "auto",
+          duration: 1,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        });
+
       if (contentRef.current) {
         tl.fromTo(
           contentRef.current,
@@ -51,20 +48,15 @@ export default function Navbar() {
             duration: 0.5,
             ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           },
-          "-=.5"
+          "-=0.5" // Start this animation 0.5 seconds earlier
         );
       }
     } else {
-      gsap.to(".navbar", {
+      tl.to(".navbar", {
         height: 0,
         duration: 1,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        onComplete: () => {
-          if (navRef.current) {
-            navRef.current.style.display = "none";
-          }
-        },
-      });
+      }).set(".navbar", { display: "none" }); // Hide it after shrinking
     }
   }, [isToggleMenu, navRef, isDesktop, contentRef]);
 
