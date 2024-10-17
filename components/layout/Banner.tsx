@@ -8,7 +8,7 @@ const Banner = () => {
   const path = usePathname();
   return (
     <>
-      {path === " /" && (
+      {path === "/" && (
         <div className="w-screen relative flex px-[5vw] py-1 justify-between gap-2 h-fit bg-neutral-950 bg-opacity-10">
           <div className="rounded-md border border-[--border-color-secondary] px-1">
             <h3

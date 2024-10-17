@@ -84,9 +84,9 @@ export default function Navbar() {
           />
         </Container>
         <Container
-          className={`transition-all duration-300 p-0 px-[5vw] relative flex flex-col h-auto`}
+          className={`p-0 px-[5vw] relative flex flex-col h-auto text-3xl sm:text-xl `}
         >
-          <div className="flex flex-col space-y-5 text-3xl sm:text-xl ">
+          <div className="flex flex-col space-y-5 ">
             <ul>
               <Links className="font-medium capitalize leading-normal" />
             </ul>
