@@ -1,5 +1,5 @@
 "use client";
-import Logo from "../lib/ui/logo";
+import Logo from "../common/Logo";
 import Menu from "../common/Menu";
 import Container from "../lib/ui/container";
 

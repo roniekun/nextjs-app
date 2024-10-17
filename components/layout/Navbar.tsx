@@ -59,9 +59,9 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:justify-end`}
+      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end`}
     >
-      <div className="lg:max-w-screen-sm flex flex-col">
+      <div className="lg:max-w-screen-sm flex flex-col h-fit self-end">
         <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
           <Button
             className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
@@ -71,7 +71,7 @@ export default function Navbar() {
           />
         </Container>
         <Container
-          className={`transition-all duration-300 p-0 px-[5vw] w-full relative flex flex-col h-[--hero-height]`}
+          className={`transition-all duration-300 p-0 px-[5vw] w-full relative flex flex-col h-auto`}
         >
           <div className="flex flex-col space-y-5">
             <ul>
