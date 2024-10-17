@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { questions as data } from "./data/question";
+import { motion } from "framer-motion";
+import { GrAdd } from "react-icons/gr";
+import Container from "@/components/lib/ui/container";
 
 const Accordion2 = () => {
   const [activeIndices, setActiveIndices] = useState<(number | null)[]>([]);
@@ -17,29 +20,46 @@ const Accordion2 = () => {
   };
 
   return (
-    <div className="w-full mx-auto my-8 space-y-4">
-      {data.map((item, index) => (
-        <div
-          key={index}
-          className="border border-[--border-color-secondary] rounded-lg"
-        >
-          <button
-            onClick={() => handleToggle(index)}
-            className="w-full p-4 text-left  focus:outline-none flex justify-between items-center"
-          >
-            <span>{item.question}</span>
-            <span>{activeIndices.includes(index) ? "-" : "+"}</span>
-          </button>
-          <div
-            className={`transition-all duration-300 overflow-hidden ${
-              activeIndices.includes(index) ? "max-h-screen" : "max-h-0"
-            }`}
-          >
-            <div className="p-4">{item.answer}</div>
-          </div>
-        </div>
-      ))}
-    </div>
+    <section className="w-full mx-auto my-8 space-y-4">
+      <Container className="flex flex-col h-auto w-full md:px-[10vw]">
+        <h1 className="mt-5 font-semibold md:text-2xl text-xl relative self-center my-10">
+          <span className="">Questions? </span>
+          Answer.
+        </h1>
+        <ul>
+          {data.map((item, idx) => (
+            <li
+              key={idx}
+              className={`flex flex-col relative lg:py-5 py-2 overflow-hidden  justify-center 
+            bg-opacity-15 border-[--border-color-secondary] border-t ${
+              idx === 0 && "border-t-0 pt-2"
+            } `}
+            >
+              <button
+                onClick={() => handleToggle(idx)}
+                className="w-full p-4 text-left flex justify-between items-center"
+              >
+                <span>{item.question}</span>
+                <GrAdd
+                  className={` flex transition-transform duration-300 text-lg ${
+                    activeIndices.includes(idx) && "rotate-45"
+                  }`}
+                />
+              </button>
+              <motion.div
+                animate={{ height: activeIndices.includes(idx) ? "auto" : "0" }}
+                transition={{ ease: [0.87, 0, 0.13, 1], duration: 0.5 }}
+                className={`transition-all duration-300 overflow-hidden ${
+                  activeIndices.includes(idx) ? "max-h-screen" : "max-h-0"
+                }`}
+              >
+                <div className="p-4">{item.answer}</div>
+              </motion.div>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
   );
 };
 
