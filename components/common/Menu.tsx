@@ -23,10 +23,6 @@ const Menu = () => {
     console.log(buttonHeight);
     setTextHeight(buttonHeight ?? 0);
 
-    if (sliderRef) {
-      gsap.set(sliderRef, { opacity: 1, top: `-${buttonHeight ?? 0 * 2}px` });
-    }
-
     if (sliderRef && isToggleMenu && buttonRef) {
       gsap.to(sliderRef.current, {
         top: `-${buttonHeight}px`,
@@ -53,7 +49,10 @@ const Menu = () => {
          rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div ref={sliderRef} className="flex flex-col relative">
+        <div
+          ref={sliderRef}
+          className="flex flex-col -top-2/3 relative transform"
+        >
           <p
             style={{ height: `${textHeight}px` }}
             className="flex place-items-center"
