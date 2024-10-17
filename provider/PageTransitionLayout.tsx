@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -9,6 +10,14 @@ type Props = {
 
 const PageTransitionLayout: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
+
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
+  }, []);
 
   return (
     <AnimatePresence mode={"wait"}>
@@ -18,6 +27,7 @@ const PageTransitionLayout: React.FC<Props> = ({ children }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        className={`${isLoading && "cursor-none"}`}
       >
         {children}
       </motion.div>
