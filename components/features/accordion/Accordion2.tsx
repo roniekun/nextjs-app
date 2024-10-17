@@ -30,9 +30,9 @@ const Accordion2 = () => {
           {data.map((item, idx) => (
             <li
               key={idx}
-              className={`flex flex-col relative overflow-hidden  justify-center 
+              className={`flex flex-col relative overflow-hidden md:py-4 justify-center 
             bg-opacity-15 border-[--border-color-secondary] border-t ${
-              idx === 0 && "border-t-0 pt-2 md:py-5"
+              idx === 0 && "border-t-0 pt-2 "
             } `}
             >
               <button
@@ -56,13 +56,14 @@ const Accordion2 = () => {
                 <AnimatePresence>
                   {activeIndices.includes(idx) && (
                     <motion.p
-                      initial={{ y: "-10px" }}
+                      initial={{ y: "-10px", opacity: 0 }}
                       animate={{
                         y: 0,
+                        opacity: 1,
                       }}
-                      exit={{ y: "-10px" }}
+                      exit={{ y: "-10px", opacity: 0 }}
                       transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
-                      className=" py-4 px-2"
+                      className=" py-4 px-2 opacity-0"
                     >
                       {item.answer}
                     </motion.p>
