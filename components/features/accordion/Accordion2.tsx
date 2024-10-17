@@ -32,7 +32,7 @@ const Accordion2 = () => {
               key={idx}
               className={`flex flex-col relative overflow-hidden  justify-center 
             bg-opacity-15 border-[--border-color-secondary] border-t ${
-              idx === 0 && "border-t-0 pt-2"
+              idx === 0 && "border-t-0 pt-2 md:py-2"
             } `}
             >
               <button
@@ -53,16 +53,19 @@ const Accordion2 = () => {
                 transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
                 className={`overflow-hidden`}
               >
-                <motion.p
-                  initial={{ y: activeIndices.includes(idx) ? "0" : "-5px" }}
-                  animate={{
-                    y: 0,
-                  }}
-                  transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
-                  className=" py-4 px-2"
-                >
-                  {item.answer}
-                </motion.p>
+                {activeIndices.includes(idx) && (
+                  <motion.p
+                    initial={{ y: "-10px" }}
+                    animate={{
+                      y: 0,
+                    }}
+                    exit={{ y: "-10px" }}
+                    transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+                    className=" py-4 px-2"
+                  >
+                    {item.answer}
+                  </motion.p>
+                )}
               </motion.div>
             </li>
           ))}
