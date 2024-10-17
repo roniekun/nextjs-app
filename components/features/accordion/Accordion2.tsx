@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { questions as data } from "./data/question";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { GrAdd } from "react-icons/gr";
 import Container from "@/components/lib/ui/container";
 
@@ -32,7 +32,7 @@ const Accordion2 = () => {
               key={idx}
               className={`flex flex-col relative overflow-hidden  justify-center 
             bg-opacity-15 border-[--border-color-secondary] border-t ${
-              idx === 0 && "border-t-0 pt-2 md:py-2"
+              idx === 0 && "border-t-0 pt-2 md:py-5"
             } `}
             >
               <button
@@ -53,19 +53,21 @@ const Accordion2 = () => {
                 transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
                 className={`overflow-hidden`}
               >
-                {activeIndices.includes(idx) && (
-                  <motion.p
-                    initial={{ y: "-10px" }}
-                    animate={{
-                      y: 0,
-                    }}
-                    exit={{ y: "-10px" }}
-                    transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
-                    className=" py-4 px-2"
-                  >
-                    {item.answer}
-                  </motion.p>
-                )}
+                <AnimatePresence>
+                  {activeIndices.includes(idx) && (
+                    <motion.p
+                      initial={{ y: "-10px" }}
+                      animate={{
+                        y: 0,
+                      }}
+                      exit={{ y: "-10px" }}
+                      transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+                      className=" py-4 px-2"
+                    >
+                      {item.answer}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </motion.div>
             </li>
           ))}
