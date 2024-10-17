@@ -8,7 +8,7 @@ const Banner = () => {
       <div className="rounded-md border border-[--border-color-secondary]">
         <h3
           style={{ fontFamily: "Montreal Mono, sans-serif" }}
-          className="text-green-600 font-bold uppercase whitespace-nowrap h-fit"
+          className="text-green-500 font-bold uppercase whitespace-nowrap h-fit"
         >
           Active now
         </h3>
