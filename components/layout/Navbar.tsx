@@ -44,8 +44,7 @@ export default function Navbar() {
         tl.fromTo(
           contentRef.current,
           { y: -10, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.3 },
-          "-=.5"
+          { y: 0, opacity: 1, duration: 0.3 }
         );
       }
     } else {
@@ -71,18 +70,18 @@ export default function Navbar() {
           : "bg-[--background-light] text-neutral-900"
       } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end rounded-b-md shadow-inner`}
     >
+      <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
+        <Button
+          className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
+        rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
+          name="close"
+          handleClick={() => setToggleMenu((prevState) => !prevState)}
+        />
+      </Container>
       <div
         ref={contentRef}
-        className="relative lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
+        className="relative opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
       >
-        <Container className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
-          <Button
-            className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
-        rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
-            name="close"
-            handleClick={() => setToggleMenu((prevState) => !prevState)}
-          />
-        </Container>
         <Container
           className={`p-0 px-[5vw] relative flex flex-col h-auto text-3xl sm:text-xl `}
         >

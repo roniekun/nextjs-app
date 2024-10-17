@@ -37,7 +37,7 @@ const Accordion2 = () => {
             >
               <button
                 onClick={() => handleToggle(idx)}
-                className="w-full py-4 px-2 text-left flex justify-between items-center font-medium"
+                className="w-full text-left flex justify-between items-center font-medium"
               >
                 <span>{item.question}</span>
                 <div
@@ -59,7 +59,7 @@ const Accordion2 = () => {
                     y: 0,
                   }}
                   transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
-                  className="p-4"
+                  className=" py-4 px-2"
                 >
                   {item.answer}
                 </motion.p>
