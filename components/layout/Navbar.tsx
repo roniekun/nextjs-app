@@ -67,17 +67,9 @@ export default function Navbar() {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-20 flex-col lg:place-items-end rounded-b-md shadow-inner`}
+      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-10 flex-col lg:place-items-end rounded-b-md shadow-inner`}
     >
       <Container>
-        <div className="h-[--header-height] p-0 px-[5vw] flex justify-end items-center">
-          <Button
-            className="capitalize bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
-          rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
-            name="close"
-            handleClick={() => setToggleMenu((prevState) => !prevState)}
-          />
-        </div>
         <div
           ref={contentRef}
           className="relative opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
