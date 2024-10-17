@@ -72,7 +72,7 @@ export default function Navbar() {
       <Container>
         <div
           ref={contentRef}
-          className="relative mt-[--header-height] opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
+          className="relative pt-[--header-height] opacity-0 lg:max-w-screen-sm flex flex-col h-fit lg:self-end w-full my-[5vw]"
         >
           <div
             className={`p-0 px-[5vw] relative flex flex-col h-auto text-xl md:text-3xl`}
