@@ -61,7 +61,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col relative overflow-visible"
+          className="flex flex-col relative overflow-visible transform  -translate-y-2/3"
         >
           <div
             ref={optionRef}
