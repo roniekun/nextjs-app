@@ -12,7 +12,7 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-  const [clicks, setClicks] = useState(0);
+  const [clicks, setClicks] = useState(2);
 
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
@@ -26,6 +26,7 @@ const Menu = () => {
   useLayoutEffect(() => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
+    console.log(clicks);
 
     if (sliderRef) {
       if (clicks == 0) {
@@ -62,7 +63,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          style={{ transform: `translateY(${-buttonHeight * 2}px)` }}
+          style={{ transform: `translateY(-${buttonHeight * 2}px)` }}
           className="flex flex-col relative overflow-visible"
         >
           <div
