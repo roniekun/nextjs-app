@@ -32,7 +32,8 @@ const Menu = () => {
 
     if (sliderRef) {
       gsap.registerPlugin(CustomEase);
-      gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+      // gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+
       if (clicks == 1) {
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
@@ -52,7 +53,8 @@ const Menu = () => {
       }
       gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
     }
-  }, [sliderRef, buttonRef, sliderRef, isToggleMenu]);
+    console.log(clicks);
+  }, [sliderRef, buttonRef, clicks]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
