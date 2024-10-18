@@ -11,35 +11,46 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [textHeight, setTextHeight] = useState<number>(0);
-  const [sliderHeight, setSliderHeight] = useState<number>(0);
+  const [clicks, setClicks] = useState(0);
 
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
     setOpenSearch(false);
+    if (clicks <= 2) {
+      setClicks((prev) => prev++);
+    } else {
+      setClicks(0);
+    }
   };
 
   useLayoutEffect(() => {
     const buttonHeight = buttonRef.current?.getBoundingClientRect().height ?? 0;
-    const containerHeight =
-      sliderRef.current?.getBoundingClientRect().height ?? 0;
+    // const containerHeight =
+    //   sliderRef.current?.getBoundingClientRect().height ?? 0;
+    // settextHeight(containerHeight);
     setTextHeight(buttonHeight);
-    setSliderHeight(containerHeight);
 
     if (sliderRef) {
-      let times = 0;
       gsap.registerPlugin(CustomEase);
       gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
-      if (times <= 2) {
+      if (clicks == 1) {
         gsap.to(sliderRef.current, {
-          y: `${buttonHeight}px`,
+          y: `-${buttonHeight}px`,
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         });
-        times++;
-      } else {
-        gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
-        times = 0;
       }
+      if (clicks == 2) {
+        gsap.to(sliderRef.current, {
+          y: 0,
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+          onComplete: () => {
+            gsap.set(sliderRef.current, { y: `-${buttonHeight}px` });
+          },
+        });
+      }
+      gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
     }
   }, [sliderRef, buttonRef, sliderRef, isToggleMenu]);
 
@@ -54,14 +65,13 @@ const Menu = () => {
         <div
           ref={sliderRef}
           style={{
-            height: `${sliderHeight}px`,
             transform: `translateY(-${textHeight * 2}px)`,
           }}
-          className="flex flex-col relative "
+          className="flex flex-col relative h-fit"
         >
-          <span style={{ height: `${sliderHeight}px` }}>Menu</span>
-          <span style={{ height: `${sliderHeight}px` }}>Close</span>
-          <span style={{ height: `${sliderHeight}px` }}>Menu</span>
+          <span style={{ height: `${textHeight}px` }}>Menu</span>
+          <span style={{ height: `${textHeight}px` }}>Close</span>
+          <span style={{ height: `${textHeight}px` }}>Menu</span>
         </div>
       </button>
     </div>
