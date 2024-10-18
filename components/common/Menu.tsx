@@ -28,18 +28,18 @@ const Menu = () => {
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
-      <AnimatePresence mode="wait">
-        <button
-          ref={buttonRef}
-          className="capitalize relative h-8 w-16 text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 overflow-hidden hover:border border-none border-neutral-500
+      <button
+        ref={buttonRef}
+        className="capitalize relative h-8 w-16 text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 overflow-hidden hover:border border-none border-neutral-500
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
-          onClick={handleClick}
+        onClick={handleClick}
+      >
+        <div
+          ref={sliderRef}
+          style={{ height: `${sliderHeight}px` }}
+          className="flex flex-col relative"
         >
-          <div
-            ref={sliderRef}
-            style={{ height: `${sliderHeight}px` }}
-            className="flex flex-col relative"
-          >
+          <AnimatePresence mode="wait">
             {isToggleMenu && (
               <motion.p
                 initial={{ top: `-${sliderHeight}px` }}
@@ -47,26 +47,28 @@ const Menu = () => {
                 transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
                 exit={{ top: `${sliderHeight}px` }}
                 style={{ height: `${textHeight}px`, top: `-${sliderHeight}px` }}
-                className="flex place-items-center absolute"
+                className="flex place-items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               >
                 Close
               </motion.p>
             )}
-            {isToggleMenu && (
+          </AnimatePresence>
+          <AnimatePresence mode="wait">
+            {!isToggleMenu && (
               <motion.p
                 initial={{ top: `-${sliderHeight}px` }}
                 animate={{ top: 0 }}
                 transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
                 exit={{ top: `${sliderHeight}px` }}
                 style={{ height: `${textHeight}px`, top: `-${sliderHeight}px` }}
-                className="flex place-items-center absolute"
+                className="flex place-items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               >
                 Menu
               </motion.p>
             )}
-          </div>
-        </button>
-      </AnimatePresence>
+          </AnimatePresence>
+        </div>
+      </button>
     </div>
   );
 };
