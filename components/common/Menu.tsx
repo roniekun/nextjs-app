@@ -4,7 +4,6 @@ import { useSearch } from "@/provider/context/SearchContext";
 import { useLayoutEffect, useRef, useState } from "react";
 import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
-import { Translate } from "@mui/icons-material";
 
 const Menu = () => {
   const { setToggleMenu } = useMenu();
@@ -12,7 +11,7 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-  const [clicks, setClicks] = useState(2);
+  const [clicks, setClicks] = useState<number>(0);
 
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
@@ -30,7 +29,10 @@ const Menu = () => {
 
     if (sliderRef) {
       if (clicks == 0) {
-        gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+        gsap.set(sliderRef.current, {
+          opacity: 1,
+          y: `-${buttonHeight * 2}px`,
+        });
       }
       gsap.registerPlugin(CustomEase);
       if (clicks == 1) {
@@ -63,8 +65,8 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          style={{ transform: `translateY(-${buttonHeight * 2}px)` }}
-          className="flex flex-col relative overflow-visible"
+          // style={{ transform: `translateY(-${buttonHeight * 2}px)` }}
+          className="flex flex-col relative overflow-visible opacity-0"
         >
           <div
             ref={optionRef}

@@ -32,7 +32,7 @@ export default function Navbar() {
       tl.set(".navbar", { display: "flex" }) // Sets the display instantly
         .to(".navbar", {
           height: isDesktop ? "100vh" : "auto",
-          duration: 1,
+          duration: 0.7,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         });
 
@@ -52,7 +52,7 @@ export default function Navbar() {
     } else {
       tl.to(".navbar", {
         height: 0,
-        duration: 1,
+        duration: 0.7,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
       }).set(".navbar", { display: "none" }); // Hide it after shrinking
     }
