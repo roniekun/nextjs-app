@@ -16,12 +16,11 @@ const Menu = () => {
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
     setOpenSearch(false);
-    if (clicks <= 2) {
-      setClicks((prev) => prev++);
-      console.log(`add clicks +${clicks}`);
+
+    if (clicks < 2) {
+      setClicks((prev) => prev + 1);
     } else {
       setClicks(0);
-      console.log(`reset clicks +${clicks}`);
     }
   };
 
@@ -35,6 +34,7 @@ const Menu = () => {
     if (sliderRef) {
       gsap.registerPlugin(CustomEase);
       // gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+      console.log(`side effects before +${clicks}`);
 
       if (clicks == 1) {
         gsap.to(sliderRef.current, {
@@ -55,7 +55,7 @@ const Menu = () => {
       }
       gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
     }
-    console.log(`side effects +${clicks}`);
+    console.log(`side effects after +${clicks}`);
   }, [sliderRef, buttonRef, clicks]);
 
   return (
