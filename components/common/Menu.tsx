@@ -6,7 +6,7 @@ import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
 
 const Menu = () => {
-  const { setToggleMenu, isToggleMenu } = useMenu();
+  const { setToggleMenu } = useMenu();
   const { setOpenSearch } = useSearch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +45,6 @@ const Menu = () => {
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           onComplete: () => {
             setClicks(0);
-            gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
           },
         });
       }
@@ -60,10 +59,7 @@ const Menu = () => {
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div
-          ref={sliderRef}
-          className="flex flex-col relative -translate-y-1/3 transform"
-        >
+        <div ref={sliderRef} className="flex flex-col relative transform">
           <div
             ref={optionRef}
             className="flex justify-center items-center h-8 w-16"
