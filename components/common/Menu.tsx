@@ -63,7 +63,12 @@ const Menu = () => {
           ref={sliderRef}
           className="flex flex-col relative -translate-y-1/3 transform"
         >
-          <div className="flex justify-center items-center">Menu</div>
+          <div
+            className="flex justify-center items-center"
+            style={{ height: `${textHeight}px` }}
+          >
+            Menu
+          </div>
           <div
             className="flex justify-center items-center"
             style={{ height: `${textHeight}px` }}
