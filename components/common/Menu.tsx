@@ -65,7 +65,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          // style={{ transform: `translateY(-${buttonHeight * 2}px)` }}
+          style={{ transform: `translateY(-100%)` }}
           className="flex flex-col relative overflow-visible opacity-0"
         >
           <div
