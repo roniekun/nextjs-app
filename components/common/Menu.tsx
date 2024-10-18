@@ -19,7 +19,6 @@ const Menu = () => {
   };
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(CustomEase);
     const buttonHeight = buttonRef.current?.getBoundingClientRect().height ?? 0;
     const containerHeight =
       sliderRef.current?.getBoundingClientRect().height ?? 0;
