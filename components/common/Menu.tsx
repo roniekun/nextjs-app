@@ -19,8 +19,6 @@ const Menu = () => {
 
     if (clicks <= 1) {
       setClicks((prev) => prev + 1);
-    } else {
-      setClicks(0);
     }
   };
 
@@ -29,6 +27,9 @@ const Menu = () => {
     setTextHeight(buttonHeight);
 
     if (sliderRef) {
+      if (clicks == 0) {
+        gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+      }
       gsap.registerPlugin(CustomEase);
       if (clicks == 1) {
         gsap.to(sliderRef.current, {
@@ -43,11 +44,11 @@ const Menu = () => {
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           onComplete: () => {
+            setClicks(0);
             gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
           },
         });
       }
-      gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
     }
   }, [sliderRef, buttonRef, clicks]);
 
@@ -55,7 +56,7 @@ const Menu = () => {
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
       <button
         ref={buttonRef}
-        className="capitalize relative h-8 w-16 text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 overflow-visible hover:border border-none border-neutral-500
+        className="capitalize overflow-hidden relative text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
@@ -64,19 +65,19 @@ const Menu = () => {
           className="flex flex-col relative -translate-y-1/3 transform"
         >
           <div
-            className="flex justify-center items-center"
+            className="flex justify-center items-center h-8 w-16"
             style={{ height: `${textHeight}px` }}
           >
             Menu
           </div>
           <div
-            className="flex justify-center items-center"
+            className="flex justify-center items-center h-8 w-16 "
             style={{ height: `${textHeight}px` }}
           >
             Close
           </div>
           <div
-            className="flex justify-center items-center"
+            className="flex justify-center items-center h-8 w-16 "
             style={{ height: `${textHeight}px` }}
           >
             Menu
