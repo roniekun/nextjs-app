@@ -26,29 +26,29 @@ const Menu = () => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
 
-    // if (sliderRef) {
-    //   if (clicks == 0) {
-    //     gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
-    //   }
-    //   gsap.registerPlugin(CustomEase);
-    //   if (clicks == 1) {
-    //     gsap.to(sliderRef.current, {
-    //       y: `-${buttonHeight}px`,
-    //       duration: 0.3,
-    //       ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-    //     });
-    //   }
-    //   if (clicks == 2) {
-    //     gsap.to(sliderRef.current, {
-    //       y: 0,
-    //       duration: 0.3,
-    //       ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-    //       onComplete: () => {
-    //         setClicks(0);
-    //       },
-    //     });
-    //   }
-    // }
+    if (sliderRef) {
+      if (clicks == 0) {
+        gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+      }
+      gsap.registerPlugin(CustomEase);
+      if (clicks == 1) {
+        gsap.to(sliderRef.current, {
+          y: `-${buttonHeight}px`,
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        });
+      }
+      if (clicks == 2) {
+        gsap.to(sliderRef.current, {
+          y: 0,
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+          onComplete: () => {
+            setClicks(0);
+          },
+        });
+      }
+    }
   }, [sliderRef, optionRef, clicks]);
 
   return (
@@ -61,7 +61,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col items-start justify-start relative transform"
+          className="flex flex-col relative overflow-visible"
         >
           <div
             ref={optionRef}
