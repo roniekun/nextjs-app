@@ -2,8 +2,16 @@
 import Logo from "../common/Logo";
 import Menu from "../common/Menu";
 import Container from "../lib/ui/container";
+import { FaSearch } from "react-icons/fa";
+import { useSearch } from "@/provider/context/SearchContext";
 
 const Header = () => {
+  const { setOpenSearch } = useSearch();
+
+  const handleClick = () => {
+    setOpenSearch((prevState) => !prevState);
+  };
+
   return (
     <header
       className={`header backdrop-blur-lg overflow-hidden h-[--header-height] 
@@ -11,7 +19,10 @@ const Header = () => {
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
-        <Menu />
+        <div className="flex gap-1">
+          <FaSearch onClick={handleClick} />
+          <Menu />
+        </div>
       </Container>
     </header>
   );

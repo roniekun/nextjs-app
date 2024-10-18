@@ -25,12 +25,10 @@ const Menu = () => {
   useLayoutEffect(() => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
-    console.log(clicks);
 
     if (sliderRef) {
       if (clicks == 0) {
         gsap.set(sliderRef.current, {
-          opacity: 1,
           y: `-${buttonHeight * 2}px`,
         });
       }
@@ -70,7 +68,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col relative overflow-visible opacity-0"
+          className="flex flex-col relative overflow-visible"
         >
           <div
             ref={optionRef}
