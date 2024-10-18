@@ -9,8 +9,8 @@ const Menu = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
   const { setOpenSearch } = useSearch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const [textHeight, setTextHeight] = useState<number>(0);
+  const optionRef = useRef<HTMLDivElement | null>(null);
+  const [buttonHeight, setButtonHeight] = useState<number>(0);
   const [clicks, setClicks] = useState(0);
 
   const handleClick = () => {
@@ -23,8 +23,8 @@ const Menu = () => {
   };
 
   useLayoutEffect(() => {
-    const buttonHeight = buttonRef.current?.getBoundingClientRect().height ?? 0;
-    setTextHeight(buttonHeight);
+    const height = optionRef.current?.getBoundingClientRect().height ?? 0;
+    setButtonHeight(height);
 
     if (sliderRef) {
       if (clicks == 0) {
@@ -50,14 +50,13 @@ const Menu = () => {
         });
       }
     }
-  }, [sliderRef, buttonRef, clicks]);
+  }, [sliderRef, optionRef, clicks]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
       <button
-        ref={buttonRef}
-        style={{ height: `${textHeight}px` }}
-        className="capitalize overflow-hidden relative text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
+        style={{ height: `${buttonHeight}px` }}
+        className="capitalize overflow-hidden w-fit relative text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
@@ -65,7 +64,12 @@ const Menu = () => {
           ref={sliderRef}
           className="flex flex-col relative -translate-y-1/3 transform"
         >
-          <div className="flex justify-center items-center h-8 w-16">Menu</div>
+          <div
+            ref={optionRef}
+            className="flex justify-center items-center h-8 w-16"
+          >
+            Menu
+          </div>
           <div className="flex justify-center items-center h-8 w-16 ">
             Close
           </div>
