@@ -3,7 +3,7 @@ import { useMenu } from "@/provider/context/MenuContext";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useLayoutEffect, useRef, useState } from "react";
 import { CustomEase } from "gsap/CustomEase";
-import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
 
 const Menu = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
@@ -24,7 +24,24 @@ const Menu = () => {
       sliderRef.current?.getBoundingClientRect().height ?? 0;
     setTextHeight(buttonHeight);
     setSliderHeight(containerHeight);
-  }, [sliderRef, buttonRef]);
+
+    if (sliderRef) {
+      let times = 0;
+      gsap.registerPlugin(CustomEase);
+      gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+      if (times <= 2) {
+        gsap.to(sliderRef.current, {
+          y: `${buttonHeight}px`,
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        });
+        times++;
+      } else {
+        gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+        times = 0;
+      }
+    }
+  }, [sliderRef, buttonRef, sliderRef, isToggleMenu]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
@@ -36,37 +53,15 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          style={{ height: `${sliderHeight}px` }}
-          className="flex flex-col relative"
+          style={{
+            height: `${sliderHeight}px`,
+            transform: `translateY(-${textHeight * 2}px)`,
+          }}
+          className="flex flex-col relative "
         >
-          <AnimatePresence mode="wait">
-            {isToggleMenu && (
-              <motion.p
-                initial={{ y: `-${sliderHeight}px`, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-                exit={{ y: `${sliderHeight}px`, opacity: 0 }}
-                style={{ height: `${textHeight}px`, y: `-${sliderHeight}px` }}
-                className="flex absolute left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 "
-              >
-                Close
-              </motion.p>
-            )}
-          </AnimatePresence>
-          <AnimatePresence mode="wait" initial={false}>
-            {!isToggleMenu && (
-              <motion.p
-                initial={{ y: `-${sliderHeight}px`, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-                exit={{ top: `${sliderHeight}px`, y: 0 }}
-                style={{ height: `${textHeight}px`, y: `-${sliderHeight}px` }}
-                className="flex place-items-center relative"
-              >
-                Menu
-              </motion.p>
-            )}
-          </AnimatePresence>
+          <span style={{ height: `${sliderHeight}px` }}>Menu</span>
+          <span style={{ height: `${sliderHeight}px` }}>Close</span>
+          <span style={{ height: `${sliderHeight}px` }}>Menu</span>
         </div>
       </button>
     </div>
