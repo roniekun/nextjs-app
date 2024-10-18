@@ -56,6 +56,7 @@ const Menu = () => {
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
       <button
         ref={buttonRef}
+        style={{ height: `${textHeight}px` }}
         className="capitalize overflow-hidden relative text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 hover:border border-none border-neutral-500
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
@@ -64,24 +65,11 @@ const Menu = () => {
           ref={sliderRef}
           className="flex flex-col relative -translate-y-1/3 transform"
         >
-          <div
-            className="flex justify-center items-center h-8 w-16"
-            style={{ height: `${textHeight}px` }}
-          >
-            Menu
-          </div>
-          <div
-            className="flex justify-center items-center h-8 w-16 "
-            style={{ height: `${textHeight}px` }}
-          >
+          <div className="flex justify-center items-center h-8 w-16">Menu</div>
+          <div className="flex justify-center items-center h-8 w-16 ">
             Close
           </div>
-          <div
-            className="flex justify-center items-center h-8 w-16 "
-            style={{ height: `${textHeight}px` }}
-          >
-            Menu
-          </div>
+          <div className="flex justify-center items-center h-8 w-16 ">Menu</div>
         </div>
       </button>
     </div>
