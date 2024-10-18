@@ -11,6 +11,7 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [textHeight, setTextHeight] = useState<number>(0);
+  const [sliderHeight, setSliderHeight] = useState<number>(0);
 
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
@@ -20,22 +21,25 @@ const Menu = () => {
   useLayoutEffect(() => {
     gsap.registerPlugin(CustomEase);
     const buttonHeight = buttonRef.current?.getBoundingClientRect().height;
-    console.log(buttonHeight);
+    const containerHeight = sliderRef.current?.getBoundingClientRect().height;
     setTextHeight(buttonHeight ?? 0);
+    setSliderHeight(containerHeight ?? 0);
+
+    gsap.set(sliderRef.current, { top: `-${buttonHeight ?? 0 * 2}px` });
 
     if (sliderRef && isToggleMenu && buttonRef) {
       gsap.to(sliderRef.current, {
-        y: `${buttonHeight}px`,
+        top: `-${buttonHeight}px`,
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
       });
     } else {
       gsap.to(sliderRef.current, {
-        y: `${buttonHeight ?? 0 * 2}px`,
+        top: "0px",
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         onComplete: () => {
-          gsap.set(sliderRef.current, { y: `-${buttonHeight ?? 0 * 3}px` });
+          gsap.set(sliderRef.current, { top: `-${buttonHeight ?? 0 * 2}px` });
         },
       });
     }
@@ -51,7 +55,8 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col -translate-y-2/3 relative transform"
+          style={{ height: `${sliderHeight}px`, top: `-${textHeight * 2}px` }}
+          className="flex flex-col relative"
         >
           <p
             style={{ height: `${textHeight}px` }}
