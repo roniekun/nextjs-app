@@ -2,8 +2,8 @@
 import { useMenu } from "@/provider/context/MenuContext";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Menu = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
@@ -20,64 +20,54 @@ const Menu = () => {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(CustomEase);
-    const buttonHeight = buttonRef.current?.getBoundingClientRect().height;
-    const containerHeight = sliderRef.current?.getBoundingClientRect().height;
-    setTextHeight(buttonHeight ?? 0);
-    setSliderHeight(containerHeight ?? 0);
-
-    gsap.set(sliderRef.current, { top: `-${buttonHeight ?? 0 * 2}px` });
-
-    if (sliderRef && isToggleMenu && buttonRef) {
-      gsap.to(sliderRef.current, {
-        top: `-${buttonHeight}px`,
-        duration: 0.3,
-        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-      });
-    } else {
-      gsap.to(sliderRef.current, {
-        top: "0px",
-        duration: 0.3,
-        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        onComplete: () => {
-          gsap.set(sliderRef.current, { top: `-${buttonHeight ?? 0 * 2}px` });
-        },
-      });
-    }
-  }, [isToggleMenu, sliderRef, buttonRef]);
+    const buttonHeight = buttonRef.current?.getBoundingClientRect().height ?? 0;
+    const containerHeight =
+      sliderRef.current?.getBoundingClientRect().height ?? 0;
+    setTextHeight(buttonHeight);
+    setSliderHeight(containerHeight);
+  }, [sliderRef, buttonRef]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
-      <button
-        ref={buttonRef}
-        className="capitalize relative h-8 w-16 text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 overflow-hidden hover:border border-none border-neutral-500
-         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
-        onClick={handleClick}
-      >
-        <div
-          ref={sliderRef}
-          style={{ height: `${sliderHeight}px`, top: `-${textHeight * 2}px` }}
-          className="flex flex-col relative"
+      <AnimatePresence mode="wait">
+        <button
+          ref={buttonRef}
+          className="capitalize relative h-8 w-16 text-sm flex justify-center items-center bg-neutral-500 bg-opacity-15 overflow-hidden hover:border border-none border-neutral-500
+        rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
+          onClick={handleClick}
         >
-          <p
-            style={{ height: `${textHeight}px` }}
-            className="flex place-items-center"
+          <div
+            ref={sliderRef}
+            style={{ height: `${sliderHeight}px` }}
+            className="flex flex-col relative"
           >
-            Menu
-          </p>
-          <p
-            style={{ height: `${textHeight}px` }}
-            className="flex place-items-center"
-          >
-            Close
-          </p>
-          <p
-            style={{ height: `${textHeight}px` }}
-            className="flex place-items-center"
-          >
-            Menu
-          </p>
-        </div>
-      </button>
+            {isToggleMenu && (
+              <motion.p
+                initial={{ top: `-${sliderHeight}px` }}
+                animate={{ top: 0 }}
+                transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
+                exit={{ top: `${sliderHeight}px` }}
+                style={{ height: `${textHeight}px`, top: `-${sliderHeight}px` }}
+                className="flex place-items-center absolute"
+              >
+                Close
+              </motion.p>
+            )}
+            {isToggleMenu && (
+              <motion.p
+                initial={{ top: `-${sliderHeight}px` }}
+                animate={{ top: 0 }}
+                transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
+                exit={{ top: `${sliderHeight}px` }}
+                style={{ height: `${textHeight}px`, top: `-${sliderHeight}px` }}
+                className="flex place-items-center absolute"
+              >
+                Menu
+              </motion.p>
+            )}
+          </div>
+        </button>
+      </AnimatePresence>
     </div>
   );
 };
