@@ -58,6 +58,14 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     localStorage.setItem("searchHistory", JSON.stringify(searchItems));
   }, [searchItems]);
 
+  useEffect(() => {
+    if (isOpenSearch) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [isOpenSearch]);
+
   return (
     <SearchContext.Provider
       value={{

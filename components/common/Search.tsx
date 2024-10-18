@@ -24,14 +24,25 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
       if (isOpenSearch) {
         gsap.to(searchRef.current, {
           display: "flex",
-          duration: 0.7,
-          ease: "customEase",
+
+          onComplete: () => {
+            gsap.to(searchRef.current, {
+              height: "70vh",
+              duration: 0.7,
+              ease: "customEase",
+            });
+          },
         });
       } else {
         gsap.to(searchRef.current, {
-          display: "none",
+          height: 0,
           duration: 0.7,
           ease: "customEase",
+          onComplete: () => {
+            if (searchRef.current) {
+              searchRef.current.style.display = "none";
+            }
+          },
         });
       }
     }

@@ -11,9 +11,9 @@ import Container from "../lib/ui/container";
 import { useLayout } from "@/provider/context/LayoutContext";
 
 export default function Navbar() {
-  const { isOpenSearch, setOpenSearch } = useSearch();
+  const { setOpenSearch } = useSearch();
   const { theme } = useTheme();
-  const { isToggleMenu, setToggleMenu } = useMenu();
+  const { isToggleMenu } = useMenu();
   const { isDesktop } = useLayout();
   const navRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
