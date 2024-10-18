@@ -2,9 +2,11 @@
 import SearchBar from "../features/search/search-bar";
 import Container from "../lib/ui/container";
 import { IContentData } from "@/data/content-data";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useSearch } from "@/provider/context/SearchContext";
 import gsap from "gsap";
+import { useTheme } from "@/provider/context/ThemeContext";
+import CustomEase from "gsap/CustomEase";
 
 interface Props {
   contentData: IContentData[];
@@ -12,14 +14,25 @@ interface Props {
 }
 const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   const { isOpenSearch } = useSearch();
+  const { theme } = useTheme();
   const searchRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    gsap.registerPlugin(CustomEase);
+    CustomEase.create("customEase", "0.76, 0, 0.24, 1");
     if (searchRef) {
       if (isOpenSearch) {
-        gsap.to(searchRef.current, { display: "block" });
+        gsap.to(searchRef.current, {
+          display: "flex",
+          duration: 0.7,
+          ease: "customEase",
+        });
       } else {
-        gsap.to(searchRef.current, { display: "none", delay: 1 });
+        gsap.to(searchRef.current, {
+          display: "none",
+          duration: 0.7,
+          ease: "customEase",
+        });
       }
     }
   }, [searchRef, isOpenSearch]);
@@ -27,9 +40,11 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   return (
     <div
       ref={searchRef}
-      className={`${
-        isOpenSearch ? "h-[--hero-height]" : "h-0"
-      } transition-all ease-custom-ease duration-500 w-screen fixed bottom-0 hidden`}
+      className={`${isOpenSearch ? "h-[--hero-height]" : "h-0"}  ${
+        theme === "dark"
+          ? "bg-[--background-dark] text-neutral-200"
+          : "bg-[--background-light] text-neutral-900"
+      } w-screen fixed  bottom-0 hidden`}
     >
       <Container className="relative w-full justify-center items-center">
         <SearchBar contentData={contentData} placeholder={placeholder} />

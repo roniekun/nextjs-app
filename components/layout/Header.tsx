@@ -4,12 +4,15 @@ import Menu from "../common/Menu";
 import Container from "../lib/ui/container";
 import { FaSearch } from "react-icons/fa";
 import { useSearch } from "@/provider/context/SearchContext";
+import { useMenu } from "@/provider/context/MenuContext";
 
 const Header = () => {
   const { setOpenSearch } = useSearch();
+  const { setToggleMenu } = useMenu();
 
   const handleClick = () => {
     setOpenSearch((prevState) => !prevState);
+    setToggleMenu(false);
   };
 
   return (
@@ -19,8 +22,11 @@ const Header = () => {
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
-        <div className="flex gap-1">
-          <FaSearch onClick={handleClick} />
+        <div className="flex gap-2 justify-center items-center">
+          <FaSearch
+            className="rounded-md bg-neutral-950 bg-opacity-10 p-1"
+            onClick={handleClick}
+          />
           <Menu />
         </div>
       </Container>
