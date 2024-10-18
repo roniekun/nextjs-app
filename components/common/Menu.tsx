@@ -18,8 +18,10 @@ const Menu = () => {
     setOpenSearch(false);
     if (clicks <= 2) {
       setClicks((prev) => prev++);
+      console.log(`add clicks +${clicks}`);
     } else {
       setClicks(0);
+      console.log(`reset clicks +${clicks}`);
     }
   };
 
@@ -53,7 +55,7 @@ const Menu = () => {
       }
       gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
     }
-    console.log(clicks);
+    console.log(`side effects +${clicks}`);
   }, [sliderRef, buttonRef, clicks]);
 
   return (
@@ -66,14 +68,26 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          style={{
-            transform: `translateY(-${textHeight * 2}px)`,
-          }}
-          className="flex flex-col relative h-fit"
+          className="flex flex-col relative -translate-y-2/3"
         >
-          <span style={{ height: `${textHeight}px` }}>Menu</span>
-          <span style={{ height: `${textHeight}px` }}>Close</span>
-          <span style={{ height: `${textHeight}px` }}>Menu</span>
+          <span
+            className="flex justify-center items-center"
+            style={{ height: `${textHeight}px` }}
+          >
+            Menu
+          </span>
+          <span
+            className="flex justify-center items-center"
+            style={{ height: `${textHeight}px` }}
+          >
+            Close
+          </span>
+          <span
+            className="flex justify-center items-center"
+            style={{ height: `${textHeight}px` }}
+          >
+            Menu
+          </span>
         </div>
       </button>
     </div>
