@@ -42,26 +42,26 @@ const Menu = () => {
           <AnimatePresence mode="wait">
             {isToggleMenu && (
               <motion.p
-                initial={{ top: `-${sliderHeight}px` }}
-                animate={{ top: 0 }}
+                initial={{ top: `-${sliderHeight}px`, opacity: 0 }}
+                animate={{ top: 0, opacity: 1 }}
                 transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-                exit={{ top: `${sliderHeight}px` }}
+                exit={{ top: `${sliderHeight}px`, opacity: 0 }}
                 style={{ height: `${textHeight}px`, top: `-${sliderHeight}px` }}
-                className="flex place-items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                className="flex place-items-center absolute left-1/2 transform -translate-x-1/2"
               >
                 Close
               </motion.p>
             )}
           </AnimatePresence>
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             {!isToggleMenu && (
               <motion.p
-                initial={{ top: `-${sliderHeight}px` }}
-                animate={{ top: 0 }}
+                initial={{ top: `-${sliderHeight}px`, opacity: 0 }}
+                animate={{ top: 0, opacity: 1 }}
                 transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-                exit={{ top: `${sliderHeight}px` }}
+                exit={{ top: `${sliderHeight}px`, opacity: 0 }}
                 style={{ height: `${textHeight}px`, top: `-${sliderHeight}px` }}
-                className="flex place-items-center absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                className="flex place-items-center absolute left-1/2 transform -translate-x-1/2"
               >
                 Menu
               </motion.p>
