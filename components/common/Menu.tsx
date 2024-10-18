@@ -11,7 +11,7 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-  const [clicks, setClicks] = useState<number>(0);
+  const [clicks, setClicks] = useState<number>(2);
 
   const handleClick = () => {
     setToggleMenu((prevState: boolean) => !prevState);
@@ -48,6 +48,11 @@ const Menu = () => {
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           onComplete: () => {
+            gsap.set(sliderRef.current, {
+              opacity: 1,
+              y: `-${buttonHeight * 2}px`,
+            });
+
             setClicks(0);
           },
         });
@@ -65,7 +70,6 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          style={{ transform: `translateY(-100%)` }}
           className="flex flex-col relative overflow-visible opacity-0"
         >
           <div
