@@ -4,6 +4,7 @@ import { useSearch } from "@/provider/context/SearchContext";
 import { useLayoutEffect, useRef, useState } from "react";
 import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
+import { Translate } from "@mui/icons-material";
 
 const Menu = () => {
   const { setToggleMenu } = useMenu();
@@ -61,7 +62,8 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col relative overflow-visible transform  -translate-y-2/3"
+          style={{ transform: `translateY(${-buttonHeight * 2}px)` }}
+          className="flex flex-col relative overflow-visible"
         >
           <div
             ref={optionRef}
