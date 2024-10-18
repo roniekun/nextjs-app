@@ -26,16 +26,10 @@ const Menu = () => {
 
   useLayoutEffect(() => {
     const buttonHeight = buttonRef.current?.getBoundingClientRect().height ?? 0;
-    // const containerHeight =
-    //   sliderRef.current?.getBoundingClientRect().height ?? 0;
-    // settextHeight(containerHeight);
     setTextHeight(buttonHeight);
 
     if (sliderRef) {
       gsap.registerPlugin(CustomEase);
-      gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
-      console.log(`side effects before +${clicks}`);
-
       if (clicks == 1) {
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
@@ -49,13 +43,12 @@ const Menu = () => {
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           onComplete: () => {
-            gsap.set(sliderRef.current, { y: `-${buttonHeight}px` });
+            gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
           },
         });
       }
       gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
     }
-    console.log(`side effects after +${clicks}`);
   }, [sliderRef, buttonRef, clicks]);
 
   return (
@@ -66,13 +59,11 @@ const Menu = () => {
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div ref={sliderRef} className="flex flex-col relative">
-          <div
-            className="flex justify-center items-center"
-            style={{ height: `${textHeight}px` }}
-          >
-            Menu
-          </div>
+        <div
+          ref={sliderRef}
+          className="flex flex-col relative -translate-y-1/3 transform"
+        >
+          <div className="flex justify-center items-center">Menu</div>
           <div
             className="flex justify-center items-center"
             style={{ height: `${textHeight}px` }}
