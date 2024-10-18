@@ -17,7 +17,7 @@ const Menu = () => {
     setToggleMenu((prevState: boolean) => !prevState);
     setOpenSearch(false);
 
-    if (clicks < 2) {
+    if (clicks <= 1) {
       setClicks((prev) => prev + 1);
     } else {
       setClicks(0);
@@ -33,7 +33,7 @@ const Menu = () => {
 
     if (sliderRef) {
       gsap.registerPlugin(CustomEase);
-      // gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
+      gsap.set(sliderRef.current, { y: `-${buttonHeight * 2}px` });
       console.log(`side effects before +${clicks}`);
 
       if (clicks == 1) {
@@ -66,28 +66,25 @@ const Menu = () => {
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div
-          ref={sliderRef}
-          className="flex flex-col relative -translate-y-2/3"
-        >
-          <span
+        <div ref={sliderRef} className="flex flex-col relative">
+          <div
             className="flex justify-center items-center"
             style={{ height: `${textHeight}px` }}
           >
             Menu
-          </span>
-          <span
+          </div>
+          <div
             className="flex justify-center items-center"
             style={{ height: `${textHeight}px` }}
           >
             Close
-          </span>
-          <span
+          </div>
+          <div
             className="flex justify-center items-center"
             style={{ height: `${textHeight}px` }}
           >
             Menu
-          </span>
+          </div>
         </div>
       </button>
     </div>
