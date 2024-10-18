@@ -59,7 +59,10 @@ const Menu = () => {
         rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
         onClick={handleClick}
       >
-        <div ref={sliderRef} className="flex flex-col relative transform">
+        <div
+          ref={sliderRef}
+          className="flex flex-col items-start justify-start relative transform"
+        >
           <div
             ref={optionRef}
             className="flex justify-center items-center h-8 w-16"
