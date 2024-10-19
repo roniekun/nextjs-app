@@ -11,85 +11,74 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-  const [clicks, setClicks] = useState<number>(2);
+  const [counter, setCounter] = useState<number>(2);
 
-  const handleClick = () => {
-    if (clicks <= 1) {
-      setClicks((prev) => prev + 1);
-    }
-  };
+  gsap.registerPlugin(CustomEase);
 
   useLayoutEffect(() => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
+  }, [optionRef]);
 
-    if (sliderRef) {
-      gsap.registerPlugin(CustomEase);
+  useEffect(() => {
+    if (isToggleMenu && isOpenSearch && counter == 1) {
+      setToggleMenu(false);
+      gsap.to(sliderRef.current, {
+        duration: 0.3,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        y: `-${buttonHeight * 2}px`,
+        onComplete: () => {
+          setCounter(2);
+        },
+      });
+    }
+  }, [isToggleMenu, isOpenSearch, counter]);
 
-      if (isToggleMenu && isOpenSearch) {
+  const handleClick = () => {
+    if (counter < 2) {
+      setCounter((prevCount) => prevCount + 1);
+    } else {
+      setCounter(0);
+    }
+
+    switch (counter) {
+      case 0:
         gsap.to(sliderRef.current, {
+          y: 0,
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-          y: `-${buttonHeight * 2}px`,
+          onComplete: () => {
+            gsap.set(sliderRef.current, {
+              y: `-${buttonHeight * 2}px`,
+            });
+            setCounter(0);
+          },
+        });
+        break;
+
+      case 1:
+        gsap.to(sliderRef.current, {
+          y: `-${buttonHeight}px`,
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         });
 
-        setToggleMenu((prevState) => !prevState);
-        // gsap.to(sliderRef.current, {
-        //   y: 0,
-        //   duration: 0.3,
-        //   ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        //   onComplete: () => {
-        //     gsap.set(sliderRef.current, {
-        //       opacity: 1,
-        //       y: `-${buttonHeight * 2}px`,
-        //     });
+        setToggleMenu(true);
 
-        //     setClicks(0);
-        //   },
-        // });
-      } else {
-        switch (clicks) {
-          case 0:
-            if (clicks == 0) {
-              setToggleMenu(false);
-              gsap.set(sliderRef.current, {
-                y: `-${buttonHeight * 2}px`,
-              });
-            }
-            break;
+        break;
 
-          case 1:
-            gsap.to(sliderRef.current, {
-              y: `-${buttonHeight}px`,
-              duration: 0.3,
-              ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-            });
+      case 2:
+        setToggleMenu(false);
+        gsap.set(sliderRef.current, {
+          opacity: 1,
+          y: `-${buttonHeight * 2}px`,
+        });
+        break;
 
-            setToggleMenu(true);
-
-            break;
-
-          case 2:
-            gsap.to(sliderRef.current, {
-              y: 0,
-              duration: 0.3,
-              ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-              onComplete: () => {
-                gsap.set(sliderRef.current, {
-                  opacity: 1,
-                  y: `-${buttonHeight * 2}px`,
-                });
-                setClicks(0);
-              },
-            });
-            break;
-          default:
-            break;
-        }
-      }
+      default:
+        break;
     }
-  }, [sliderRef, optionRef, clicks, isOpenSearch, isToggleMenu]);
-
+  };
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
       <button
