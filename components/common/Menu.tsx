@@ -14,9 +14,6 @@ const Menu = () => {
   const [clicks, setClicks] = useState<number>(2);
 
   const handleClick = () => {
-    setToggleMenu((prevState: boolean) => !prevState);
-    setOpenSearch(false);
-
     if (clicks <= 1) {
       setClicks((prev) => prev + 1);
     }
@@ -29,17 +26,50 @@ const Menu = () => {
     if (sliderRef) {
       gsap.registerPlugin(CustomEase);
 
-      switch (clicks) {
-        case 0:
-          if (clicks == 0) {
-            gsap.set(sliderRef.current, {
-              y: `-${buttonHeight * 2}px`,
-            });
-          }
-          break;
+      if (isToggleMenu && isOpenSearch) {
+        gsap.to(sliderRef.current, {
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+          y: `-${buttonHeight * 2}px`,
+        });
 
-        case 1:
-          if (isOpenSearch && isToggleMenu) {
+        setToggleMenu((prevState) => !prevState);
+        // gsap.to(sliderRef.current, {
+        //   y: 0,
+        //   duration: 0.3,
+        //   ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        //   onComplete: () => {
+        //     gsap.set(sliderRef.current, {
+        //       opacity: 1,
+        //       y: `-${buttonHeight * 2}px`,
+        //     });
+
+        //     setClicks(0);
+        //   },
+        // });
+      } else {
+        switch (clicks) {
+          case 0:
+            if (clicks == 0) {
+              setToggleMenu(false);
+              gsap.set(sliderRef.current, {
+                y: `-${buttonHeight * 2}px`,
+              });
+            }
+            break;
+
+          case 1:
+            gsap.to(sliderRef.current, {
+              y: `-${buttonHeight}px`,
+              duration: 0.3,
+              ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+            });
+
+            setToggleMenu(true);
+
+            break;
+
+          case 2:
             gsap.to(sliderRef.current, {
               y: 0,
               duration: 0.3,
@@ -49,36 +79,13 @@ const Menu = () => {
                   opacity: 1,
                   y: `-${buttonHeight * 2}px`,
                 });
-
                 setClicks(0);
               },
             });
-          } else {
-            gsap.to(sliderRef.current, {
-              y: `-${buttonHeight}px`,
-              duration: 0.3,
-              ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-            });
-          }
-          break;
-
-        case 2:
-          gsap.to(sliderRef.current, {
-            y: 0,
-            duration: 0.3,
-            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-            onComplete: () => {
-              gsap.set(sliderRef.current, {
-                opacity: 1,
-                y: `-${buttonHeight * 2}px`,
-              });
-
-              setClicks(0);
-            },
-          });
-          break;
-        default:
-          break;
+            break;
+          default:
+            break;
+        }
       }
     }
   }, [sliderRef, optionRef, clicks, isOpenSearch, isToggleMenu]);
