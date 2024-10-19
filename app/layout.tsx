@@ -33,7 +33,7 @@ export default function RootLayout({
             {children}
             <CookieModal />
             <Footer />
-            <Search placeholder="Search" contentData={contentData} />
+            <Search placeholder="Search..." contentData={contentData} />
           </main>
         </LocalProvider>
       </body>

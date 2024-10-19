@@ -36,7 +36,7 @@ export default function Hero() {
         <h1 className="text-4xl font-bold ">Your Website, Your Platform!</h1>
         <br />
         <Button
-          className="font-medium border-2 rounded-md border-[--border-color-secondary] bg-opacity-10 bg-neutral-950"
+          className="font-medium border-2 rounded-md border-[--border-color-secondary] bg-opacity-5 bg-neutral-950"
           name="roniebenitez01@gmail.com"
           size="lg"
           handleClick={EmailTo}

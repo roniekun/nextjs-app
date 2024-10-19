@@ -22,22 +22,23 @@ const Menu = () => {
     }
   };
 
-  useEffect(() => {
-    if (isOpenSearch) {
-      setClicks(0);
-    }
-  }, [isOpenSearch]);
-
   useLayoutEffect(() => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
 
     if (sliderRef) {
+      if (isOpenSearch) {
+        gsap.to(sliderRef.current, {
+          y: `-${buttonHeight * 2}px`,
+        });
+      }
+
       if (clicks == 0) {
         gsap.set(sliderRef.current, {
           y: `-${buttonHeight * 2}px`,
         });
       }
+
       gsap.registerPlugin(CustomEase);
       if (clicks == 1) {
         //display close
@@ -63,7 +64,7 @@ const Menu = () => {
         });
       }
     }
-  }, [sliderRef, optionRef, clicks]);
+  }, [sliderRef, optionRef, clicks, isOpenSearch]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>

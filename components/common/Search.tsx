@@ -23,26 +23,15 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
     if (searchRef) {
       if (isOpenSearch) {
         gsap.to(searchRef.current, {
-          display: "flex",
-
-          onComplete: () => {
-            gsap.to(searchRef.current, {
-              height: "70vh",
-              duration: 0.7,
-              ease: "customEase",
-            });
-          },
+          height: "70vh",
+          duration: 0.7,
+          ease: "customEase",
         });
       } else {
         gsap.to(searchRef.current, {
           height: 0,
           duration: 0.7,
           ease: "customEase",
-          onComplete: () => {
-            if (searchRef.current) {
-              searchRef.current.style.display = "none";
-            }
-          },
         });
       }
     }
@@ -51,14 +40,18 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   return (
     <div
       ref={searchRef}
-      className={`${isOpenSearch ? "h-[--hero-height]" : "h-0"}  ${
+      className={`${
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-200"
           : "bg-[--background-light] text-neutral-900"
-      } w-screen fixed  bottom-0 hidden`}
+      } w-screen overflow-hidden fixed bottom-0 h-0`}
     >
       <Container className="relative w-full justify-center items-center">
-        <SearchBar contentData={contentData} placeholder={placeholder} />
+        <SearchBar
+          className="overflow-y-scroll"
+          contentData={contentData}
+          placeholder={placeholder}
+        />
       </Container>
     </div>
   );
