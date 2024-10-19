@@ -25,7 +25,7 @@ const Header = () => {
         <div className="flex gap-2 justify-center items-center">
           <FaSearch
             type="button"
-            className="rounded-md bg-neutral-950 bg-opacity-10 p-1 h-full aspect-square cursor-pointer"
+            className="rounded-md bg-neutral-950 bg-opacity-10 p-1 h-8 aspect-square cursor-pointer"
             onClick={handleClick}
           />
           <Menu />

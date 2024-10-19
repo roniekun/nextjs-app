@@ -13,13 +13,13 @@ const Banner = () => {
           <div className="rounded-md border border-[--border-color-secondary] px-1">
             <h3
               style={{ fontFamily: "Montreal Mono, sans-serif" }}
-              className="text-green-500 font-bold uppercase whitespace-nowrap h-fit"
+              className="text-green-500 font-bold uppercase whitespace-nowrap h-fit select-none pointer-events-none"
             >
               Active now
             </h3>
           </div>
           <TextSlider
-            className="rounded-md border border-[--border-color-secondary]"
+            className="rounded-md border border-[--border-color-secondary] pointer-events-none"
             title="Available for freelance work - Available for freelance work - Available for freelance work - Available for freelance work - Available for freelance work -"
           />
           <ToggleTheme className="h-fit rounded-md border border-[--border-color-secondary]" />
