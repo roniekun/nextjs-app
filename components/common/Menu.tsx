@@ -6,7 +6,7 @@ import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
 
 const Menu = () => {
-  const { setToggleMenu } = useMenu();
+  const { setToggleMenu, isToggleMenu } = useMenu();
   const { setOpenSearch, isOpenSearch } = useSearch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
@@ -27,28 +27,42 @@ const Menu = () => {
     setButtonHeight(height);
 
     if (sliderRef) {
-      if (isOpenSearch) {
-        gsap.to(sliderRef.current, {
-          y: `-${buttonHeight * 2}px`,
-        });
-      }
-
-      if (clicks == 0) {
-        gsap.set(sliderRef.current, {
-          y: `-${buttonHeight * 2}px`,
-        });
-      }
-
       gsap.registerPlugin(CustomEase);
-      if (clicks == 1) {
-        //display close
-        gsap.to(sliderRef.current, {
-          y: `-${buttonHeight}px`,
-          duration: 0.3,
-          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        });
+
+      switch (clicks) {
+        case 0:
+          if (clicks == 0) {
+            gsap.set(sliderRef.current, {
+              y: `-${buttonHeight * 2}px`,
+            });
+          }
+          break;
+        case 1:
+          gsap.to(sliderRef.current, {
+            y: `-${buttonHeight}px`,
+            duration: 0.3,
+            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+          });
+          break;
+        case 2:
+          gsap.to(sliderRef.current, {
+            y: 0,
+            duration: 0.3,
+            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+            onComplete: () => {
+              gsap.set(sliderRef.current, {
+                opacity: 1,
+                y: `-${buttonHeight * 2}px`,
+              });
+
+              setClicks(0);
+            },
+          });
+          break;
+        default:
+          break;
       }
-      if (clicks == 2) {
+      if (isOpenSearch && isToggleMenu) {
         gsap.to(sliderRef.current, {
           y: 0,
           duration: 0.3,
@@ -64,7 +78,7 @@ const Menu = () => {
         });
       }
     }
-  }, [sliderRef, optionRef, clicks, isOpenSearch]);
+  }, [sliderRef, optionRef, clicks, isOpenSearch, isToggleMenu]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
