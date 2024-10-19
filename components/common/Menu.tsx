@@ -1,7 +1,7 @@
 "use client";
 import { useMenu } from "@/provider/context/MenuContext";
 import { useSearch } from "@/provider/context/SearchContext";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
 
@@ -22,12 +22,15 @@ const Menu = () => {
     }
   };
 
+  useEffect(() => {
+    if (isOpenSearch) {
+      setClicks(0);
+    }
+  }, [isOpenSearch]);
+
   useLayoutEffect(() => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
-    if (isOpenSearch) {
-      setClicks(2);
-    }
 
     if (sliderRef) {
       if (clicks == 0) {
@@ -60,7 +63,7 @@ const Menu = () => {
         });
       }
     }
-  }, [sliderRef, optionRef, clicks, isOpenSearch]);
+  }, [sliderRef, optionRef, clicks]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
