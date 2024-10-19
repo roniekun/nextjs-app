@@ -11,7 +11,7 @@ const Menu = () => {
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-  const [counter, setCounter] = useState<number>(2);
+  const [counter, setCounter] = useState<number>(0);
 
   gsap.registerPlugin(CustomEase);
 
@@ -43,6 +43,7 @@ const Menu = () => {
 
     switch (counter) {
       case 0:
+        setToggleMenu(false);
         gsap.to(sliderRef.current, {
           y: 0,
           duration: 0.3,
