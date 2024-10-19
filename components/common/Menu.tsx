@@ -37,13 +37,31 @@ const Menu = () => {
             });
           }
           break;
+
         case 1:
-          gsap.to(sliderRef.current, {
-            y: `-${buttonHeight}px`,
-            duration: 0.3,
-            ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-          });
+          if (isOpenSearch && isToggleMenu) {
+            gsap.to(sliderRef.current, {
+              y: 0,
+              duration: 0.3,
+              ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+              onComplete: () => {
+                gsap.set(sliderRef.current, {
+                  opacity: 1,
+                  y: `-${buttonHeight * 2}px`,
+                });
+
+                setClicks(0);
+              },
+            });
+          } else {
+            gsap.to(sliderRef.current, {
+              y: `-${buttonHeight}px`,
+              duration: 0.3,
+              ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+            });
+          }
           break;
+
         case 2:
           gsap.to(sliderRef.current, {
             y: 0,
@@ -61,21 +79,6 @@ const Menu = () => {
           break;
         default:
           break;
-      }
-      if (isOpenSearch && isToggleMenu) {
-        gsap.to(sliderRef.current, {
-          y: 0,
-          duration: 0.3,
-          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-          onComplete: () => {
-            gsap.set(sliderRef.current, {
-              opacity: 1,
-              y: `-${buttonHeight * 2}px`,
-            });
-
-            setClicks(0);
-          },
-        });
       }
     }
   }, [sliderRef, optionRef, clicks, isOpenSearch, isToggleMenu]);
