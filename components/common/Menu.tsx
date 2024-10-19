@@ -7,11 +7,10 @@ import gsap from "gsap";
 
 const Menu = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
-  const { setOpenSearch, isOpenSearch } = useSearch();
+  const { isOpenSearch } = useSearch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-  const [counter, setCounter] = useState<number>(0);
 
   gsap.registerPlugin(CustomEase);
 
@@ -20,29 +19,36 @@ const Menu = () => {
     setButtonHeight(height);
   }, [optionRef]);
 
+  let counter = 0;
+
   useEffect(() => {
-    if (isToggleMenu && isOpenSearch && counter == 1) {
+    if (isToggleMenu && isOpenSearch) {
       setToggleMenu(false);
+      counter = 0;
       gsap.to(sliderRef.current, {
         duration: 0.3,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         y: `-${buttonHeight * 2}px`,
-        onComplete: () => {
-          setCounter(2);
-        },
       });
     }
-  }, [isToggleMenu, isOpenSearch, counter]);
+  }, [isToggleMenu, isOpenSearch]);
 
   const handleClick = () => {
     if (counter < 2) {
-      setCounter((prevCount) => prevCount + 1);
-    } else {
-      setCounter(0);
+      counter++;
     }
 
     switch (counter) {
-      case 0:
+      case 1: //step down, label: "Close"
+        setToggleMenu(true);
+        gsap.to(sliderRef.current, {
+          y: `-${buttonHeight}px`,
+          duration: 0.3,
+          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        });
+
+        break;
+      case 2: //step down, label: "Menu"
         setToggleMenu(false);
         gsap.to(sliderRef.current, {
           y: 0,
@@ -52,30 +58,10 @@ const Menu = () => {
             gsap.set(sliderRef.current, {
               y: `-${buttonHeight * 2}px`,
             });
-            setCounter(0);
+            counter = 0; //reset, label: "Menu"
           },
         });
         break;
-
-      case 1:
-        gsap.to(sliderRef.current, {
-          y: `-${buttonHeight}px`,
-          duration: 0.3,
-          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        });
-
-        setToggleMenu(true);
-
-        break;
-
-      case 2:
-        setToggleMenu(false);
-        gsap.set(sliderRef.current, {
-          opacity: 1,
-          y: `-${buttonHeight * 2}px`,
-        });
-        break;
-
       default:
         break;
     }
@@ -90,7 +76,7 @@ const Menu = () => {
       >
         <div
           ref={sliderRef}
-          className="flex flex-col relative overflow-visible"
+          className="flex flex-col relative overflow-visible -translate-y-2/3"
         >
           <div
             ref={optionRef}
