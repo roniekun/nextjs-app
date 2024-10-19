@@ -7,7 +7,7 @@ import gsap from "gsap";
 
 const Menu = () => {
   const { setToggleMenu } = useMenu();
-  const { setOpenSearch } = useSearch();
+  const { setOpenSearch, isOpenSearch } = useSearch();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
@@ -25,6 +25,9 @@ const Menu = () => {
   useLayoutEffect(() => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
+    if (isOpenSearch) {
+      setClicks(0);
+    }
 
     if (sliderRef) {
       if (clicks == 0) {
@@ -56,7 +59,7 @@ const Menu = () => {
         });
       }
     }
-  }, [sliderRef, optionRef, clicks]);
+  }, [sliderRef, optionRef, clicks, isOpenSearch]);
 
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>

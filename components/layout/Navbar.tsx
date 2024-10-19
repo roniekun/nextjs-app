@@ -15,6 +15,7 @@ export default function Navbar() {
   const { theme } = useTheme();
   const { isToggleMenu } = useMenu();
   const { isDesktop } = useLayout();
+  const { isOpenSearch } = useSearch();
   const navRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
 
