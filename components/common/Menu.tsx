@@ -26,7 +26,7 @@ const Menu = () => {
     const height = optionRef.current?.getBoundingClientRect().height ?? 0;
     setButtonHeight(height);
     if (isOpenSearch) {
-      setClicks(0);
+      setClicks(2);
     }
 
     if (sliderRef) {
@@ -37,6 +37,7 @@ const Menu = () => {
       }
       gsap.registerPlugin(CustomEase);
       if (clicks == 1) {
+        //display close
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
           duration: 0.3,
