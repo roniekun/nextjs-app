@@ -5,10 +5,20 @@ import Container from "../lib/ui/container";
 import { FaSearch } from "react-icons/fa";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const Header = () => {
   const { setOpenSearch } = useSearch();
   const { setToggleMenu, isToggleMenu } = useMenu();
+  // const headerRef = useRef<HTMLDivElement | null>(null);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    gsap.to(".header", { opacity: 1, duration: 0.3, delay: 0.1 });
+  }, [pathname]);
 
   const handleClick = () => {
     setOpenSearch((prevState) => !prevState);
@@ -18,7 +28,7 @@ const Header = () => {
   return (
     <header
       className={`header backdrop-blur-lg overflow-hidden h-[--header-height] 
-         bg-transparent flex flex-col justify-center w-full sticky z-20 top-0`}
+         bg-transparent flex flex-col justify-center w-full sticky z-20 top-0 opacity-0`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
