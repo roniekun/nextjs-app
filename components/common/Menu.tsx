@@ -1,9 +1,9 @@
 "use client";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useSearch } from "@/provider/context/SearchContext";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
 
 const Menu = () => {
   const { setToggleMenu } = useMenu();
@@ -20,10 +20,24 @@ const Menu = () => {
 
   const [counter, setCounter] = useState<number>(0);
 
+  const pathname = usePathname();
+
+  useEffect(() => {
+    gsap.to(sliderRef.current, {
+      y: 0,
+      duration: 0.3,
+      ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+      onComplete: () => {
+        gsap.set(sliderRef.current, {
+          y: `-${buttonHeight * 2}px`,
+        });
+      },
+    });
+  }, [pathname]);
+
   const handleClick = () => {
     switch (counter) {
       case 0: //step down, label: "Close"
-        console.log(`this should log 0 = ${counter}`);
         setToggleMenu(true);
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
