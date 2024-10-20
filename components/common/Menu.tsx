@@ -19,7 +19,7 @@ const Menu = () => {
     setButtonHeight(height);
   }, [optionRef]);
 
-  let counter: number = 0;
+  const [counter, setCounter] = useState<number>(0);
 
   // useEffect(() => {
   //   if (isToggleMenu && isOpenSearch) {
@@ -37,22 +37,19 @@ const Menu = () => {
     switch (counter) {
       case 0: //step down, label: "Close"
         console.log(`this should log 0 = ${counter}`);
-
         setToggleMenu(true);
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           onComplete: () => {
-            counter++;
-            console.log(`should log 1 = ${counter}`);
+            setCounter((prevCount) => prevCount + 1);
           },
         });
         break;
 
       case 1: //step down, label: "Menu"
         console.log(`this should log 1 = ${counter}`);
-
         setToggleMenu(false);
         gsap.to(sliderRef.current, {
           y: 0,
@@ -62,10 +59,7 @@ const Menu = () => {
             gsap.set(sliderRef.current, {
               y: `-${buttonHeight * 2}px`,
             });
-            counter = 0; //reset, label: "Menu"
-            setTimeout(() => {
-              console.log(`0 = ${counter}`);
-            }, 300);
+            setCounter(0); //reset, label: "Menu"
           },
         });
         break;
