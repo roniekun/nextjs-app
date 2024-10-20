@@ -6,8 +6,7 @@ import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
 
 const Menu = () => {
-  const { setToggleMenu, isToggleMenu } = useMenu();
-  const { isOpenSearch } = useSearch();
+  const { setToggleMenu } = useMenu();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
@@ -20,20 +19,6 @@ const Menu = () => {
   }, [optionRef]);
 
   const [counter, setCounter] = useState<number>(0);
-
-  useEffect(() => {
-    if (isToggleMenu && isOpenSearch) {
-      setToggleMenu(false);
-      gsap.to(sliderRef.current, {
-        duration: 0.3,
-        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        y: `-${buttonHeight * 2}px`,
-        onComplete: () => {
-          setCounter(0);
-        },
-      });
-    }
-  }, [isToggleMenu, isOpenSearch]);
 
   const handleClick = () => {
     switch (counter) {

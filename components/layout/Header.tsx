@@ -8,7 +8,7 @@ import { useMenu } from "@/provider/context/MenuContext";
 
 const Header = () => {
   const { setOpenSearch } = useSearch();
-  const { setToggleMenu } = useMenu();
+  const { setToggleMenu, isToggleMenu } = useMenu();
 
   const handleClick = () => {
     setOpenSearch((prevState) => !prevState);
@@ -23,11 +23,14 @@ const Header = () => {
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo />
         <div className="flex gap-2 justify-center items-center">
-          <FaSearch
-            type="button"
-            className="rounded-md bg-neutral-950 bg-opacity-10 p-2 h-8 w-8 fill-current text-current aspect-square cursor-pointer"
-            onClick={handleClick}
-          />
+          {!isToggleMenu && (
+            <FaSearch
+              type="button"
+              className="rounded-md bg-neutral-950 bg-opacity-10 p-2 h-8 w-8 fill-current text-current aspect-square cursor-pointer"
+              onClick={handleClick}
+            />
+          )}
+
           <Menu />
         </div>
       </Container>
