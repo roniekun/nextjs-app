@@ -19,19 +19,19 @@ const Menu = () => {
     setButtonHeight(height);
   }, [optionRef]);
 
-  let counter = 0;
+  let counter: number = 0;
 
-  useEffect(() => {
-    if (isToggleMenu && isOpenSearch) {
-      setToggleMenu(false);
-      counter = 0;
-      gsap.to(sliderRef.current, {
-        duration: 0.3,
-        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        y: `-${buttonHeight * 2}px`,
-      });
-    }
-  }, [isToggleMenu, isOpenSearch]);
+  // useEffect(() => {
+  //   if (isToggleMenu && isOpenSearch) {
+  //     setToggleMenu(false);
+  //     counter = 0;
+  //     gsap.to(sliderRef.current, {
+  //       duration: 0.3,
+  //       ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+  //       y: `-${buttonHeight * 2}px`,
+  //     });
+  //   }
+  // }, [isToggleMenu, isOpenSearch]);
 
   const handleClick = () => {
     if (counter < 2) {
@@ -41,6 +41,7 @@ const Menu = () => {
     switch (counter) {
       case 1: //step down, label: "Close"
         setToggleMenu(true);
+        console.log(counter);
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
           duration: 0.3,
@@ -49,6 +50,8 @@ const Menu = () => {
 
         break;
       case 2: //step down, label: "Menu"
+        console.log(counter);
+
         setToggleMenu(false);
         gsap.to(sliderRef.current, {
           y: 0,
@@ -59,6 +62,9 @@ const Menu = () => {
               y: `-${buttonHeight * 2}px`,
             });
             counter = 0; //reset, label: "Menu"
+            setTimeout(() => {
+              console.log(counter);
+            }, 300);
           },
         });
         break;
