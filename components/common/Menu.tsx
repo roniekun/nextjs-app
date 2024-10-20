@@ -31,6 +31,7 @@ const Menu = () => {
         gsap.set(sliderRef.current, {
           y: `-${buttonHeight * 2}px`,
         });
+        setCounter(0);
       },
     });
   }, [pathname]);
