@@ -36,17 +36,22 @@ const Menu = () => {
   const handleClick = () => {
     switch (counter) {
       case 0: //step down, label: "Close"
+        console.log(`this should log 0 = ${counter}`);
+
         setToggleMenu(true);
-        console.log(counter);
         gsap.to(sliderRef.current, {
           y: `-${buttonHeight}px`,
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+          onComplete: () => {
+            counter++;
+            console.log(`should log 1 = ${counter}`);
+          },
         });
-        counter = counter + 1;
         break;
+
       case 1: //step down, label: "Menu"
-        console.log(counter);
+        console.log(`this should log 1 = ${counter}`);
 
         setToggleMenu(false);
         gsap.to(sliderRef.current, {
@@ -59,7 +64,7 @@ const Menu = () => {
             });
             counter = 0; //reset, label: "Menu"
             setTimeout(() => {
-              console.log(counter);
+              console.log(`0 = ${counter}`);
             }, 300);
           },
         });
