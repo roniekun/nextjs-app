@@ -21,17 +21,19 @@ const Menu = () => {
 
   const [counter, setCounter] = useState<number>(0);
 
-  // useEffect(() => {
-  //   if (isToggleMenu && isOpenSearch) {
-  //     setToggleMenu(false);
-  //     counter = 0;
-  //     gsap.to(sliderRef.current, {
-  //       duration: 0.3,
-  //       ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-  //       y: `-${buttonHeight * 2}px`,
-  //     });
-  //   }
-  // }, [isToggleMenu, isOpenSearch]);
+  useEffect(() => {
+    if (isToggleMenu && isOpenSearch) {
+      setToggleMenu(false);
+      gsap.to(sliderRef.current, {
+        duration: 0.3,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        y: `-${buttonHeight * 2}px`,
+        onComplete: () => {
+          setCounter(0);
+        },
+      });
+    }
+  }, [isToggleMenu, isOpenSearch]);
 
   const handleClick = () => {
     switch (counter) {
