@@ -34,12 +34,8 @@ const Menu = () => {
   // }, [isToggleMenu, isOpenSearch]);
 
   const handleClick = () => {
-    if (counter < 2) {
-      counter++;
-    }
-
     switch (counter) {
-      case 1: //step down, label: "Close"
+      case 0: //step down, label: "Close"
         setToggleMenu(true);
         console.log(counter);
         gsap.to(sliderRef.current, {
@@ -49,7 +45,7 @@ const Menu = () => {
         });
 
         break;
-      case 2: //step down, label: "Menu"
+      case 1: //step down, label: "Menu"
         console.log(counter);
 
         setToggleMenu(false);
@@ -70,6 +66,9 @@ const Menu = () => {
         break;
       default:
         break;
+    }
+    if (counter < 1) {
+      counter++;
     }
   };
   return (
