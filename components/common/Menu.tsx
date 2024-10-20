@@ -43,7 +43,7 @@ const Menu = () => {
           duration: 0.3,
           ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
         });
-
+        counter = counter + 1;
         break;
       case 1: //step down, label: "Menu"
         console.log(counter);
@@ -67,10 +67,8 @@ const Menu = () => {
       default:
         break;
     }
-    if (counter < 1) {
-      counter++;
-    }
   };
+
   return (
     <div style={{ fontFamily: "Neue Bit , Mori" }}>
       <button
