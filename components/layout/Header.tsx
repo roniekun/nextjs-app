@@ -31,7 +31,7 @@ const Header = () => {
          bg-transparent flex flex-col justify-center w-full sticky z-20 top-0 opacity-0`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
-        <Logo />
+        <Logo className={`${isToggleMenu && "pointer-events-none"}`} />
         <div className="flex gap-2 justify-center items-center">
           {!isToggleMenu && (
             <FaSearch
