@@ -21,19 +21,24 @@ const Menu = () => {
   const [counter, setCounter] = useState<number>(0);
 
   const pathname = usePathname();
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    gsap.to(sliderRef.current, {
-      y: 0,
-      duration: 0.3,
-      ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-      onComplete: () => {
-        gsap.set(sliderRef.current, {
-          y: `-${buttonHeight * 2}px`,
-        });
-        setCounter(0);
-      },
-    });
+    if (isInitialMount.current) {
+      isInitialMount.current = false; // Set it to false after the initial load
+    } else {
+      gsap.to(sliderRef.current, {
+        y: 0,
+        duration: 0.3,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+        onComplete: () => {
+          gsap.set(sliderRef.current, {
+            y: `-${buttonHeight * 2}px`,
+          });
+          setCounter(0);
+        },
+      });
+    }
   }, [pathname]);
 
   const handleClick = () => {
