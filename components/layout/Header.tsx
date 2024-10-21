@@ -23,19 +23,15 @@ const Header = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if (isScrolled && theme === "light") {
-      gsap.to(".header", {
-        backgroundColor: "#171717",
-        color: "#ffffff",
-        duration: 0.3,
-      });
-    } else {
-      gsap.to(".header", {
-        backgroundColor: "transparent",
-        color: "#171717",
-        duration: 0.3,
-      });
-    }
+    gsap.to(".header", {
+      backgroundColor:
+        isScrolled && theme === "light" ? "#171717" : "transparent",
+      color:
+        theme === "dark" || (isScrolled && theme === "light")
+          ? "#ffffff"
+          : "#171717",
+      duration: 0.3,
+    });
   }, [isScrolled, theme]);
 
   const handleClick = () => {
@@ -54,7 +50,7 @@ const Header = () => {
           {!isToggleMenu && (
             <FaSearch
               type="button"
-              className="rounded-md bg-neutral-950 bg-opacity-10 p-2 h-8 w-8 fill-current text-current aspect-square cursor-pointer"
+              className="rounded-md bg-neutral-500 bg-opacity-15 p-2 h-8 w-8 fill-current text-current aspect-square cursor-pointer"
               onClick={handleClick}
             />
           )}
