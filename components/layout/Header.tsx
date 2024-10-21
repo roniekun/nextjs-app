@@ -32,7 +32,7 @@ const Header = () => {
     } else {
       gsap.to(".header", {
         backgroundColor: "transparent",
-        color: "#ffffff",
+        color: "#171717",
         duration: 0.3,
       });
     }
