@@ -40,15 +40,15 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   return (
     <div
       ref={searchRef}
-      className={`${
-        theme === "dark"
-          ? "bg-[--background-dark] text-neutral-300"
-          : "bg-[--background-light] text-neutral-900"
-      } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
+      className={`w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
     >
       <Container className="relative w-full justify-center items-center">
         <SearchBar
-          className="overflow-y-scroll"
+          className={`${
+            theme === "dark"
+              ? "bg-[--background-dark] text-neutral-300"
+              : "bg-[--background-light] text-neutral-900"
+          } `}
           contentData={contentData}
           placeholder={placeholder}
         />
