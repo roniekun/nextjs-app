@@ -6,12 +6,14 @@ import { FaSearch } from "react-icons/fa";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
+import { useTheme } from "@/provider/context/ThemeContext";
 
 const Header = () => {
   const { setOpenSearch } = useSearch();
   const { setToggleMenu, isToggleMenu } = useMenu();
+  const { isScrolled } = useTheme();
   // const headerRef = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();
@@ -19,6 +21,14 @@ const Header = () => {
   useEffect(() => {
     gsap.to(".header", { opacity: 1, duration: 0.3, delay: 0.1 });
   }, [pathname]);
+
+  useEffect(() => {
+    if (isScrolled) {
+      gsap.to(".header", { backgroundColor: "#fff", duration: 0.3 });
+    } else {
+      gsap.to(".header", { backgroundColor: "transparent", duration: 0.3 });
+    }
+  }, [isScrolled]);
 
   const handleClick = () => {
     setOpenSearch((prevState) => !prevState);

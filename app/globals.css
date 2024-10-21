@@ -78,6 +78,7 @@ body[theme="dark"] {
 
 html,
 body {
+  user-select: none;
   scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--text-color-primary);
