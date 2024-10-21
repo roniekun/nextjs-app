@@ -24,9 +24,17 @@ const Header = () => {
 
   useEffect(() => {
     if (isScrolled) {
-      gsap.to(".header", { backgroundColor: "#fff", duration: 0.3 });
+      gsap.to(".header", {
+        backgroundColor: "#171717",
+        color: "#ffffff",
+        duration: 0.3,
+      });
     } else {
-      gsap.to(".header", { backgroundColor: "transparent", duration: 0.3 });
+      gsap.to(".header", {
+        backgroundColor: "transparent",
+        color: "#ffffff",
+        duration: 0.3,
+      });
     }
   }, [isScrolled]);
 
