@@ -13,7 +13,7 @@ import { useTheme } from "@/provider/context/ThemeContext";
 const Header = () => {
   const { setOpenSearch } = useSearch();
   const { setToggleMenu, isToggleMenu } = useMenu();
-  const { isScrolled } = useTheme();
+  const { isScrolled, theme } = useTheme();
   // const headerRef = useRef<HTMLDivElement | null>(null);
 
   const pathname = usePathname();
@@ -23,7 +23,7 @@ const Header = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if (isScrolled) {
+    if (isScrolled && theme === "light") {
       gsap.to(".header", {
         backgroundColor: "#171717",
         color: "#ffffff",
@@ -36,7 +36,7 @@ const Header = () => {
         duration: 0.3,
       });
     }
-  }, [isScrolled]);
+  }, [isScrolled, theme]);
 
   const handleClick = () => {
     setOpenSearch((prevState) => !prevState);
