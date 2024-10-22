@@ -8,8 +8,7 @@ import Navbar from "@/components/layout/Navbar";
 import Banner from "@/components/layout/Banner";
 import Search from "@/components/common/Search";
 import { contentData } from "@/data/content-data";
-import store from "@/store/store";
-import { Provider } from "react-redux";
+import ClientProvider from "@/provider/ClientProvider";
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
@@ -24,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Provider store={store}>
+        <ClientProvider>
           <LocalProvider>
             <main
               className="flex flex-col p-0"
@@ -39,7 +38,7 @@ export default function RootLayout({
               <Search placeholder="Search..." contentData={contentData} />
             </main>
           </LocalProvider>
-        </Provider>
+        </ClientProvider>
       </body>
     </html>
   );
