@@ -1,11 +1,10 @@
 "use client";
 
-import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { twMerge } from "tailwind-merge";
 import { useEffect } from "react";
 import { toggleTheme } from "@/store/slices/themeSlice";
-import { useAppDispatch } from "@/store/hooks/hooks";
 
 type Props = {
   className?: string;

@@ -8,15 +8,12 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
-import { useAppSelector } from "@/store/hooks/hooks";
-import { useAppDispatch } from "@/store/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
 import {
   setOpenSearch,
   setInfocus,
   setQuery,
   addSearchItem,
-  toggleOpenSearch,
-  setSearchItems,
 } from "@/store/slices/searchSlice";
 import { SearchHistoryProps } from "@/store/slices/searchSlice";
 

@@ -3,22 +3,21 @@ import Logo from "../common/Logo";
 import Menu from "../common/Menu";
 import Container from "../lib/ui/container";
 import { FaSearch } from "react-icons/fa";
-import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { useTheme } from "@/provider/context/ThemeContext";
-import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
+import { setOpenSearch } from "@/store/slices/searchSlice";
 
 const Header = () => {
-  const { setOpenSearch } = useSearch();
   const { setToggleMenu, isToggleMenu } = useMenu();
   const { isScrolled } = useTheme();
   // const headerRef = useRef<HTMLDivElement | null>(null);
 
   const theme = useAppSelector((state) => state.theme);
-
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const Header = () => {
   }, [isScrolled, theme]);
 
   const handleClick = () => {
-    setOpenSearch((prevState) => !prevState);
+    dispatch(setOpenSearch(false));
     setToggleMenu(false);
   };
 

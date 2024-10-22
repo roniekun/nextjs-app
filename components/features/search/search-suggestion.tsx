@@ -9,8 +9,7 @@ import {
   addSearchItem,
   setInfocus,
 } from "@/store/slices/searchSlice";
-import { useAppDispatch } from "@/store/hooks/hooks";
-import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks";
 
 type Props = {
   filteredResults?: IContentData[];
