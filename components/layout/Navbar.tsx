@@ -37,14 +37,11 @@ export default function Navbar() {
 
   useLayoutEffect(() => {
     if (isToggleMenu) {
-      tl.set(".navbar", {
-        display: "flex",
-      }) // Sets the display instantly
-        .to(".navbar", {
-          height: isDesktop ? "100vh" : "auto",
-          duration: 0.7,
-          ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-        });
+      tl.to(".navbar", {
+        height: isDesktop ? "100vh" : "auto",
+        duration: 0.7,
+        ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
+      });
 
       if (contentRef.current) {
         tl.fromTo(
@@ -56,7 +53,7 @@ export default function Navbar() {
             duration: 0.5,
             ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
           },
-          "-=0.5" // Start this animation 0.5 seconds earlier
+          "-=0.5"
         );
       }
     } else {
@@ -64,14 +61,14 @@ export default function Navbar() {
         height: 0,
         duration: 0.7,
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
-      }).set(".navbar", { display: "none" }); // Hide it after shrinking
+      });
     }
   }, [isToggleMenu, navRef, isDesktop, contentRef]);
 
   return (
     <nav
       ref={navRef}
-      className={`navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-10 flex-col lg:place-items-end rounded-b-md shadow-inner`}
+      className={`navbar overflow-hidden h-0 fixed left-0 top-0 w-screen z-10 flex-col lg:place-items-end rounded-b-md shadow-inner`}
     >
       <Container>
         <div
