@@ -14,10 +14,12 @@ type Props = {
   setFilteredSearchItems: React.Dispatch<
     React.SetStateAction<SearchHistoryProps[]>
   >;
+  selectedIndex: number | null;
 };
 const SearchHistoryModal: React.FC<Props> = ({
   filteredSearchItems,
   setFilteredSearchItems,
+  selectedIndex,
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -69,7 +71,9 @@ const SearchHistoryModal: React.FC<Props> = ({
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
-          className="flex list-none w-full relative justify-between gap-x-1"
+          className={`${
+            selectedIndex === idx && "bg-neutral-900 bg-opacity-15"
+          } flex list-none w-full relative justify-between gap-x-1`}
         >
           <UpdateOutlinedIcon />
           <a

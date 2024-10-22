@@ -111,7 +111,7 @@ const SearchBar: React.FC<SearchProps> = ({
       );
     } else if (e.key === "ArrowUp") {
       setSelectedIndex((prevIndex) =>
-        prevIndex !== null && prevIndex <= filteredSearchItems.length - 1
+        prevIndex !== null && prevIndex >= filteredSearchItems.length - 1
           ? prevIndex - 1
           : 0
       );
@@ -163,6 +163,7 @@ const SearchBar: React.FC<SearchProps> = ({
           <div className="relative h-auto">
             <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">
               <SearchHistoryModal
+                selectedIndex={selectedIndex ?? null}
                 filteredSearchItems={filteredSearchItems}
                 setFilteredSearchItems={setFilteredSearchItems}
               />
