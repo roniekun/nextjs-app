@@ -45,18 +45,22 @@ const SearchBar: React.FC<SearchProps> = ({
   // useCallback and debounce/lodash
   const debounceHandleInputChange = useCallback(
     debounce((enteredQuery: string) => {
-      const formattedQuery = enteredQuery.trim().toLowerCase();
+      if (enteredQuery === "") {
+        setFilteredSearchItems([]);
+      } else {
+        const formattedQuery = enteredQuery.trim().toLowerCase();
 
-      const filteredData = contentData?.filter((data) =>
-        data.title.toLowerCase().trim().includes(formattedQuery)
-      );
-      const newFilteredSearchItem = searchItems.filter((item) =>
-        item.search.toLowerCase().trim().includes(formattedQuery)
-      );
-      setFilteredSearchItems(newFilteredSearchItem);
+        const filteredData = contentData?.filter((data) =>
+          data.title.toLowerCase().trim().includes(formattedQuery)
+        );
+        const newFilteredSearchItem = searchItems.filter((item) =>
+          item.search.toLowerCase().trim().includes(formattedQuery)
+        );
+        setFilteredSearchItems(newFilteredSearchItem);
 
-      setFilteredResult(filteredData);
-      dispatch(setInfocus(true));
+        setFilteredResult(filteredData);
+        dispatch(setInfocus(true));
+      }
     }, 300),
     [contentData, searchItems, isInfocus]
   );
@@ -73,6 +77,7 @@ const SearchBar: React.FC<SearchProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
+    setFilteredSearchItems([...searchItems]);
   };
 
   const handleSearch = () => {
