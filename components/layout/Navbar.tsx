@@ -3,7 +3,7 @@ import Links from "../lib/links";
 import Social from "../lib/social";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import Container from "../lib/ui/container";
@@ -24,9 +24,13 @@ export default function Navbar() {
     }
   }, [isToggleMenu]);
 
-  useLayoutEffect(() => {
-    console.log(theme);
-  }, [theme]);
+  useEffect(() => {
+    if (navRef.current) {
+      navRef.current.style.backgroundColor =
+        theme === "dark" ? "#171717" : "#ffffff";
+      navRef.current.style.color = theme === "dark" ? "#ffffff" : "#171717";
+    }
+  }, [theme, navRef]);
 
   gsap.registerPlugin(CustomEase);
   const tl = gsap.timeline();
@@ -35,8 +39,6 @@ export default function Navbar() {
     if (isToggleMenu) {
       tl.set(".navbar", {
         display: "flex",
-        backgroundColor: theme === "dark" ? "#171717" : "#ffffff",
-        color: theme === "dark" ? "#ffffff" : "#171717",
       }) // Sets the display instantly
         .to(".navbar", {
           height: isDesktop ? "100vh" : "auto",
@@ -64,7 +66,7 @@ export default function Navbar() {
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
       }).set(".navbar", { display: "none" }); // Hide it after shrinking
     }
-  }, [isToggleMenu, navRef, isDesktop, contentRef, theme]);
+  }, [isToggleMenu, navRef, isDesktop, contentRef]);
 
   return (
     <nav
