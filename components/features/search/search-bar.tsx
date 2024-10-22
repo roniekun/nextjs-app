@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
@@ -79,10 +79,13 @@ const SearchBar: React.FC<SearchProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     setInFocus(true);
-    if (e) {
-      setQuery(e.currentTarget.value);
-    }
   };
+
+  useEffect(() => {
+    if (isInFocus) {
+      setFilteredSearchItems((prevState) => [...prevState]);
+    }
+  }, [isInFocus]);
 
   const handleSearch = () => {
     if (query) {
