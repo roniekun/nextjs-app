@@ -8,12 +8,10 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
-import filterSearchItems from "./util/filterSearchItems";
 import { useAppSelector } from "@/store/hooks/hooks";
 import { useAppDispatch } from "@/store/hooks/hooks";
 import {
   setOpenSearch,
-  setSearchItems,
   setInfocus,
   setQuery,
   addSearchItem,
@@ -32,7 +30,7 @@ const SearchBar: React.FC<SearchProps> = ({
   contentData,
 }) => {
   const dispatch = useAppDispatch();
-  const { isInfocus, isOpenSearch, searchItems, query } = useAppSelector(
+  const { isInfocus, searchItems, query } = useAppSelector(
     (state) => state.search
   );
   const router = useRouter();
@@ -78,9 +76,9 @@ const SearchBar: React.FC<SearchProps> = ({
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
-    dispatch(setInfocus(true));
-  };
+  // const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
+  //   dispatch(setInfocus(true));
+  // };
 
   // useEffect(() => {
   //   if (isInfocus) {
@@ -122,9 +120,9 @@ const SearchBar: React.FC<SearchProps> = ({
         <input
           value={query ?? ""}
           ref={inputRef}
-          onClick={(e) => {
-            handleClick(e);
-          }}
+          // onClick={(e) => {
+          //   handleClick(e);
+          // }}
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
