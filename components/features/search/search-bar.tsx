@@ -83,14 +83,14 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   const handleSearch = () => {
-    if (query) {
-      const trimQuery = query.trim();
+    if (enteredQuery) {
+      const trimQuery = enteredQuery.trim();
       const newSearch: SearchHistoryProps = {
         search: trimQuery,
         id: searchItems.length + 1,
         date: Date.now(),
       };
-
+      dispatch(setQuery(trimQuery));
       dispatch(addSearchItem(newSearch));
       dispatch(setInfocus(false));
       dispatch(setOpenSearch(false));
@@ -121,17 +121,17 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   useEffect(() => {
+    console.log(selectedIndex);
     const filteredItem = filteredSearchItems.find(
       (_, index) => index === selectedIndex
     );
     if (filteredItem) {
       setEnteredQuery(filteredItem.search ?? "");
     }
-    dispatch(setQuery(""));
   }, [selectedIndex]);
 
   const handleClear = () => {
-    dispatch(setQuery(""));
+    setEnteredQuery("");
   };
 
   return (
