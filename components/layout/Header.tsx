@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { useTheme } from "@/provider/context/ThemeContext";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
-import { setOpenSearch } from "@/store/slices/searchSlice";
+import { toggleOpenSearch } from "@/store/slices/searchSlice";
 
 const Header = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
@@ -37,7 +37,7 @@ const Header = () => {
   }, [isScrolled, theme]);
 
   const handleOpenSearch = () => {
-    dispatch(setOpenSearch(true));
+    dispatch(toggleOpenSearch());
   };
 
   return (

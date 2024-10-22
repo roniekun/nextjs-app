@@ -3,7 +3,7 @@ import Links from "../lib/links";
 import Social from "../lib/social";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import Container from "../lib/ui/container";
@@ -18,18 +18,26 @@ export default function Navbar() {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const theme = useAppSelector((state) => state.theme);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isToggleMenu) {
       setOpenSearch(false);
     }
   }, [isToggleMenu]);
 
+  useLayoutEffect(() => {
+    console.log(theme);
+  }, [theme]);
+
   gsap.registerPlugin(CustomEase);
   const tl = gsap.timeline();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isToggleMenu) {
-      tl.set(".navbar", { display: "flex" }) // Sets the display instantly
+      tl.set(".navbar", {
+        display: "flex",
+        backgroundColor: theme === "dark" ? "#171717" : "#ffffff",
+        color: theme === "dark" ? "#ffffff" : "#171717",
+      }) // Sets the display instantly
         .to(".navbar", {
           height: isDesktop ? "100vh" : "auto",
           duration: 0.7,
@@ -56,16 +64,12 @@ export default function Navbar() {
         ease: CustomEase.create("customEase", "0.76, 0, 0.24, 1"),
       }).set(".navbar", { display: "none" }); // Hide it after shrinking
     }
-  }, [isToggleMenu, navRef, isDesktop, contentRef]);
+  }, [isToggleMenu, navRef, isDesktop, contentRef, theme]);
 
   return (
     <nav
       ref={navRef}
-      className={`${
-        theme === "dark"
-          ? "bg-[--background-dark] text-neutral-200"
-          : "bg-[--background-light] text-neutral-900"
-      } navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-10 flex-col lg:place-items-end rounded-b-md shadow-inner`}
+      className={`navbar overflow-hidden hidden h-0 fixed left-0 top-0 w-screen z-10 flex-col lg:place-items-end rounded-b-md shadow-inner`}
     >
       <Container>
         <div

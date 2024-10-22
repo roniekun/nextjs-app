@@ -3,14 +3,16 @@ import { useMenu } from "@/provider/context/MenuContext";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
+import { useAppDispatch } from "@/store/hooks/hooks";
+import { setOpenSearch } from "@/store/slices/searchSlice";
 import { usePathname } from "next/navigation";
 
 const Menu = () => {
-  const { setToggleMenu } = useMenu();
+  const { setToggleMenu, isToggleMenu } = useMenu();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const optionRef = useRef<HTMLDivElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number>(0);
-
+  const dispatch = useAppDispatch();
   gsap.registerPlugin(CustomEase);
 
   useLayoutEffect(() => {
@@ -22,6 +24,10 @@ const Menu = () => {
 
   const pathname = usePathname();
   const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    dispatch(setOpenSearch(false));
+  }, [isToggleMenu]);
 
   useEffect(() => {
     if (isInitialMount.current) {
