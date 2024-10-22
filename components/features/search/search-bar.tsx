@@ -50,7 +50,6 @@ const SearchBar: React.FC<SearchProps> = ({
 
       if (formattedQuery === "") {
         setFilteredResult([]);
-        dispatch(setInfocus(false));
       } else {
         const filteredData = contentData?.filter((data) =>
           data.title.toLowerCase().trim().includes(formattedQuery)
@@ -112,7 +111,7 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   const handleClear = () => {
-    dispatch(setQuery(null));
+    dispatch(setQuery(""));
     dispatch(setInfocus(false));
   };
 

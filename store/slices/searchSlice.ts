@@ -11,14 +11,14 @@ interface SearchState {
   isOpenSearch: boolean;
   isInfocus: boolean;
   searchItems: SearchHistoryProps[];
-  query: null | string;
+  query: string;
 }
 
 const initialState: SearchState = {
   isOpenSearch: false,
   isInfocus: false,
   searchItems: [],
-  query: null,
+  query: "",
 };
 
 const searchSlice = createSlice({
@@ -41,7 +41,7 @@ const searchSlice = createSlice({
       state.searchItems = action.payload;
     },
 
-    setQuery: (state, action: PayloadAction<string | null>) => {
+    setQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
 
