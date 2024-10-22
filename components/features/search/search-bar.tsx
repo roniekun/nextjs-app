@@ -82,11 +82,11 @@ const SearchBar: React.FC<SearchProps> = ({
     dispatch(setInfocus(true));
   };
 
-  useEffect(() => {
-    if (isInfocus) {
-      setFilteredSearchItems((prevState) => [...prevState]);
-    }
-  }, [isInfocus]);
+  // useEffect(() => {
+  //   if (isInfocus) {
+  //     setFilteredSearchItems((prevState) => [...prevState]);
+  //   }
+  // }, [isInfocus]);
 
   const handleSearch = () => {
     if (query) {
@@ -96,8 +96,6 @@ const SearchBar: React.FC<SearchProps> = ({
         id: searchItems.length + 1,
         date: Date.now(),
       };
-
-      dispatch(addSearchItem(newSearch));
 
       dispatch(addSearchItem(newSearch));
 
