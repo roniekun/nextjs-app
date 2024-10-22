@@ -99,7 +99,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   // Saving the theme to local storage
   useEffect(() => {
-    document.body.setAttribute("theme", theme);
     localStorage.setItem("theme", JSON.stringify(theme));
   }, [theme]);
 
