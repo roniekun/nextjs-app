@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
@@ -15,6 +15,7 @@ import {
   setInfocus,
   setQuery,
   addSearchItem,
+  toggleOpenSearch,
 } from "@/store/slices/searchSlice";
 import { SearchHistoryProps } from "@/store/slices/searchSlice";
 
@@ -50,6 +51,7 @@ const SearchBar: React.FC<SearchProps> = ({
 
       if (formattedQuery === "") {
         setFilteredResult([]);
+        dispatch(setInfocus(false));
       } else {
         const filteredData = contentData?.filter((data) =>
           data.title.toLowerCase().trim().includes(formattedQuery)
@@ -77,15 +79,15 @@ const SearchBar: React.FC<SearchProps> = ({
     }
   };
 
-  // const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
-  //   dispatch(setInfocus(true));
-  // };
+  const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
+    dispatch(setInfocus(true));
+  };
 
-  // useEffect(() => {
-  //   if (isInfocus) {
-  //     setFilteredSearchItems((prevState) => [...prevState]);
-  //   }
-  // }, [isInfocus]);
+  useEffect(() => {
+    if (isInfocus) {
+      setFilteredSearchItems((prevState) => [...prevState]);
+    }
+  }, [isInfocus]);
 
   const handleSearch = () => {
     if (query) {
@@ -121,9 +123,9 @@ const SearchBar: React.FC<SearchProps> = ({
         <input
           value={query ?? ""}
           ref={inputRef}
-          // onClick={(e) => {
-          //   handleClick(e);
-          // }}
+          onClick={(e) => {
+            handleClick(e);
+          }}
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
@@ -132,17 +134,9 @@ const SearchBar: React.FC<SearchProps> = ({
         />
         <div className="flex justify-center h-full items-center rounded-r-full">
           {isInfocus ? (
-            <button
-              type="button"
-              className="aspect-square p-2"
-              onClick={handleClear}
-            >
-              <IoIosClose />
-            </button>
+            <IoIosClose onClick={handleClear} />
           ) : (
-            <button type="button" className="aspect-square p-2">
-              <MdOutlineSearch />
-            </button>
+            <MdOutlineSearch onClick={handleSearch} />
           )}
         </div>
       </div>
