@@ -16,6 +16,7 @@ import {
   setQuery,
   addSearchItem,
   toggleOpenSearch,
+  setSearchItems,
 } from "@/store/slices/searchSlice";
 import { SearchHistoryProps } from "@/store/slices/searchSlice";
 
@@ -49,21 +50,16 @@ const SearchBar: React.FC<SearchProps> = ({
     debounce((enteredQuery: string) => {
       const formattedQuery = enteredQuery.trim().toLowerCase();
 
-      if (formattedQuery === "") {
-        setFilteredResult([]);
-        dispatch(setInfocus(false));
-      } else {
-        const filteredData = contentData?.filter((data) =>
-          data.title.toLowerCase().trim().includes(formattedQuery)
-        );
-        const newFilteredSearchItem = searchItems.filter((item) =>
-          item.search.toLowerCase().trim().includes(formattedQuery)
-        );
-        setFilteredSearchItems(newFilteredSearchItem);
+      const filteredData = contentData?.filter((data) =>
+        data.title.toLowerCase().trim().includes(formattedQuery)
+      );
+      const newFilteredSearchItem = searchItems.filter((item) =>
+        item.search.toLowerCase().trim().includes(formattedQuery)
+      );
+      setFilteredSearchItems(newFilteredSearchItem);
 
-        setFilteredResult(filteredData);
-        dispatch(setInfocus(true));
-      }
+      setFilteredResult(filteredData);
+      dispatch(setInfocus(true));
     }, 300),
     [contentData, searchItems, isInfocus]
   );
@@ -72,8 +68,7 @@ const SearchBar: React.FC<SearchProps> = ({
     if (e) {
       const enteredQuery = e.target.value;
       dispatch(setQuery(enteredQuery));
-      console.log(enteredQuery);
-      console.log(e.target.value);
+
       //calling the debounced search result
       debounceHandleInputChange(enteredQuery);
     }
@@ -82,12 +77,6 @@ const SearchBar: React.FC<SearchProps> = ({
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
   };
-
-  useEffect(() => {
-    if (isInfocus) {
-      setFilteredSearchItems((prevState) => [...prevState]);
-    }
-  }, [isInfocus]);
 
   const handleSearch = () => {
     if (query) {
@@ -99,12 +88,15 @@ const SearchBar: React.FC<SearchProps> = ({
       };
 
       dispatch(addSearchItem(newSearch));
-
       dispatch(setInfocus(false));
       dispatch(setOpenSearch(false));
       router.replace(`/search_result?query=${encodeURIComponent(trimQuery)}`);
     }
   };
+
+  useEffect(() => {
+    console.log(isInfocus);
+  }, [isInfocus]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -132,7 +124,7 @@ const SearchBar: React.FC<SearchProps> = ({
           className="w-full text-lg relative flex-1 border-[--border-color-secondary] border-b px-2 m-0 
           appearance-none bg-transparent  p-1 leading-tight focus:outline-none"
         />
-        <div className="flex justify-center h-full items-center rounded-r-full">
+        <div className="flex justify-center h-full items-center rounded-r-full cursor-pointer">
           {isInfocus ? (
             <IoIosClose onClick={handleClear} />
           ) : (

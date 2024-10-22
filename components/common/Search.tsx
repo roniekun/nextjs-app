@@ -42,8 +42,8 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
       ref={searchRef}
       className={`${
         theme === "dark"
-          ? "bg-[--background-dark] text-neutral-400"
-          : "bg-[--background-light] text-neutral-900"
+          ? "bg-[--background-dark] text-neutral-200"
+          : "bg-neutral-300 text-neutral-900"
       } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
     >
       <Container className="relative w-full p-[10vw] justify-center items-center">
