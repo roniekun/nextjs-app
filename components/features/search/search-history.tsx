@@ -50,7 +50,7 @@ const SearchHistoryModal: React.FC<Props> = ({
       const updatedItems = searchItems.filter(
         (item) => deletedItem.date !== item.date
       ); // updating the original search collection
-      setSearchItems(updatedItems);
+      dispatch(setSearchItems(updatedItems));
       setDeletedItem(deletedItem);
     }
   };

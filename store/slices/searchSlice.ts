@@ -14,10 +14,24 @@ interface SearchState {
   query: string;
 }
 
+let searchHistory: SearchHistoryProps[] = [];
+
+if (typeof window !== "undefined") {
+  try {
+    const storedHistory = localStorage.getItem("history");
+    if (storedHistory) {
+      searchHistory = JSON.parse(storedHistory);
+    }
+  } catch (error) {
+    console.error("Failed to parse search history from localStorage", error);
+    searchHistory = [];
+  }
+}
+
 const initialState: SearchState = {
   isOpenSearch: false,
   isInfocus: false,
-  searchItems: [],
+  searchItems: searchHistory,
   query: "",
 };
 
@@ -52,6 +66,16 @@ const searchSlice = createSlice({
         newSearch,
         prevSearch: state.searchItems,
       });
+
+      if (typeof window !== "undefined") {
+        try {
+          if (state.searchItems) {
+            localStorage.setItem("history", JSON.stringify(state.searchItems));
+          }
+        } catch (error) {
+          console.error("Failed to save search history to localStorage", error);
+        }
+      }
     },
   },
 });
