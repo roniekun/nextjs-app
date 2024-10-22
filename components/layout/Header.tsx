@@ -36,9 +36,8 @@ const Header = () => {
     });
   }, [isScrolled, theme]);
 
-  const handleClick = () => {
-    dispatch(setOpenSearch(false));
-    setToggleMenu(false);
+  const handleOpenSearch = () => {
+    dispatch(setOpenSearch(true));
   };
 
   return (
@@ -53,7 +52,7 @@ const Header = () => {
             <FaSearch
               type="button"
               className="bg-neutral-500 bg-opacity-15 p-2 h-8 w-8 fill-current text-current aspect-square cursor-pointer hover:border border-none border-neutral-500 rounded-md hover:shadow-[0_0_10px_3px_rgba(255,255,255,0.7)] transition-shadow duration-300 z-10"
-              onClick={handleClick}
+              onClick={handleOpenSearch}
             />
           )}
 

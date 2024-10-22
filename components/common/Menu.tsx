@@ -56,7 +56,6 @@ const Menu = () => {
         break;
 
       case 1: //step down, label: "Menu"
-        console.log(`this should log 1 = ${counter}`);
         setToggleMenu(false);
         gsap.to(sliderRef.current, {
           y: 0,
