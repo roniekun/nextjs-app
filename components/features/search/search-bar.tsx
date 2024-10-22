@@ -39,16 +39,20 @@ const SearchBar: React.FC<SearchProps> = ({
     SearchHistoryProps[]
   >([]);
 
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [enteredQuery, setEnteredQuery] = useState(query);
+
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   // filtering the result every 300 miliseconds as value of the query changes using
   // useCallback and debounce/lodash
   const debounceHandleInputChange = useCallback(
-    debounce((enteredQuery: string) => {
-      if (enteredQuery === "") {
-        setFilteredSearchItems([]);
+    debounce((enteredKey: string) => {
+      if (enteredKey === "") {
+        setFilteredSearchItems([...searchItems]);
       } else {
-        const formattedQuery = enteredQuery.trim().toLowerCase();
+        dispatch(setQuery(enteredKey));
+        const formattedQuery = enteredKey.trim().toLowerCase();
 
         const filteredData = contentData?.filter((data) =>
           data.title.toLowerCase().trim().includes(formattedQuery)
@@ -59,7 +63,6 @@ const SearchBar: React.FC<SearchProps> = ({
         setFilteredSearchItems(newFilteredSearchItem);
 
         setFilteredResult(filteredData);
-        dispatch(setInfocus(true));
       }
     }, 300),
     [contentData, searchItems, isInfocus]
@@ -67,11 +70,10 @@ const SearchBar: React.FC<SearchProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
-      const enteredQuery = e.target.value;
-      dispatch(setQuery(enteredQuery));
-
+      const enteredKey = e.target.value;
+      setEnteredQuery(enteredKey);
       //calling the debounced search result
-      debounceHandleInputChange(enteredQuery);
+      debounceHandleInputChange(enteredKey);
     }
   };
 
@@ -101,21 +103,42 @@ const SearchBar: React.FC<SearchProps> = ({
   }, [isInfocus]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "ArrowDown") {
+      setSelectedIndex((prevIndex) =>
+        prevIndex !== null && prevIndex < filteredSearchItems.length - 1
+          ? prevIndex + 1
+          : filteredSearchItems.length - 1
+      );
+    } else if (e.key === "ArrowUp") {
+      setSelectedIndex((prevIndex) =>
+        prevIndex !== null && prevIndex <= filteredSearchItems.length - 1
+          ? prevIndex - 1
+          : 0
+      );
+    } else if (e.key === "Enter") {
       handleSearch();
     }
   };
 
+  useEffect(() => {
+    const filteredItem = filteredSearchItems.find(
+      (_, index) => index === selectedIndex
+    );
+    if (filteredItem) {
+      setEnteredQuery(filteredItem.search ?? "");
+    }
+    dispatch(setQuery(""));
+  }, [selectedIndex]);
+
   const handleClear = () => {
     dispatch(setQuery(""));
-    dispatch(setInfocus(false));
   };
 
   return (
     <div className={twMerge(`flex relative flex-col h-auto w-full`, className)}>
       <div className="flex relative w-full p-0 items-center my-2">
         <input
-          value={query ?? ""}
+          value={enteredQuery ?? ""}
           ref={inputRef}
           onClick={(e) => {
             handleClick(e);
