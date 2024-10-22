@@ -13,12 +13,12 @@ type Props = {
 };
 
 const ToggleTheme: React.FC<Props> = ({ className, label }) => {
-  const themeMode = useAppSelector((state) => state.theme);
+  const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    document.body.setAttribute("theme", themeMode);
-  }, [themeMode]);
+    document.body.setAttribute("theme", theme);
+  }, [theme]);
 
   return (
     <div className={twMerge(`w-fit aspect-square flex mx-1  `, className)}>

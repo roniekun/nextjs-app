@@ -9,12 +9,15 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { useTheme } from "@/provider/context/ThemeContext";
+import { useAppSelector } from "@/store/hooks/hooks";
 
 const Header = () => {
   const { setOpenSearch } = useSearch();
   const { setToggleMenu, isToggleMenu } = useMenu();
-  const { isScrolled, theme } = useTheme();
+  const { isScrolled } = useTheme();
   // const headerRef = useRef<HTMLDivElement | null>(null);
+
+  const theme = useAppSelector((state) => state.theme);
 
   const pathname = usePathname();
 
@@ -25,7 +28,7 @@ const Header = () => {
   useEffect(() => {
     gsap.to(".header", {
       backgroundColor:
-        isScrolled && theme === "light" ? "#171717" : "transparent",
+        isScrolled && theme == "light" ? "#171717" : "transparent",
       color:
         theme === "dark" || (isScrolled && theme === "light")
           ? "#ffffff"

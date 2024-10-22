@@ -4,20 +4,19 @@ import Social from "../lib/social";
 import { useSearch } from "@/provider/context/SearchContext";
 import { useMenu } from "@/provider/context/MenuContext";
 import { useEffect, useRef } from "react";
-import { useTheme } from "@/provider/context/ThemeContext";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import Container from "../lib/ui/container";
 import { useLayout } from "@/provider/context/LayoutContext";
+import { useAppSelector } from "@/store/hooks/hooks";
 
 export default function Navbar() {
   const { setOpenSearch } = useSearch();
-  const { theme } = useTheme();
   const { isToggleMenu } = useMenu();
   const { isDesktop } = useLayout();
-  const { isOpenSearch } = useSearch();
   const navRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
+  const theme = useAppSelector((state) => state.theme);
 
   useEffect(() => {
     if (isToggleMenu) {

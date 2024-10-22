@@ -5,8 +5,8 @@ import { IContentData } from "@/data/content-data";
 import { useLayoutEffect, useRef } from "react";
 import { useSearch } from "@/provider/context/SearchContext";
 import gsap from "gsap";
-import { useTheme } from "@/provider/context/ThemeContext";
 import CustomEase from "gsap/CustomEase";
+import { useAppSelector } from "@/store/hooks/hooks";
 
 interface Props {
   contentData: IContentData[];
@@ -14,8 +14,8 @@ interface Props {
 }
 const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   const { isOpenSearch } = useSearch();
-  const { theme } = useTheme();
   const searchRef = useRef<HTMLDivElement | null>(null);
+  const theme = useAppSelector((state) => state.theme);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(CustomEase);
@@ -44,9 +44,9 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
         theme === "dark"
           ? "bg-[--background-dark] text-neutral-400"
           : "bg-[--background-light] text-neutral-900"
-      } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md p-[5vw]`}
+      } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
     >
-      <Container className="relative w-full justify-center items-center">
+      <Container className="relative w-full p-[10vw] justify-center items-center">
         <SearchBar
           className={`overflow-y-hidden`}
           contentData={contentData}
