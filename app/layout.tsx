@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./store/styles/globals.css";
+import "./globals.css";
 import LocalProvider from "@/provider/LocalProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
