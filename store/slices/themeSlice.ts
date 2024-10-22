@@ -4,7 +4,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type ThemeState = "light" | "dark";
 
-const savedTheme = localStorage.getItem("theme");
+const savedTheme =
+  typeof window !== "undefined" ? localStorage.getItem("theme") : null;
 const initialState: ThemeState = (
   savedTheme ? JSON.parse(savedTheme) : "light"
 ) as ThemeState;
@@ -16,11 +17,15 @@ const themeSlice = createSlice({
   reducers: {
     toggleTheme: (state) => {
       const newTheme = state === "light" ? "dark" : "light";
-      localStorage.setItem("theme", JSON.stringify(newTheme)); // Persist the theme in localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("theme", JSON.stringify(newTheme)); // Persist the theme in localStorage
+      }
       return newTheme; // Return the updated state
     },
     setTheme: (state, action: PayloadAction<ThemeState>) => {
-      localStorage.setItem("theme", JSON.stringify(action.payload)); // Persist the theme in localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("theme", JSON.stringify(action.payload)); // Persist the theme in localStorage
+      }
       return action.payload; // Return the updated state
     },
   },
