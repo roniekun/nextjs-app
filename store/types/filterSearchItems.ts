@@ -1,4 +1,4 @@
-import { SearchHistoryProps } from "@/store/slices/searchSlice";
+import { SearchHistoryProps } from "../slices/searchSlice";
 
 type Props = {
   newSearch: SearchHistoryProps; // A single search item

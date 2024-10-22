@@ -1,12 +1,16 @@
 import { IContentData } from "../../../data/content-data";
 import { useRef } from "react";
-import {
-  SearchHistoryProps,
-  useSearch,
-} from "@/provider/context/SearchContext";
+import { SearchHistoryProps } from "@/store/slices/searchSlice";
 import { useRouter } from "next/navigation";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import filterSearchItems from "./util/filterSearchItems";
+import {
+  setQuery,
+  toggleOpenSearch,
+  addSearchItem,
+  setInfocus,
+} from "@/store/slices/searchSlice";
+import { useAppDispatch } from "@/store/hooks/hooks";
+import { useAppSelector } from "@/store/hooks/hooks";
 
 type Props = {
   filteredResults?: IContentData[];
@@ -14,8 +18,8 @@ type Props = {
 
 export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
   const router = useRouter();
-  const { setOpenSearch, setQuery, setSearchItems, setInFocus, searchItems } =
-    useSearch();
+  const dispatch = useAppDispatch();
+  const { query, searchItems } = useAppSelector((state) => state.search);
   const listRef = useRef<(HTMLLIElement | null)[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
@@ -42,15 +46,12 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
         date: Date.now(),
       };
 
-      setSearchItems(
-        (prevSearch) => filterSearchItems({ newSearch, prevSearch }) //calling reusasble utility function passing both object arguments
-      );
-
+      dispatch(addSearchItem(newSearch));
       router.replace(
         `/search_result?query=${encodeURIComponent(newQuery ?? "")}`
       );
-      setOpenSearch((prevState) => !prevState);
-      setInFocus(false);
+      dispatch(toggleOpenSearch());
+      dispatch(setInfocus(false));
     }
   };
 

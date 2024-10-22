@@ -3,16 +3,22 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import {
-  useSearch,
-  SearchHistoryProps,
-} from "@/provider/context/SearchContext";
 import { twMerge } from "tailwind-merge";
 import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
 import filterSearchItems from "./util/filterSearchItems";
+import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppDispatch } from "@/store/hooks/hooks";
+import {
+  setOpenSearch,
+  setSearchItems,
+  setInfocus,
+  setQuery,
+  addSearchItem,
+} from "@/store/slices/searchSlice";
+import { SearchHistoryProps } from "@/store/slices/searchSlice";
 
 export type SearchProps = {
   placeholder?: string;
@@ -25,16 +31,11 @@ const SearchBar: React.FC<SearchProps> = ({
   placeholder,
   contentData,
 }) => {
+  const dispatch = useAppDispatch();
+  const { isInfocus, isOpenSearch, searchItems, query } = useAppSelector(
+    (state) => state.search
+  );
   const router = useRouter();
-  const {
-    setOpenSearch,
-    isInFocus,
-    setInFocus,
-    setSearchItems,
-    searchItems,
-    setQuery,
-    query,
-  } = useSearch();
 
   const [filteredResult, setFilteredResult] = useState<IContentData[]>([]);
   const [filteredSearchItems, setFilteredSearchItems] = useState<
@@ -51,7 +52,7 @@ const SearchBar: React.FC<SearchProps> = ({
 
       if (formattedQuery === "") {
         setFilteredResult([]);
-        setInFocus(false);
+        dispatch(setInfocus(false));
       } else {
         const filteredData = contentData?.filter((data) =>
           data.title.toLowerCase().trim().includes(formattedQuery)
@@ -62,10 +63,10 @@ const SearchBar: React.FC<SearchProps> = ({
         setFilteredSearchItems(newFilteredSearchItem);
 
         setFilteredResult(filteredData);
-        setInFocus(true);
+        dispatch(setInfocus(true));
       }
     }, 300),
-    [contentData, searchItems, isInFocus]
+    [contentData, searchItems, isInfocus]
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
@@ -78,14 +79,14 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
-    setInFocus(true);
+    dispatch(setInfocus(true));
   };
 
   useEffect(() => {
-    if (isInFocus) {
+    if (isInfocus) {
       setFilteredSearchItems((prevState) => [...prevState]);
     }
-  }, [isInFocus]);
+  }, [isInfocus]);
 
   const handleSearch = () => {
     if (query) {
@@ -96,12 +97,12 @@ const SearchBar: React.FC<SearchProps> = ({
         date: Date.now(),
       };
 
-      setSearchItems((prevSearch) =>
-        filterSearchItems({ newSearch, prevSearch })
-      );
+      dispatch(addSearchItem(newSearch));
 
-      setInFocus(false);
-      setOpenSearch(false);
+      dispatch(addSearchItem(newSearch));
+
+      dispatch(setInfocus(false));
+      dispatch(setOpenSearch(false));
       router.replace(`/search_result?query=${encodeURIComponent(trimQuery)}`);
     }
   };
@@ -113,8 +114,8 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   const handleClear = () => {
-    setQuery(null);
-    setInFocus(false);
+    dispatch(setQuery(null));
+    dispatch(setInfocus(false));
   };
 
   return (
@@ -133,7 +134,7 @@ const SearchBar: React.FC<SearchProps> = ({
           appearance-none bg-transparent  p-1 leading-tight focus:outline-none"
         />
         <div className="flex justify-center h-full items-center rounded-r-full">
-          {isInFocus ? (
+          {isInfocus ? (
             <button
               type="button"
               className="aspect-square p-2"
@@ -149,7 +150,7 @@ const SearchBar: React.FC<SearchProps> = ({
         </div>
       </div>
 
-      {(isInFocus || query) &&
+      {(isInfocus || query) &&
         (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
           <div className="relative h-auto">
             <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">

@@ -1,9 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
-import { useSearch } from "@/provider/context/SearchContext";
 import { useRouter } from "next/navigation";
-import { SearchHistoryProps } from "@/provider/context/SearchContext";
+import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppDispatch } from "@/store/hooks/hooks";
+import { setSearchItems } from "@/store/slices/searchSlice";
+
+import {
+  setOpenSearch,
+  toggleOpenSearch,
+  setQuery,
+} from "@/store/slices/searchSlice";
+import { SearchHistoryProps } from "@/store/slices/searchSlice";
 import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
 
 type Props = {
@@ -17,7 +25,8 @@ const SearchHistoryModal: React.FC<Props> = ({
   setFilteredSearchItems,
 }) => {
   const router = useRouter();
-  const { setOpenSearch, searchItems, setSearchItems, setQuery } = useSearch();
+  const dispatch = useAppDispatch();
+  const { searchItems } = useAppSelector((state) => state.search);
   const historyRefs = useRef<(HTMLLIElement | null)[]>([]);
   const [deletedItem, setDeletedItem] = useState<SearchHistoryProps | null>(
     null
@@ -31,8 +40,9 @@ const SearchHistoryModal: React.FC<Props> = ({
 
   const handleClick = (idx: number) => {
     const textContent = historyRefs.current[idx]?.textContent ?? "";
-    setQuery(textContent);
-    setOpenSearch((prevState) => !prevState);
+    dispatch(setQuery(textContent));
+    dispatch(toggleOpenSearch());
+
     router.replace(`/search_result?query=${encodeURIComponent(textContent)}`);
   };
 
