@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
@@ -71,6 +71,8 @@ const SearchBar: React.FC<SearchProps> = ({
     if (e) {
       const enteredQuery = e.target.value;
       setQuery(enteredQuery);
+      console.log(enteredQuery);
+      console.log(e.target.value);
       //calling the debounced search result
       debounceHandleInputChange(enteredQuery);
     }
