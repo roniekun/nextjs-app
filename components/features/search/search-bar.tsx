@@ -69,7 +69,7 @@ const SearchBar: React.FC<SearchProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
       const enteredQuery = e.target.value;
-      setQuery(enteredQuery);
+      dispatch(setQuery(enteredQuery));
       console.log(enteredQuery);
       console.log(e.target.value);
       //calling the debounced search result
