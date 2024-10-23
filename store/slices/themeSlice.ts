@@ -1,38 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import cookie from "js-cookie";
 
-// Define the theme types
+interface ThemeState {
+  theme: "light" | "dark";
+}
 
-type ThemeState = "light" | "dark";
+const getInitialTheme = (): "light" | "dark" => {
+  const cookieTheme = cookie.get("theme");
+  return cookieTheme === "dark" ? "dark" : "light"; // Default to 'light'
+};
 
-const savedTheme =
-  typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-const initialState: ThemeState = (
-  savedTheme ? JSON.parse(savedTheme) : "light"
-) as ThemeState;
+const initialState: ThemeState = {
+  theme: getInitialTheme(),
+};
 
-// Create the slice
 const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
     toggleTheme: (state) => {
-      const newTheme = state === "light" ? "dark" : "light";
-      if (typeof window !== "undefined") {
-        localStorage.setItem("theme", JSON.stringify(newTheme)); // Persist the theme in localStorage
-      }
-      return newTheme; // Return the updated state
+      state.theme = state.theme === "light" ? "dark" : "light";
+      cookie.set("theme", state.theme); // Persist in cookies
     },
-    setTheme: (state, action: PayloadAction<ThemeState>) => {
-      if (typeof window !== "undefined") {
-        localStorage.setItem("theme", JSON.stringify(action.payload)); // Persist the theme in localStorage
-      }
-      return action.payload; // Return the updated state
+    setTheme: (state, action: PayloadAction<"light" | "dark">) => {
+      state.theme = action.payload;
+      cookie.set("theme", state.theme); // Persist in cookies
     },
   },
 });
 
-// Export the actions
 export const { toggleTheme, setTheme } = themeSlice.actions;
-
-// Export the reducer
 export default themeSlice.reducer;

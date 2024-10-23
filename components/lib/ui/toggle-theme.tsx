@@ -16,7 +16,7 @@ const ToggleTheme: React.FC<Props> = ({ className, label }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    document.body.setAttribute("theme", theme);
+    document.body.setAttribute("theme", theme.theme);
   }, [theme]);
 
   return (

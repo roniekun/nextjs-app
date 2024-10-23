@@ -27,8 +27,9 @@ export default function Navbar() {
   useEffect(() => {
     if (navRef.current) {
       navRef.current.style.backgroundColor =
-        theme === "dark" ? "#171717" : "#ffffff";
-      navRef.current.style.color = theme === "dark" ? "#ffffff" : "#171717";
+        theme.theme === "dark" ? "#171717" : "#ffffff";
+      navRef.current.style.color =
+        theme.theme === "dark" ? "#ffffff" : "#171717";
     }
   }, [theme, navRef]);
 

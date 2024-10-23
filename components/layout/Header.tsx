@@ -27,9 +27,9 @@ const Header = () => {
   useEffect(() => {
     gsap.to(".header", {
       backgroundColor:
-        isScrolled && theme == "light" ? "#171717" : "transparent",
+        isScrolled && theme.theme == "light" ? "#171717" : "transparent",
       color:
-        theme === "dark" || (isScrolled && theme === "light")
+        theme.theme === "dark" || (isScrolled && theme.theme === "light")
           ? "#ffffff"
           : "#171717",
       duration: 0.3,
