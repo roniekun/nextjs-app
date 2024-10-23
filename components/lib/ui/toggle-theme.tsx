@@ -18,6 +18,7 @@ const ToggleTheme: React.FC<Props> = ({ className, label }) => {
 
   useEffect(() => {
     const cookieTheme = cookie.get("theme") ?? "light";
+    console.log(cookieTheme);
     document.body.setAttribute("theme", cookieTheme);
   }, []);
 
