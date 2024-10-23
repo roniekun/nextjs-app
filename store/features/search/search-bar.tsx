@@ -9,13 +9,13 @@ import SearchHistoryModal from "./search-history";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
+import { SearchHistoryProps } from "@/store/types/filterSearchItems";
 import {
   setOpenSearch,
   setInfocus,
   setQuery,
   addSearchItem,
 } from "@/store/slices/searchSlice";
-import { SearchHistoryProps } from "@/store/slices/searchSlice";
 
 export type SearchProps = {
   placeholder?: string;

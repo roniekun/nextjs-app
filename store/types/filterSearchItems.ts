@@ -1,4 +1,15 @@
-import { SearchHistoryProps } from "../slices/searchSlice";
+export interface SearchHistoryProps {
+  id: number;
+  search: string;
+  date: number;
+}
+
+export interface SearchState {
+  isOpenSearch: boolean;
+  isInfocus: boolean;
+  searchItems: SearchHistoryProps[];
+  query: string;
+}
 
 type Props = {
   newSearch: SearchHistoryProps; // A single search item

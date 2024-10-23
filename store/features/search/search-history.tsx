@@ -6,9 +6,9 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
 import {
   toggleOpenSearch,
   setQuery,
-  SearchHistoryProps,
   setSearchItems,
 } from "@/store/slices/searchSlice";
+import { SearchHistoryProps } from "@/store/types/filterSearchItems";
 import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
 
 type Props = {

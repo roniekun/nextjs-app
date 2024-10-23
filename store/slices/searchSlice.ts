@@ -1,18 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import filterSearchItems from "../types/filterSearchItems";
-
-export interface SearchHistoryProps {
-  id: number;
-  search: string;
-  date: number;
-}
-
-interface SearchState {
-  isOpenSearch: boolean;
-  isInfocus: boolean;
-  searchItems: SearchHistoryProps[];
-  query: string;
-}
+import { SearchState, SearchHistoryProps } from "../types/filterSearchItems";
 
 let searchHistory: SearchHistoryProps[] = [];
 

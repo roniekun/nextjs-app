@@ -1,5 +1,5 @@
 "use client";
-import SearchBar from "../features/search/search-bar";
+import SearchBar from "../../store/features/search/search-bar";
 import Container from "../lib/ui/container";
 import { IContentData } from "@/data/content-data";
 import { useLayoutEffect, useRef } from "react";

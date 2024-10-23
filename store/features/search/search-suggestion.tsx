@@ -1,6 +1,6 @@
 import { IContentData } from "../../../data/content-data";
 import { useRef } from "react";
-import { SearchHistoryProps } from "@/store/slices/searchSlice";
+import { SearchHistoryProps } from "@/store/types/filterSearchItems";
 import { useRouter } from "next/navigation";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import {
