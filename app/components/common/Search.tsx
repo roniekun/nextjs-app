@@ -5,8 +5,9 @@ import { IContentData } from "@/data/content-data";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
-import { useAppSelector } from "@/app/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/hooks";
 import { motion, AnimatePresence } from "framer-motion";
+import { toggleOpenSearch } from "@/app/redux/slices/searchSlice";
 
 interface Props {
   contentData: IContentData[];
@@ -16,6 +17,7 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   const searchRef = useRef<HTMLDivElement | null>(null);
   const theme = useAppSelector((state) => state.theme);
   const { isOpenSearch } = useAppSelector((state) => state.search);
+  const dispatch = useAppDispatch();
 
   useLayoutEffect(() => {
     gsap.registerPlugin(CustomEase);
@@ -41,11 +43,12 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
     <AnimatePresence>
       {isOpenSearch && (
         <motion.div
+          onTap={() => dispatch(toggleOpenSearch())}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0 }}
-          className="w-full h-full bg-neutral-950 bg-opacity-10 opacity-0"
+          className="w-full h-full bg-neutral-950 bg-opacity-30 opacity-0 z-20"
         >
           <div
             ref={searchRef}
