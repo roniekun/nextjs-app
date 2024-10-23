@@ -28,12 +28,18 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
           height: "70vh",
           duration: 0.7,
           ease: "customEase",
+          onComplete: () => {
+            document.body.style.overflow = "hidden";
+          },
         });
       } else {
         gsap.to(searchRef.current, {
           height: 0,
           duration: 0.7,
           ease: "customEase",
+          onComplete: () => {
+            document.body.style.overflow = "scroll";
+          },
         });
       }
     }
@@ -56,7 +62,7 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
               theme.theme === "dark"
                 ? "bg-[--background-dark] text-neutral-200"
                 : "bg-neutral-300 text-neutral-900"
-            } w-screen overflow-hidden absolute bottom-0 h-0 rounded-t-md`}
+            } w-screen overflow-hidden absolute bottom-0 h-0 z-30 rounded-t-md`}
           >
             <Container className="relative w-full p-[10vw] justify-center items-center">
               <SearchBar contentData={contentData} placeholder={placeholder} />
