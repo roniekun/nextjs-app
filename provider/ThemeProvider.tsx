@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks";
-import { setTheme } from "@/store/slices/themeSlice";
+import { setTheme, toggleTheme } from "@/store/slices/themeSlice";
 import cookie from "js-cookie";
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -13,7 +13,7 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     const cookieTheme = cookie.get("theme") as typeof theme;
     document.body.setAttribute("theme", cookieTheme);
     dispatch(setTheme(cookieTheme));
-  }, [dispatch]);
+  }, [dispatch, toggleTheme]);
 
   return <>{children}</>;
 };
