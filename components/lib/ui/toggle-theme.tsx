@@ -5,6 +5,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { twMerge } from "tailwind-merge";
 import { useEffect } from "react";
 import { toggleTheme } from "@/store/slices/themeSlice";
+import cookie from "js-cookie";
 
 type Props = {
   className?: string;
@@ -16,7 +17,13 @@ const ToggleTheme: React.FC<Props> = ({ className, label }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const cookieTheme = cookie.get("theme") ?? "light";
+    document.body.setAttribute("theme", cookieTheme);
+  }, []);
+
+  useEffect(() => {
     document.body.setAttribute("theme", theme.theme);
+    console.log(theme.theme);
   }, [theme]);
 
   return (
