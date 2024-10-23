@@ -6,6 +6,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
 import { useAppSelector } from "@/app/redux/hooks/hooks";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   contentData: IContentData[];
@@ -37,18 +38,30 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
   }, [searchRef, isOpenSearch]);
 
   return (
-    <div
-      ref={searchRef}
-      className={`${
-        theme.theme === "dark"
-          ? "bg-[--background-dark] text-neutral-200"
-          : "bg-neutral-300 text-neutral-900"
-      } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
-    >
-      <Container className="relative w-full p-[10vw] justify-center items-center">
-        <SearchBar contentData={contentData} placeholder={placeholder} />
-      </Container>
-    </div>
+    <AnimatePresence>
+      {isOpenSearch && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          exit={{ opacity: 0 }}
+          className="w-full h-full bg-neutral-950 bg-opacity-10 opacity-0"
+        >
+          <div
+            ref={searchRef}
+            className={`${
+              theme.theme === "dark"
+                ? "bg-[--background-dark] text-neutral-200"
+                : "bg-neutral-300 text-neutral-900"
+            } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
+          >
+            <Container className="relative w-full p-[10vw] justify-center items-center">
+              <SearchBar contentData={contentData} placeholder={placeholder} />
+            </Container>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
