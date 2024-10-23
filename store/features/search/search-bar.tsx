@@ -146,8 +146,8 @@ const SearchBar: React.FC<SearchProps> = ({
           onChange={(e) => handleInputChange(e)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full text-lg relative flex-1 border-[--border-color-secondary] border-b px-2 m-0 
-          appearance-none bg-transparent  p-1 leading-tight focus:outline-none"
+          className="w-full text-lg relative flex-1 border-[--border-color-primary] border-b px-2 m-0 
+          appearance-none bg-transparent  p-1 leading-tight focus:ring-0 focus:outline-none"
         />
         <div className="flex justify-center h-full items-center rounded-r-full cursor-pointer">
           {isInfocus ? (

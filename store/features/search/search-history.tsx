@@ -80,17 +80,14 @@ const SearchHistoryModal: React.FC<Props> = ({
           <UpdateOutlinedIcon />
           <a
             onClick={() => handleClick(idx)}
-            className="flex-1 cursor-pointer  flex item-center relative gap-x-1"
+            className="flex-1 cursor-pointer  flex justify-start text-left item-center relative gap-x-1"
           >
             {item.search}
           </a>
-          <button
+          <IoIosClose
             className="cursor-pointer relative"
-            type="button"
             onClick={() => handleDelete(item.id)}
-          >
-            <IoIosClose />
-          </button>
+          />
         </li>
       ))}
     </ul>
