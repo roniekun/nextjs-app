@@ -98,10 +98,6 @@ const SearchBar: React.FC<SearchProps> = ({
     }
   };
 
-  useEffect(() => {
-    console.log(isInfocus);
-  }, [isInfocus]);
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "ArrowDown") {
       setSelectedIndex((prevIndex) =>
@@ -131,6 +127,8 @@ const SearchBar: React.FC<SearchProps> = ({
   }, [selectedIndex]);
 
   const handleClear = () => {
+    dispatch(setInfocus(false));
+    dispatch(setQuery(""));
     setEnteredQuery("");
   };
 
