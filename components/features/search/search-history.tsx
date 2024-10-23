@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
-import { setSearchItems } from "@/store/slices/searchSlice";
-
-import { toggleOpenSearch, setQuery } from "@/store/slices/searchSlice";
-import { SearchHistoryProps } from "@/store/slices/searchSlice";
+import {
+  toggleOpenSearch,
+  setQuery,
+  SearchHistoryProps,
+  setSearchItems,
+} from "@/store/slices/searchSlice";
 import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
 
 type Props = {
@@ -49,9 +51,9 @@ const SearchHistoryModal: React.FC<Props> = ({
     if (deletedItem) {
       const updatedItems = searchItems.filter(
         (item) => deletedItem.date !== item.date
-      ); // updating the original search collection
-      dispatch(setSearchItems(updatedItems));
+      ); // updating the original search array
       setDeletedItem(deletedItem);
+      dispatch(setSearchItems(updatedItems));
     }
   };
 

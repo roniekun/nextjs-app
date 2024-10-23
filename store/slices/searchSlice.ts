@@ -53,6 +53,10 @@ const searchSlice = createSlice({
 
     setSearchItems: (state, action: PayloadAction<SearchHistoryProps[]>) => {
       state.searchItems = action.payload;
+
+      if (state.searchItems) {
+        localStorage.setItem("history", JSON.stringify(state.searchItems));
+      }
     },
 
     setQuery: (state, action: PayloadAction<string>) => {
