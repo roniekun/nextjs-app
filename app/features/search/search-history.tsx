@@ -77,17 +77,15 @@ const SearchHistoryModal: React.FC<Props> = ({
             selectedIndex === idx && "bg-neutral-900 bg-opacity-15"
           } flex list-none w-full relative justify-between gap-x-1`}
         >
-          <div>
-            <UpdateOutlinedIcon />
-            <a
-              onClick={() => handleClick(idx)}
-              className="cursor-pointer flex text-left  relative gap-x-1"
-            >
-              {item.search}
-            </a>
-          </div>
+          <UpdateOutlinedIcon />
+          <a
+            onClick={() => handleClick(idx)}
+            className="cursor-pointer flex text-left flex-1  relative gap-x-1"
+          >
+            {item.search}
+          </a>
           <IoIosClose
-            className="cursor-pointer relative"
+            className="cursor-pointer relative p-2"
             onClick={() => handleDelete(item.id)}
           />
         </li>
