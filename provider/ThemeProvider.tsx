@@ -13,7 +13,11 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     const cookieTheme = cookie.get("theme") as typeof theme;
     document.body.setAttribute("theme", cookieTheme);
     dispatch(setTheme(cookieTheme));
-  }, [dispatch, toggleTheme]);
+  }, [dispatch]);
+
+  useLayoutEffect(() => {
+    document.body.setAttribute("theme", theme);
+  }, [theme]);
 
   return <>{children}</>;
 };
