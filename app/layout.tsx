@@ -9,7 +9,6 @@ import Banner from "@/components/layout/Banner";
 import Search from "@/components/common/Search";
 import { contentData } from "@/data/content-data";
 import ClientProvider from "@/provider/ClientProvider";
-import { useAppSelector } from "@/store/hooks/hooks";
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
