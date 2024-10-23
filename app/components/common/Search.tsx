@@ -48,7 +48,7 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
           exit={{ opacity: 0 }}
-          className="w-full h-full bg-neutral-950 bg-opacity-30 opacity-0 z-20"
+          className="w-screen h-screen fixed top-0 bg-neutral-950 bg-opacity-30 opacity-0 z-20"
         >
           <div
             ref={searchRef}
@@ -56,7 +56,7 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
               theme.theme === "dark"
                 ? "bg-[--background-dark] text-neutral-200"
                 : "bg-neutral-300 text-neutral-900"
-            } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
+            } w-screen overflow-hidden absolute bottom-0 h-0 rounded-t-md`}
           >
             <Container className="relative w-full p-[10vw] justify-center items-center">
               <SearchBar contentData={contentData} placeholder={placeholder} />
