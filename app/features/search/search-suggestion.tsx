@@ -1,6 +1,6 @@
 import { IContentData } from "../../../data/content-data";
 import { useRef } from "react";
-import { SearchHistoryProps } from "@/store/types/filterSearchItems";
+import { SearchHistoryProps } from "@/app/redux/types/filterSearchItems";
 import { useRouter } from "next/navigation";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import {
@@ -8,8 +8,8 @@ import {
   toggleOpenSearch,
   addSearchItem,
   setInfocus,
-} from "@/store/slices/searchSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks";
+} from "@/app/redux/slices/searchSlice";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/hooks";
 
 type Props = {
   filteredResults?: IContentData[];

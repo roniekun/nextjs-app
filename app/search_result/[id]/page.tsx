@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { contentData } from "@/data/content-data";
-import Container from "@/components/lib/ui/container";
+import Container from "@/app/components/lib/ui/container";
 
 // This function dynamically generates the metadata based on the result.
 export async function generateMetadata({

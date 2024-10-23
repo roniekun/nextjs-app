@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { questions as data } from "./data/question";
 import { motion, AnimatePresence } from "framer-motion";
 import { GrAdd } from "react-icons/gr";
-import Container from "@/components/lib/ui/container";
+import Container from "@/app/components/lib/ui/container";
 
 const Accordion2 = () => {
   const [activeIndices, setActiveIndices] = useState<(number | null)[]>([]);

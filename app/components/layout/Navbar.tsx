@@ -8,7 +8,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import Container from "../lib/ui/container";
 import { useLayout } from "@/provider/context/LayoutContext";
-import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppSelector } from "@/app/redux/hooks/hooks";
 
 export default function Navbar() {
   const { setOpenSearch } = useSearch();

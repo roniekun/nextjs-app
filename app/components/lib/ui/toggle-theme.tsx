@@ -1,9 +1,9 @@
 "use client";
 
-import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { twMerge } from "tailwind-merge";
-import { toggleTheme } from "@/store/slices/themeSlice";
+import { toggleTheme } from "@/app/redux/slices/themeSlice";
 
 type Props = {
   className?: string;

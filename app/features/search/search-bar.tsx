@@ -8,14 +8,14 @@ import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
-import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
-import { SearchHistoryProps } from "@/store/types/filterSearchItems";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
+import { SearchHistoryProps } from "@/app/redux/types/filterSearchItems";
 import {
   setOpenSearch,
   setInfocus,
   setQuery,
   addSearchItem,
-} from "@/store/slices/searchSlice";
+} from "@/app/redux/slices/searchSlice";
 
 export type SearchProps = {
   placeholder?: string;

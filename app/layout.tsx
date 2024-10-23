@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LocalProvider from "@/provider/LocalProvider";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import CookieModal from "@/components/modal/cookie";
-import Navbar from "@/components/layout/Navbar";
-import Banner from "@/components/layout/Banner";
-import Search from "@/components/common/Search";
+import Header from "@/app/components/layout/Header";
+import Footer from "@/app/components/layout/Footer";
+import CookieModal from "@/app/components/modal/cookie";
+import Navbar from "@/app/components/layout/Navbar";
+import Banner from "@/app/components/layout/Banner";
+import Search from "@/app/components/common/Search";
 import { contentData } from "@/data/content-data";
 import ClientProvider from "@/provider/ClientProvider";
 

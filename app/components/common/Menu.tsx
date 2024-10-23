@@ -3,8 +3,8 @@ import { useMenu } from "@/provider/context/MenuContext";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { CustomEase } from "gsap/CustomEase";
 import gsap from "gsap";
-import { useAppDispatch } from "@/store/hooks/hooks";
-import { setOpenSearch } from "@/store/slices/searchSlice";
+import { useAppDispatch } from "@/app/redux/hooks/hooks";
+import { setOpenSearch } from "@/app/redux/slices/searchSlice";
 import { usePathname } from "next/navigation";
 
 const Menu = () => {

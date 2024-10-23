@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks/hooks";
-import { setTheme, toggleTheme } from "@/store/slices/themeSlice";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/hooks";
+import { setTheme, toggleTheme } from "@/app/redux/slices/themeSlice";
 import cookie from "js-cookie";
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({

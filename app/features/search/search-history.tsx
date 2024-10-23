@@ -2,13 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
 import {
   toggleOpenSearch,
   setQuery,
   setSearchItems,
-} from "@/store/slices/searchSlice";
-import { SearchHistoryProps } from "@/store/types/filterSearchItems";
+} from "@/app/redux/slices/searchSlice";
+import { SearchHistoryProps } from "@/app/redux/types/filterSearchItems";
 import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
 
 type Props = {
@@ -68,7 +68,7 @@ const SearchHistoryModal: React.FC<Props> = ({
   }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
 
   return (
-    <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 ">
+    <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-x-scroll ">
       {filteredSearchItems.slice(0, 10).map((item, idx) => (
         <li
           key={idx}
@@ -77,13 +77,15 @@ const SearchHistoryModal: React.FC<Props> = ({
             selectedIndex === idx && "bg-neutral-900 bg-opacity-15"
           } flex list-none w-full relative justify-between gap-x-1`}
         >
-          <UpdateOutlinedIcon />
-          <a
-            onClick={() => handleClick(idx)}
-            className="flex-1 cursor-pointer  flex justify-start text-left item-center relative gap-x-1"
-          >
-            {item.search}
-          </a>
+          <div>
+            <UpdateOutlinedIcon />
+            <a
+              onClick={() => handleClick(idx)}
+              className="cursor-pointer flex text-left  relative gap-x-1"
+            >
+              {item.search}
+            </a>
+          </div>
           <IoIosClose
             className="cursor-pointer relative"
             onClick={() => handleDelete(item.id)}

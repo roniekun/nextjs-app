@@ -3,8 +3,8 @@ import Link from "next/link";
 import Container from "../lib/ui/container";
 import { useMenu } from "@/provider/context/MenuContext";
 import { twMerge } from "tailwind-merge";
-import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
-import { setOpenSearch } from "@/store/slices/searchSlice";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
+import { setOpenSearch } from "@/app/redux/slices/searchSlice";
 import { usePathname } from "next/navigation";
 
 type Props = {

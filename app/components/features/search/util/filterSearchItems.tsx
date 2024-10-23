@@ -1,4 +1,4 @@
-import { SearchHistoryProps } from "@/store/types/filterSearchItems";
+import { SearchHistoryProps } from "@/app/redux/types/filterSearchItems";
 
 type Props = {
   newSearch: SearchHistoryProps; // A single search item

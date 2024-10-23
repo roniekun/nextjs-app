@@ -1,11 +1,11 @@
 "use client";
-import SearchBar from "../../store/features/search/search-bar";
+import SearchBar from "../../features/search/search-bar";
 import Container from "../lib/ui/container";
 import { IContentData } from "@/data/content-data";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import CustomEase from "gsap/CustomEase";
-import { useAppSelector } from "@/store/hooks/hooks";
+import { useAppSelector } from "@/app/redux/hooks/hooks";
 
 interface Props {
   contentData: IContentData[];
@@ -46,11 +46,7 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
       } w-screen overflow-hidden fixed bottom-0 h-0 rounded-t-md`}
     >
       <Container className="relative w-full p-[10vw] justify-center items-center">
-        <SearchBar
-          className={`overflow-y-hidden`}
-          contentData={contentData}
-          placeholder={placeholder}
-        />
+        <SearchBar contentData={contentData} placeholder={placeholder} />
       </Container>
     </div>
   );

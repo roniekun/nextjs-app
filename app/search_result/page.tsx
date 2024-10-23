@@ -1,7 +1,7 @@
 import { contentData } from "@/data/content-data";
 import { Metadata } from "next";
 import Link from "next/link";
-import Container from "@/components/lib/ui/container";
+import Container from "@/app/components/lib/ui/container";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {

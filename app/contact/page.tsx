@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import { admin } from "@/data/admin-data";
 
-import Container from "@/components/lib/ui/container";
+import Container from "@/app/components/lib/ui/container";
 
 export const metadata: Metadata = {
   title: `Contact | ${admin.name}`,

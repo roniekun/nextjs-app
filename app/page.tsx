@@ -1,8 +1,8 @@
 "use client";
 import PageTransitionLayout from "@/provider/PageTransitionLayout";
-import Container from "@/components/lib/ui/container";
-import Hero from "@/components/common/Hero";
-import Accordion2 from "@/components/features/accordion/Accordion2";
+import Container from "@/app/components/lib/ui/container";
+import Hero from "@/app/components/common/Hero";
+import Accordion2 from "@/app/components/features/accordion/Accordion2";
 
 export default function Home() {
   return (

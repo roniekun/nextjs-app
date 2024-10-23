@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import gsap from "gsap";
 import { useTheme } from "@/provider/context/ThemeContext";
-import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
-import { toggleOpenSearch } from "@/store/slices/searchSlice";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
+import { toggleOpenSearch } from "@/app/redux/slices/searchSlice";
 
 const Header = () => {
   const { setToggleMenu, isToggleMenu } = useMenu();
