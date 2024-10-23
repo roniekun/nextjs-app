@@ -9,15 +9,6 @@ import Banner from "@/app/components/layout/Banner";
 import Search from "@/app/components/common/Search";
 import { contentData } from "@/data/content-data";
 import ClientProvider from "@/provider/ClientProvider";
-import { NextApiRequest } from "next";
-import { getThemeCookie } from "./util/cookie";
-export async function getServerSideProps({ req }: { req: NextApiRequest }) {
-  // Read the theme from cookies
-  const initialTheme = getThemeCookie(req);
-  return {
-    props: { initialTheme },
-  };
-}
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
@@ -26,14 +17,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  initialTheme,
 }: Readonly<{
   children: React.ReactNode;
-  initialTheme: string;
 }>) {
   return (
     <html lang="en">
-      <body data-theme={initialTheme}>
+      <body>
         <ClientProvider>
           <LocalProvider>
             <main

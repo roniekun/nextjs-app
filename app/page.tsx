@@ -3,6 +3,8 @@ import PageTransitionLayout from "@/provider/PageTransitionLayout";
 import Container from "@/app/components/lib/ui/container";
 import Hero from "@/app/components/common/Hero";
 import Accordion2 from "@/app/components/features/accordion/Accordion2";
+import { NextApiRequest } from "next";
+import { getThemeCookie } from "./util/cookie";
 
 export default function Home() {
   return (
