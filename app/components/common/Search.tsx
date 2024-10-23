@@ -49,7 +49,7 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
     <AnimatePresence>
       {isOpenSearch && (
         <motion.div
-          onTap={() => dispatch(toggleOpenSearch())}
+          onClick={() => dispatch(toggleOpenSearch())}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
@@ -57,6 +57,9 @@ const Search: React.FC<Props> = ({ contentData, placeholder }) => {
           className="w-screen h-screen fixed top-0 bg-neutral-950 bg-opacity-30 opacity-0 z-20"
         >
           <div
+            onClick={(event) => {
+              event.stopPropagation(); // Prevents event bubbling
+            }}
             ref={searchRef}
             className={`${
               theme.theme === "dark"
