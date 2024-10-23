@@ -3,9 +3,7 @@
 import { useAppSelector, useAppDispatch } from "@/store/hooks/hooks";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { twMerge } from "tailwind-merge";
-import { useEffect } from "react";
 import { toggleTheme } from "@/store/slices/themeSlice";
-import cookie from "js-cookie";
 
 type Props = {
   className?: string;
@@ -13,19 +11,7 @@ type Props = {
 };
 
 const ToggleTheme: React.FC<Props> = ({ className, label }) => {
-  const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const cookieTheme = cookie.get("theme") ?? "light";
-    console.log(cookieTheme);
-    document.body.setAttribute("theme", cookieTheme);
-  }, []);
-
-  useEffect(() => {
-    document.body.setAttribute("theme", theme.theme);
-    console.log(theme.theme);
-  }, [theme]);
 
   return (
     <div className={twMerge(`w-fit aspect-square flex mx-1  `, className)}>
