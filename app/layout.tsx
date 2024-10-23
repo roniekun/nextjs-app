@@ -10,7 +10,6 @@ import Search from "@/components/common/Search";
 import { contentData } from "@/data/content-data";
 import ClientProvider from "@/provider/ClientProvider";
 import { useAppSelector } from "@/store/hooks/hooks";
-import { useEffect } from "react";
 
 export const metadata: Metadata = {
   title: "Ronie Benitez",
@@ -22,11 +21,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { theme } = useAppSelector((state) => state.theme);
-  useEffect(() => {
-    document.body.setAttribute("theme", theme);
-  }, []);
-
   return (
     <html lang="en">
       <body>

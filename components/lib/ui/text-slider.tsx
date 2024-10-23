@@ -36,7 +36,7 @@ const TextSlider: React.FC<Props> = ({ title, speed = 0.1, className }) => {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    requestAnimationFrame(animation);
+    const instanceOfAnimation = requestAnimationFrame(animation);
     if (sliderRef) {
       gsap.to(sliderRef.current, {
         scrollTrigger: {
@@ -49,6 +49,10 @@ const TextSlider: React.FC<Props> = ({ title, speed = 0.1, className }) => {
         },
       });
     }
+    return () => {
+      // ScrollTrigger.kill(); // or ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      cancelAnimationFrame(instanceOfAnimation);
+    };
   }, [sliderRef]);
 
   return (
