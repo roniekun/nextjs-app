@@ -177,6 +177,7 @@ const SearchBar: React.FC<SearchProps> = ({
           <div className="relative h-auto">
             <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">
               <SearchHistoryModal
+                setEnteredQuery={setEnteredQuery}
                 selectedIndex={selectedIndex ?? null}
                 setSearchSuggestions={setSearchSuggestions}
                 searchSuggestions={searchSuggestions}

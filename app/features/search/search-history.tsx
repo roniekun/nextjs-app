@@ -16,6 +16,7 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import { IContentData } from "@/data/content-data";
 
 type Props = {
+  setEnteredQuery: React.Dispatch<React.SetStateAction<string>>;
   searchSuggestions: (SearchHistoryProps | IContentData)[];
   setSearchSuggestions: React.Dispatch<
     React.SetStateAction<(SearchHistoryProps | IContentData)[]>
@@ -23,6 +24,7 @@ type Props = {
   selectedIndex: number | null;
 };
 const SearchHistoryModal: React.FC<Props> = ({
+  setEnteredQuery,
   searchSuggestions,
   setSearchSuggestions,
   selectedIndex,
@@ -55,7 +57,7 @@ const SearchHistoryModal: React.FC<Props> = ({
       const searchQuery = suggestionRefs.current[idx]?.textContent
         ?.toLowerCase()
         .trim();
-      setQuery(searchQuery ?? "");
+      setEnteredQuery(searchQuery ?? "");
     }
   };
 
@@ -120,11 +122,10 @@ const SearchHistoryModal: React.FC<Props> = ({
             selectedIndex === idx && "bg-neutral-900 bg-opacity-15"
           } flex list-none w-full relative justify-between gap-x-1`}
         >
-          <UpdateOutlinedIcon />
-
           {/* Conditional rendering based on 'search' or 'title' properties */}
           {"search" in item ? (
             <>
+              <UpdateOutlinedIcon />
               <a
                 onClick={() => handleClickHistory(idx)}
                 className="cursor-pointer flex text-left flex-1 relative gap-x-1"
