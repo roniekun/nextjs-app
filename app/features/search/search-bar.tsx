@@ -34,11 +34,14 @@ const SearchBar: React.FC<SearchProps> = ({
   );
   const router = useRouter();
 
-  const [filteredResult, setFilteredResult] = useState<IContentData[]>([]);
   const [filteredSearchItems, setFilteredSearchItems] = useState<
     SearchHistoryProps[]
   >([]);
 
+  const [filteredResult, setFilteredResult] = useState<IContentData[]>([]);
+  const [searchSuggestions, setSearchSuggestions] = useState<
+    (IContentData | SearchHistoryProps)[]
+  >([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [enteredQuery, setEnteredQuery] = useState(query);
 
@@ -79,7 +82,10 @@ const SearchBar: React.FC<SearchProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
-    setFilteredSearchItems([...searchItems]);
+    setSelectedIndex(null);
+    setFilteredSearchItems(
+      enteredQuery.length > 0 ? [...filteredSearchItems] : [...searchItems]
+    );
   };
 
   const handleSearch = () => {
@@ -99,20 +105,26 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "ArrowDown") {
-      setSelectedIndex((prevIndex) =>
-        prevIndex !== null && prevIndex < filteredSearchItems.length - 1
-          ? prevIndex + 1
-          : filteredSearchItems.length - 1
-      );
-    } else if (e.key === "ArrowUp") {
-      setSelectedIndex((prevIndex) =>
-        prevIndex !== null && prevIndex >= filteredSearchItems.length - 1
-          ? prevIndex - 1
-          : 0
-      );
-    } else if (e.key === "Enter") {
-      handleSearch();
+    const items = enteredQuery ? filteredSearchItems : searchItems;
+
+    if (!items.length) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        setSelectedIndex((prevIndex) =>
+          prevIndex !== null && prevIndex < items.length - 1
+            ? prevIndex + 1
+            : items.length - 1
+        );
+        break;
+      case "ArrowUp":
+        setSelectedIndex((prevIndex) =>
+          prevIndex !== null && prevIndex > 0 ? prevIndex - 1 : 0
+        );
+        break;
+      case "Enter":
+        handleSearch();
+        break;
     }
   };
 
@@ -131,6 +143,10 @@ const SearchBar: React.FC<SearchProps> = ({
     dispatch(setQuery(""));
     setEnteredQuery("");
   };
+
+  useEffect(() => {
+    setSearchSuggestions([...filteredSearchItems, ...filteredResult]);
+  }, [filteredSearchItems, filteredResult]); //merging suggestions
 
   return (
     <div className={twMerge(`flex relative flex-col h-auto w-full`, className)}>
@@ -162,10 +178,9 @@ const SearchBar: React.FC<SearchProps> = ({
             <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">
               <SearchHistoryModal
                 selectedIndex={selectedIndex ?? null}
-                filteredSearchItems={filteredSearchItems}
-                setFilteredSearchItems={setFilteredSearchItems}
+                setSearchSuggestions={setSearchSuggestions}
+                searchSuggestions={searchSuggestions}
               />
-              <SearchSuggestionModal filteredResults={filteredResult} />
             </div>
           </div>
         )}
