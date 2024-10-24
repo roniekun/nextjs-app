@@ -52,6 +52,7 @@ const SearchBar: React.FC<SearchProps> = ({
     debounce((enteredKey: string) => {
       if (enteredKey === "") {
         setFilteredSearchItems([...searchItems]);
+        setFilteredResult([]);
       } else {
         dispatch(setQuery(enteredKey));
         const formattedQuery = enteredKey.trim().toLowerCase();
@@ -75,6 +76,7 @@ const SearchBar: React.FC<SearchProps> = ({
     if (e) {
       const enteredKey = e.target.value;
       setEnteredQuery(enteredKey);
+      console.log(enteredKey);
       //calling the debounced search result
       debounceHandleInputChange(enteredKey);
     }
@@ -84,6 +86,7 @@ const SearchBar: React.FC<SearchProps> = ({
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
     setSelectedIndex(null);
+    console.log(enteredQuery);
     setSearchSuggestions(
       enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
     );
@@ -108,7 +111,7 @@ const SearchBar: React.FC<SearchProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const items = enteredQuery ? searchSuggestions : searchItems;
 
-    if (!items.length) return;
+    // if (!items.length) return;
 
     switch (e.key) {
       case "ArrowDown":
