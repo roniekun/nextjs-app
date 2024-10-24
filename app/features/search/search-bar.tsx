@@ -82,15 +82,19 @@ const SearchBar: React.FC<SearchProps> = ({
     }
   };
 
+  function updateSuggestions() {
+    setSearchSuggestions(
+      enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
+    );
+  }
+
   //click event for input field
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
     setSelectedIndex(null);
-    console.log(enteredQuery);
-    setSearchSuggestions(
-      enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
-    );
+    updateSuggestions();
   };
+
   //execute search
   const handleSearch = () => {
     if (enteredQuery) {
