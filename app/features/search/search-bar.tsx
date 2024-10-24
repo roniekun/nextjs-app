@@ -83,8 +83,8 @@ const SearchBar: React.FC<SearchProps> = ({
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
     setSelectedIndex(null);
-    setFilteredSearchItems(
-      enteredQuery.length > 0 ? [...filteredSearchItems] : [...searchItems]
+    setSearchSuggestions(
+      enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
     );
   };
 
@@ -105,7 +105,7 @@ const SearchBar: React.FC<SearchProps> = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const items = enteredQuery ? filteredSearchItems : searchItems;
+    const items = enteredQuery ? searchSuggestions : searchItems;
 
     if (!items.length) return;
 
@@ -172,19 +172,18 @@ const SearchBar: React.FC<SearchProps> = ({
         </div>
       </div>
 
-      {(isInfocus || query) &&
-        (filteredSearchItems.length > 0 || filteredResult.length > 0) && (
-          <div className="relative h-auto">
-            <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">
-              <SearchHistoryModal
-                setEnteredQuery={setEnteredQuery}
-                selectedIndex={selectedIndex ?? null}
-                setSearchSuggestions={setSearchSuggestions}
-                searchSuggestions={searchSuggestions}
-              />
-            </div>
+      {(isInfocus || query) && searchSuggestions.length > 0 && (
+        <div className="relative h-auto">
+          <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">
+            <SearchHistoryModal
+              setEnteredQuery={setEnteredQuery}
+              selectedIndex={selectedIndex ?? null}
+              setSearchSuggestions={setSearchSuggestions}
+              searchSuggestions={searchSuggestions}
+            />
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };

@@ -113,7 +113,7 @@ const SearchHistoryModal: React.FC<Props> = ({
   }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
 
   return (
-    <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-x-scroll ">
+    <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-y-scroll ">
       {searchSuggestions.map((item, idx) => (
         <li
           key={idx}
@@ -134,7 +134,7 @@ const SearchHistoryModal: React.FC<Props> = ({
               </a>
 
               <IoIosClose
-                className="cursor-pointer relative p-2"
+                className="cursor-pointer relative"
                 onClick={() => handleDelete(item.id)}
               />
             </>
