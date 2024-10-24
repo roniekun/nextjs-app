@@ -4,7 +4,6 @@ import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { SearchSuggestionModal } from "./search-suggestion";
 import SearchHistoryModal from "./search-history";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
@@ -71,6 +70,7 @@ const SearchBar: React.FC<SearchProps> = ({
     [contentData, searchItems, isInfocus]
   );
 
+  //realtime changes of inputs value
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | null) => {
     if (e) {
       const enteredKey = e.target.value;
@@ -80,6 +80,7 @@ const SearchBar: React.FC<SearchProps> = ({
     }
   };
 
+  //click event for input field
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
     setSelectedIndex(null);
@@ -87,7 +88,7 @@ const SearchBar: React.FC<SearchProps> = ({
       enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
     );
   };
-
+  //execute search
   const handleSearch = () => {
     if (enteredQuery) {
       const trimQuery = enteredQuery.trim();
@@ -103,7 +104,7 @@ const SearchBar: React.FC<SearchProps> = ({
       router.replace(`/search_result?query=${encodeURIComponent(trimQuery)}`);
     }
   };
-
+  //for keyboard functions
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const items = enteredQuery ? searchSuggestions : searchItems;
 
@@ -128,22 +129,27 @@ const SearchBar: React.FC<SearchProps> = ({
     }
   };
 
+  //selecting result to highlight (for user experience)
   useEffect(() => {
-    console.log(selectedIndex);
-    const filteredItem = filteredSearchItems.find(
+    const filteredSuggestion = searchSuggestions.find(
       (_, index) => index === selectedIndex
     );
-    if (filteredItem) {
-      setEnteredQuery(filteredItem.search ?? "");
-    }
+    if (filteredSuggestion && "search" in filteredSuggestion) {
+      filteredSuggestion;
+      setEnteredQuery(filteredSuggestion.search);
+    } else if (filteredSuggestion && "title" in filteredSuggestion) {
+      setEnteredQuery(filteredSuggestion.title);
+    } else return;
   }, [selectedIndex]);
 
+  //clears the input field
   const handleClear = () => {
     dispatch(setInfocus(false));
     dispatch(setQuery(""));
     setEnteredQuery("");
   };
 
+  //realtime updates for suggestions
   useEffect(() => {
     setSearchSuggestions([...filteredSearchItems, ...filteredResult]);
   }, [filteredSearchItems, filteredResult]); //merging suggestions
