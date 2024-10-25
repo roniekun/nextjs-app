@@ -86,9 +86,6 @@ const SearchBar: React.FC<SearchProps> = ({
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
     setSelectedIndex(-1);
-    setSearchSuggestions(
-      enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
-    );
   };
 
   //execute search
@@ -152,6 +149,13 @@ const SearchBar: React.FC<SearchProps> = ({
   useEffect(() => {
     setSearchSuggestions([...filteredSearchItems, ...filteredResult]);
   }, [filteredSearchItems, filteredResult]); //merging suggestions
+
+  //upodates for suggestions when user focus to the input
+  useEffect(() => {
+    setSearchSuggestions(
+      enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
+    );
+  }, [isInfocus]);
 
   return (
     <div className={twMerge(`flex relative flex-col h-auto w-full`, className)}>
