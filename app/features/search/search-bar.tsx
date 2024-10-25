@@ -41,7 +41,7 @@ const SearchBar: React.FC<SearchProps> = ({
   const [searchSuggestions, setSearchSuggestions] = useState<
     (IContentData | SearchHistoryProps)[]
   >([]);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [enteredQuery, setEnteredQuery] = useState(query);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -86,12 +86,13 @@ const SearchBar: React.FC<SearchProps> = ({
     setSearchSuggestions(
       enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
     );
+    console.log("function inside click event");
   }
 
   //click event for input field
   const handleClick = (e: React.MouseEvent<HTMLInputElement> | null) => {
     dispatch(setInfocus(true));
-    setSelectedIndex(null);
+    setSelectedIndex(-1);
     updateSuggestions();
   };
 
@@ -120,15 +121,11 @@ const SearchBar: React.FC<SearchProps> = ({
     switch (e.key) {
       case "ArrowDown":
         setSelectedIndex((prevIndex) =>
-          prevIndex !== null && prevIndex < items.length - 1
-            ? prevIndex + 1
-            : items.length - 1
+          prevIndex < items.length - 1 ? prevIndex + 1 : items.length - 1
         );
         break;
       case "ArrowUp":
-        setSelectedIndex((prevIndex) =>
-          prevIndex !== null && prevIndex > 0 ? prevIndex - 1 : 0
-        );
+        setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
         break;
       case "Enter":
         handleSearch();
@@ -138,6 +135,7 @@ const SearchBar: React.FC<SearchProps> = ({
 
   //selecting result to highlight (for user experience)
   useEffect(() => {
+    console.log(selectedIndex);
     const filteredSuggestion = searchSuggestions.find(
       (_, index) => index === selectedIndex
     );
