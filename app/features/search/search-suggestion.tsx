@@ -1,50 +1,76 @@
-import { IContentData } from "../../../data/content-data";
-import { useRef } from "react";
-import { SearchHistoryProps } from "@/app/redux/types/filterSearchItems";
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { IoIosClose } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
 import {
-  setQuery,
-  toggleOpenSearch,
   addSearchItem,
   setInfocus,
+  toggleOpenSearch,
+  setQuery,
+  setSearchItems,
 } from "@/app/redux/slices/searchSlice";
-import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/hooks";
+import { SearchHistoryProps } from "@/app/redux/types/filterSearchItems";
+import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
+import { IContentData } from "@/data/content-data";
 
 type Props = {
-  filteredResults?: IContentData[];
+  setEnteredQuery: React.Dispatch<React.SetStateAction<string>>;
+  searchSuggestions: (SearchHistoryProps | IContentData)[];
+  setSearchSuggestions: React.Dispatch<
+    React.SetStateAction<(SearchHistoryProps | IContentData)[]>
+  >;
+  selectedIndex: number | null;
 };
-
-export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
+const SearchSuggestionModal: React.FC<Props> = ({
+  setEnteredQuery,
+  searchSuggestions,
+  setSearchSuggestions,
+  selectedIndex,
+}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { query, searchItems } = useAppSelector((state) => state.search);
-  const listRef = useRef<(HTMLLIElement | null)[]>([]);
+  const { searchItems } = useAppSelector((state) => state.search);
+  const [deletedItem, setDeletedItem] = useState<SearchHistoryProps | null>(
+    null
+  );
+
+  const suggestionRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   const setRef = (el: HTMLLIElement | null, idx: number) => {
     if (el) {
-      listRef.current[idx] = el;
+      suggestionRefs.current[idx] = el;
     }
+  };
+
+  const handleClickHistory = (idx: number) => {
+    const textContent = suggestionRefs.current[idx]?.textContent ?? "";
+    dispatch(setQuery(textContent));
+    dispatch(toggleOpenSearch());
+
+    router.replace(`/search_result?query=${encodeURIComponent(textContent)}`);
   };
 
   const handleMouseDown = (idx: number) => {
-    if (listRef.current) {
-      const searchQuery = listRef.current[idx]?.textContent
+    if (suggestionRefs.current) {
+      const searchQuery = suggestionRefs.current[idx]?.textContent
         ?.toLowerCase()
         .trim();
-      setQuery(searchQuery ?? "");
+      setEnteredQuery(searchQuery ?? "");
     }
   };
 
-  const handleClick = (idx: number) => {
-    if (listRef.current) {
-      const newQuery = listRef.current[idx]?.textContent?.toLowerCase().trim();
+  const handleClickSearch = (idx: number) => {
+    if (suggestionRefs.current) {
+      const newQuery = suggestionRefs.current[idx]?.textContent
+        ?.toLowerCase()
+        .trim();
       const newSearch: SearchHistoryProps = {
         search: newQuery ?? "",
         id: searchItems.length + 1,
         date: Date.now(),
       };
-
       dispatch(addSearchItem(newSearch));
       router.replace(
         `/search_result?query=${encodeURIComponent(newQuery ?? "")}`
@@ -54,26 +80,83 @@ export const SearchSuggestionModal: React.FC<Props> = ({ filteredResults }) => {
     }
   };
 
+  //deleting items in history
+  const handleDelete = (i: number) => {
+    // Find the item with "search" in its properties and a matching ID
+    const foundItem = searchSuggestions.find(
+      (item): item is SearchHistoryProps => {
+        return "search" in item && item.id === i;
+      }
+    );
+
+    if (foundItem) {
+      const updatedItems = searchSuggestions.filter(
+        (item): item is SearchHistoryProps => {
+          return "search" in item && item.date !== foundItem.date;
+        }
+      ); // Updating the original array by removing the deleted item
+      setDeletedItem(foundItem); // Store the deleted item
+      dispatch(setSearchItems(updatedItems)); // Update the state with filtered items
+    }
+  };
+
+  useEffect(() => {
+    if (deletedItem) {
+      const updatedSearchSuggestions = searchSuggestions.filter(
+        (item): item is SearchHistoryProps => {
+          return "date" in item && item.date !== deletedItem.date;
+        }
+      );
+
+      setSearchSuggestions(updatedSearchSuggestions);
+    }
+  }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
+
   return (
-    <ul className="flex flex-col relative gap-y-1">
-      {filteredResults
-        // [...new Set(filteredResults.map(result => result.title))] //optional for removing duplicates
-        ?.sort((a, b) => a.title.localeCompare(b.title)) //sorting the result alphabetically
-        .slice(0, 10)
-        .map((result, idx) => (
-          <li
-            ref={(el) => setRef(el, idx)}
-            onMouseDown={() => handleMouseDown(idx)}
-            key={idx}
-            onClick={() => handleClick(idx)}
-            className="rounded-sm flex"
-          >
-            <SearchSharpIcon />
-            <a className="cursor-pointer lowercase flex-1 " href={result.link}>
-              {result.title}
-            </a>
-          </li>
-        ))}
+    <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-y-scroll ">
+      {searchSuggestions.map((item, idx) => (
+        <li
+          key={idx}
+          ref={(el) => setRef(el, idx)}
+          className={`${
+            selectedIndex === idx && "bg-neutral-900 bg-opacity-15"
+          } flex list-none w-full relative justify-between gap-x-1`}
+        >
+          {/* Conditional rendering based on 'search' or 'title' properties */}
+          {"search" in item ? (
+            <>
+              <UpdateOutlinedIcon />
+              <a
+                onClick={() => handleClickHistory(idx)}
+                className="cursor-pointer flex text-left flex-1 relative gap-x-1"
+              >
+                {item.search}
+              </a>
+
+              <IoIosClose
+                className="cursor-pointer relative"
+                onClick={() => handleDelete(item.id)}
+              />
+            </>
+          ) : "title" in item ? (
+            <div className="flex items-center gap-x-1">
+              <SearchSharpIcon />
+              <a
+                onClick={() => handleClickSearch(idx)}
+                onMouseDown={() => {
+                  handleMouseDown(idx);
+                }}
+                className="cursor-pointer flex text-left flex-1 relative gap-x-1"
+              >
+                {item.title}
+              </a>
+              <span className="read-only" />
+            </div>
+          ) : null}
+        </li>
+      ))}
     </ul>
   );
 };
+
+export default SearchSuggestionModal;

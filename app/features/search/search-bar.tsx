@@ -1,10 +1,11 @@
 "use client";
+
 import { useRef, useState, useCallback, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineSearch } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import SearchHistoryModal from "./search-history";
+import SearchSuggestionModal from "./search-suggestion";
 import { IContentData } from "../../../data/content-data";
 import debounce from "lodash/debounce";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
@@ -76,7 +77,6 @@ const SearchBar: React.FC<SearchProps> = ({
     if (e) {
       const enteredKey = e.target.value;
       setEnteredQuery(enteredKey);
-      console.log(enteredKey);
       //calling the debounced search result
       debounceHandleInputChange(enteredKey);
     }
@@ -86,7 +86,8 @@ const SearchBar: React.FC<SearchProps> = ({
     setSearchSuggestions(
       enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
     );
-    console.log("function inside click event");
+    console.log(enteredQuery);
+    console.log(enteredQuery.length);
   }
 
   //click event for input field
@@ -125,7 +126,7 @@ const SearchBar: React.FC<SearchProps> = ({
         );
         break;
       case "ArrowUp":
-        setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+        setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : -1));
         break;
       case "Enter":
         handleSearch();
@@ -135,7 +136,6 @@ const SearchBar: React.FC<SearchProps> = ({
 
   //selecting result to highlight (for user experience)
   useEffect(() => {
-    console.log(selectedIndex);
     const filteredSuggestion = searchSuggestions.find(
       (_, index) => index === selectedIndex
     );
@@ -186,7 +186,7 @@ const SearchBar: React.FC<SearchProps> = ({
       {(isInfocus || query) && searchSuggestions.length > 0 && (
         <div className="relative h-auto">
           <div className="flex flex-col relative rounded-sm h-auto overflow-hidden p-2 text-lg">
-            <SearchHistoryModal
+            <SearchSuggestionModal
               setEnteredQuery={setEnteredQuery}
               selectedIndex={selectedIndex ?? null}
               setSearchSuggestions={setSearchSuggestions}
