@@ -154,6 +154,8 @@ const SearchBar: React.FC<SearchProps> = ({
 
   //updates for suggestions when user focus to the input
   useEffect(() => {
+    console.log(searchSuggestions);
+    console.log(searchItems);
     setSearchSuggestions(
       enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
     );
