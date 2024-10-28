@@ -128,6 +128,10 @@ const SearchSuggestionModal: React.FC<Props> = ({
     setSelectedIndex(-1);
   };
 
+  useEffect(() => {
+    setHoveredItem(selectedIndex);
+  }, [selectedIndex]);
+
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-y-scroll ">
       {searchSuggestions.map((item, idx) => (
@@ -139,7 +143,7 @@ const SearchSuggestionModal: React.FC<Props> = ({
           className={`${
             (selectedIndex === idx || hoveredItem === idx) &&
             "bg-neutral-900 bg-opacity-10"
-          } flex list-none w-full relative justify-between gap-x-1 rounded-md`}
+          } flex list-none w-full relative justify-between items-center gap-x-1 rounded-md`}
         >
           {/* Conditional rendering based on 'search' or 'title' properties */}
           {"search" in item ? (
