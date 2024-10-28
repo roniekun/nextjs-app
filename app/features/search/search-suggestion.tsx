@@ -120,17 +120,11 @@ const SearchSuggestionModal: React.FC<Props> = ({
 
   const handleMouseHover = (idx: number) => {
     setHoveredItem(idx);
-    setSelectedIndex(idx);
   };
 
   const handleMouseLeave = () => {
     setHoveredItem(null);
-    setSelectedIndex(-1);
   };
-
-  useEffect(() => {
-    setHoveredItem(selectedIndex);
-  }, [selectedIndex]);
 
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-y-scroll ">
