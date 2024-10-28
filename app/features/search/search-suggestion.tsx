@@ -1,8 +1,10 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks/hooks";
+
 import {
   addSearchItem,
   setInfocus,
@@ -112,15 +114,23 @@ const SearchSuggestionModal: React.FC<Props> = ({
     }
   }, [deletedItem]); //filteredSearchItems, setFilteredSearchItems
 
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+
+  const handleMouseHover = (idx: number) => {
+    setHoveredItem(idx);
+  };
+
   return (
     <ul className="relative flex flex-col w-full rounded-b-md h-auto gap-y-1 overflow-y-scroll ">
       {searchSuggestions.map((item, idx) => (
         <li
           key={idx}
           ref={(el) => setRef(el, idx)}
+          onMouseEnter={() => handleMouseHover(idx)}
           className={`${
-            selectedIndex === idx && "bg-neutral-900 bg-opacity-15"
-          } flex list-none w-full relative justify-between gap-x-1`}
+            (selectedIndex === idx || hoveredItem === idx) &&
+            "bg-neutral-900 bg-opacity-10"
+          } flex list-none w-full relative justify-between gap-x-1 rounded-md`}
         >
           {/* Conditional rendering based on 'search' or 'title' properties */}
           {"search" in item ? (

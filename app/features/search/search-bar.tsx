@@ -112,11 +112,13 @@ const SearchBar: React.FC<SearchProps> = ({
 
     switch (e.key) {
       case "ArrowDown":
+        e.preventDefault();
         setSelectedIndex((prevIndex) =>
           prevIndex < items.length - 1 ? prevIndex + 1 : items.length - 1
         );
         break;
       case "ArrowUp":
+        e.preventDefault();
         setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : -1));
         break;
       case "Enter":
@@ -150,7 +152,7 @@ const SearchBar: React.FC<SearchProps> = ({
     setSearchSuggestions([...filteredSearchItems, ...filteredResult]);
   }, [filteredSearchItems, filteredResult]); //merging suggestions
 
-  //upodates for suggestions when user focus to the input
+  //updates for suggestions when user focus to the input
   useEffect(() => {
     setSearchSuggestions(
       enteredQuery.length > 0 ? [...searchSuggestions] : [...searchItems]
