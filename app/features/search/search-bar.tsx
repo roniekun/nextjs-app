@@ -189,6 +189,7 @@ const SearchBar: React.FC<SearchProps> = ({
             <SearchSuggestionModal
               setEnteredQuery={setEnteredQuery}
               selectedIndex={selectedIndex ?? null}
+              setSelectedIndex={setSelectedIndex}
               setSearchSuggestions={setSearchSuggestions}
               searchSuggestions={searchSuggestions}
             />

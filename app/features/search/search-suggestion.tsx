@@ -23,12 +23,14 @@ type Props = {
   setSearchSuggestions: React.Dispatch<
     React.SetStateAction<(SearchHistoryProps | IContentData)[]>
   >;
-  selectedIndex: number | null;
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
+  selectedIndex: number;
 };
 const SearchSuggestionModal: React.FC<Props> = ({
   setEnteredQuery,
   searchSuggestions,
   setSearchSuggestions,
+  setSelectedIndex,
   selectedIndex,
 }) => {
   const router = useRouter();
@@ -118,6 +120,12 @@ const SearchSuggestionModal: React.FC<Props> = ({
 
   const handleMouseHover = (idx: number) => {
     setHoveredItem(idx);
+    setSelectedIndex(idx);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+    setSelectedIndex(-1);
   };
 
   return (
@@ -127,6 +135,7 @@ const SearchSuggestionModal: React.FC<Props> = ({
           key={idx}
           ref={(el) => setRef(el, idx)}
           onMouseEnter={() => handleMouseHover(idx)}
+          onMouseLeave={handleMouseLeave}
           className={`${
             (selectedIndex === idx || hoveredItem === idx) &&
             "bg-neutral-900 bg-opacity-10"
