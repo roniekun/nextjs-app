@@ -2,7 +2,7 @@ import { MenuProvider } from "./context/MenuContext";
 import { LayoutProvider } from "./context/LayoutContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { SearchProvider } from "./context/SearchContext";
-import SmoothScroll from "./SmoothScroll";
+// import SmoothScroll from "./SmoothScroll";
 
 type Props = {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ const LocalProvider = ({ children }: Props) => {
       <LayoutProvider>
         <MenuProvider>
           <ThemeProvider>
-            <SmoothScroll>{children}</SmoothScroll>
+          {children}
           </ThemeProvider>
         </MenuProvider>
       </LayoutProvider>

@@ -30,7 +30,7 @@ export default function Hero() {
         style={{ opacity: sm }}
         className="sticky top-[--header-height] h-[--hero-height] flex flex-col py-[5vw]"
       >
-        <h1 className="text-xl font-medium text-[--text-color-muted]">
+        <h1 className="text-lg font-medium text-[--text-color-muted]">
           Elevate your Creative Vision:
         </h1>
         <h1 className="text-4xl font-bold ">Your Website, Your Platform!</h1>

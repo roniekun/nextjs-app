@@ -42,8 +42,8 @@ const Header = () => {
 
   return (
     <header
-      className={`header backdrop-blur-lg overflow-hidden h-[--header-height] 
-         bg-transparent flex flex-col justify-center w-full sticky z-20 top-0 opacity-0`}
+      className={`header backdrop-blur-lg overflow-hidden h-[--header-height] items-center
+         bg-transparent flex flex-col justify-center w-full sticky z-20 top-0 bg-black opacity-0`}
     >
       <Container className="py-0 flex items-center justify-between max-w-[1400px] h-[--header-height]">
         <Logo className={`${isToggleMenu && "pointer-events-none"}`} />
